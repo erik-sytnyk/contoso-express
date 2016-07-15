@@ -1,0 +1,13 @@
+node_modules/
+build/
+typings/globals/
+typings/modules/
+client/typings/
+.idea/
+config/local.json
+data/db/
+server/test.ts
+data/logs
+client/typings
+data/config/local.json
+.vscode/
