@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "outDir": "../build/client_full",
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react",
+        "allowJs": true
+    }
+}

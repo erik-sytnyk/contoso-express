@@ -1,0 +1,37 @@
+{
+  "app": {
+    "appName": "Contoso Express",
+    "isDevLocal": true,
+    "logErrors": true,
+    "rootUrl": "http://localhost:3500"
+  },
+  "db": {
+    "host": "localhost",
+    "dbName": "contoso",
+    "username": "admin",
+    "password": "password123"
+  },
+  "web": {
+    "port": 3500,
+    "sessionSecret": "secret_value_!?!"
+  },
+  "email": {
+    "fromNoReply": "noreply@contoso.com"
+  },
+  "auth": {
+    "useAuth": true,
+    "google": {
+      "clientID": "???",
+      "clientSecret": "???"
+    },
+    "facebook": {
+      "clientID": "???",
+      "clientSecret": "???"
+    }
+  },
+  "format": {
+    "date": "MM/DD/YYYY",
+    "year": "YYYY",
+    "currencySymbol": "$"
+  }
+}

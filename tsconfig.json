@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "build/server",
+    "rootDir": "server",
+    "jsx": "react",
+    "allowUnreachableCode": true
+  },
+  "exclude": [
+    "client",
+    "node_modules"
+  ]
+}

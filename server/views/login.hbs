@@ -1,0 +1,50 @@
+{{!< auth}}
+<section class="container-fluid">
+    <div class="row">
+        <aside class="col-xs-1"></aside>
+        <section class="content-main col-xs-10">
+            {{#if title}}
+                <h1 class="hidden-xs">{{title}}</h1>
+            {{/if}}
+            <div class="container">
+                <div class="col-sm-6 col-sm-offset-3">
+
+                    <h1><span class="fa fa-sign-in"></span> Login</h1>
+
+                    {{#if statusMessage}}
+                        <div class="alert {{statusMessage.uiClass}}">{{statusMessage.message}}</div>
+                    {{/if}}
+
+                    <form action="/login" method="post">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+
+                        <button type="submit" class="btn btn-warning btn-lg">Login</button>
+                    </form>
+
+                    <hr>
+
+                    <a href="/passwordForgot" id="forgot-password">Forgot your password?</a>
+
+                    <hr>
+
+                    <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+                    <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google+</a>
+
+                    <hr>
+
+                    <p>Need an account? <a href="/signup">Signup</a></p>
+                    <p>Or go <a href="/">home</a>.</p>
+
+                </div>
+            </div>
+        </section>
+        <aside class="col-xs-1"></aside>
+    </div>
+</section>
