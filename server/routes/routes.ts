@@ -11,41 +11,59 @@ export default {
     init: initRoutes
 };
 
+let helper = helperInit(null, null);
+
 function initRoutes(app, passport) {
-    let helper = helperInit(app, passport);
+    helper = helperInit(app, passport);
+
+    initAuthRoutes(passport);
 
     helper.get('/', homeController.home, {view: true});
-    helper.get('/api/student/statistics', studentController.getStudentsStatistics, {view: true});
-    helper.get('/api/student/list', studentController.getStudents, {view: true});
-    helper.get('/api/student/getStudent', studentController.getStudent, {view: true});
-    helper.post('/api/student/save', studentController.saveStudent, {view: true});
-    helper.post('/api/student/delete', studentController.deleteStudent, {view: true});
 
-    helper.get('/api/department/list', departmentController.getDepartments, {view: true});
-    helper.get('/api/department/getDepartment', departmentController.getDepartment, {view: true});
-    helper.post('/api/department/save', departmentController.saveDepartment, {view: true});
-    helper.post('/api/department/delete', departmentController.deleteDepartment, {view: true});
+    initStudentRoutes();
 
-    helper.get('/api/instructor/list', instructorController.getInstructors, {view: true});
-    helper.get('/api/instructor/getInstructor', instructorController.getInstructor, {view: true});
-    helper.post('/api/instructor/save', instructorController.saveInstructor, {view: true});
-    helper.post('/api/instructor/delete', instructorController.deleteInstructor, {view: true});
+    initDepartmentRoutes();
 
-    helper.get('/api/course/list', courseController.getCourses, {view: true});
-    helper.get('/api/course/getCourse', courseController.getCourse, {view: true});
-    helper.post('/api/course/save', courseController.saveCourse, {view: true});
-    helper.post('/api/course/delete', courseController.deleteCourse, {view: true});
+    initInstructorRoutes();
+
+    initCourseRoutes();
 
     helper.get('/api/enrollment/list', enrollmentController.getEnrollmentsByCourse, {view: true});
-
-    initAuthRoutes(helper, passport);
 
     //all other routes are rendered as home (for client side routing)
     helper.get('*', homeController.home, {view: true});
 }
 
-//TODO TS i-sense for helper
-function initAuthRoutes(helper, passport) {
+function initStudentRoutes() {
+    helper.get('/api/student/statistics', studentController.getStudentsStatistics);
+    helper.get('/api/student/list', studentController.getStudents);
+    helper.get('/api/student/getStudent', studentController.getStudent);
+    helper.post('/api/student/save', studentController.saveStudent);
+    helper.post('/api/student/delete', studentController.deleteStudent);
+}
+
+function initDepartmentRoutes() {
+    helper.get('/api/department/list', departmentController.getDepartments);
+    helper.get('/api/department/getDepartment', departmentController.getDepartment);
+    helper.post('/api/department/save', departmentController.saveDepartment);
+    helper.post('/api/department/delete', departmentController.deleteDepartment);
+}
+
+function initInstructorRoutes() {
+    helper.get('/api/instructor/list', instructorController.getInstructors);
+    helper.get('/api/instructor/getInstructor', instructorController.getInstructor);
+    helper.post('/api/instructor/save', instructorController.saveInstructor);
+    helper.post('/api/instructor/delete', instructorController.deleteInstructor);
+}
+
+function initCourseRoutes() {
+    helper.get('/api/course/list', courseController.getCourses);
+    helper.get('/api/course/getCourse', courseController.getCourse);
+    helper.post('/api/course/save', courseController.saveCourse);
+    helper.post('/api/course/delete', courseController.deleteCourse);
+}
+
+function initAuthRoutes(passport) {
     let authController = authControllerInit(passport);
 
     helper.get('/activate/:token', authController.activate, {auth: false});
