@@ -5,6 +5,11 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+//from command line (run with --production argument)
+const isProduction = process.argv.indexOf('--production') !== -1;
+
+let cssLoaderStr = isProduction ? 'css?minimize' : 'css';
+
 module.exports = {
     entry: {
         app: "./client/AppMain.tsx"
@@ -14,23 +19,17 @@ module.exports = {
         filename: 'bundle.js'
     },
     resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+        extensions: ["", ".ts", ".tsx", ".js"]
     },
     module: {
-        preLoaders: [
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            {test: /\.js$/, loader: "source-map-loader"}
-        ],
         loaders: [
             {test: /\.tsx?$/, loader: "awesome-typescript-loader?tsconfig=tsconfig.webpack.json"},
-            {test: /\.css$/, loader: ExtractTextPlugin.extract("css?minimize")},
-            {test: /\.less$/, loader: ExtractTextPlugin.extract("css?minimize!less")},
+            {test: /\.css$/, loader: ExtractTextPlugin.extract(cssLoaderStr)},
+            {test: /\.less$/, loader: ExtractTextPlugin.extract(cssLoaderStr + '!less')},
             {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'file?name=assets/[name]-[hash:3].[ext]'}
         ]
     },
     devtool: "cheap-inline-module-source-map",
-    //devtool: "source-map",
     plugins: [
         new webpack.NoErrorsPlugin(),
         new ExtractTextPlugin('app.css', {allChunks: true})
@@ -43,6 +42,8 @@ module.exports = {
 
 function addExtras() {
     copyStaticAssets();
+
+    if (isProduction) minifyJs();
 }
 
 addExtras();
@@ -60,6 +61,16 @@ function copyStaticAssets() {
     ], {/*OPTIONS*/});
 
     module.exports.plugins.push(copyPlugin);
+}
+
+function minifyJs() {
+    let uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
+        compress: {
+            warnings: false
+        }
+    });
+
+    module.exports.plugins.push(uglifyPlugin);
 }
 
 
