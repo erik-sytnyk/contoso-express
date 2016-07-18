@@ -20,5 +20,5 @@ function saveInstructor(instructor) {
 }
 
 function deleteInstructor(id) {
-    return httpHelper.post('/api/instructor/delete', {id});
+    return httpHelper.delete('/api/instructor/delete', {id});
 }

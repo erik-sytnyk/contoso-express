@@ -11,9 +11,10 @@ function init(expressApp, passportAuth) {
     return {
         app: app,
         isLoggedIn: isLoggedIn,
-        get: get,
-        post: post,
-        put: put
+        get: httpGet,
+        post: httpPost,
+        put: httpPut,
+        delete: httpDelete
     };
 }
 
@@ -22,19 +23,24 @@ interface AccessMode {
     view?: boolean
 }
 
-function get(path, handler, accessMode?: AccessMode) {
+function httpGet(path, handler, accessMode?: AccessMode) {
     const args = getRouteArguments(path, handler, accessMode);
     app.get.apply(app, args);
 }
 
-function post(path, handler, accessMode?: AccessMode) {
+function httpPost(path, handler, accessMode?: AccessMode) {
     const args = getRouteArguments(path, handler, accessMode);
     app.post.apply(app, args);
 }
 
-function put(path, handler, accessMode?: AccessMode) {
+function httpPut(path, handler, accessMode?: AccessMode) {
     const args = getRouteArguments(path, handler, accessMode);
     app.put.apply(app, args);
+}
+
+function httpDelete(path, handler, accessMode?: AccessMode) {
+    const args = getRouteArguments(path, handler, accessMode);
+    app.delete.apply(app, args);
 }
 
 function getRouteArguments(path, handler, accessMode) {

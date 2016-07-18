@@ -32,5 +32,5 @@ function saveStudent(student) {
 }
 
 function deleteStudent(id) {
-    return httpHelper.post('/api/student/delete', {id});
+    return httpHelper.delete('/api/student/delete', {id});
 }
