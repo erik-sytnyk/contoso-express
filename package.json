@@ -2,11 +2,19 @@
   "name": "contoso-express",
   "version": "0.1.0",
   "description": "Full-stack JavaScript application based on Contoso University .NET tutorial",
-  "keywords": ["TypeScript", "Contoso", "Express", "Postgres", "Passport", "React"],
+  "keywords": [
+    "TypeScript",
+    "Contoso",
+    "Express",
+    "Postgres",
+    "Passport",
+    "React"
+  ],
   "main": "index.js",
   "scripts": {
     "start": "node build/server/startServer.js",
-    "build": "tsc && webpack",
+    "build": "npm run clean:server && tsc && webpack",
+    "clean:server": "rimraf build/server",
     "seed": "node build/server/tasks/syncDb",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -57,6 +65,7 @@
     "redux": "^3.5.2",
     "redux-immutable-state-invariant": "^1.2.3",
     "redux-thunk": "^2.1.0",
+    "rimraf": "^2.5.3",
     "sequelize": "^3.23.3",
     "toastr": "^2.1.2",
     "winston": "^2.2.0"

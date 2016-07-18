@@ -4,7 +4,8 @@
     "lodash": "registry:npm/lodash#4.0.0+20160416211519",
     "react-redux": "registry:npm/react-redux#4.4.0+20160207114942",
     "redux": "registry:npm/redux#3.0.6+20160214194820",
-    "redux-thunk": "registry:npm/redux-thunk#2.0.0+20160525185520"
+    "redux-thunk": "registry:npm/redux-thunk#2.0.0+20160525185520",
+    "rimraf": "registry:npm/rimraf#2.5.0+20160211003958"
   },
   "globalDependencies": {
     "bluebird": "registry:dt/bluebird#2.0.0+20160319051630",
