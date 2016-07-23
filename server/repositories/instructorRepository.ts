@@ -26,7 +26,7 @@ function init(db) {
     officeAssignmentModel = db.models.OfficeAssignment;
 }
 
-function getInstructors(): Promise<Array<Instructor>> {
+function getInstructors(): Promise<Instructor[]> {
     let instructors: any = [];
 
     return instructorModel.findAll({

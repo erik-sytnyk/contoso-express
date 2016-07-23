@@ -17,7 +17,7 @@ function init(db) {
 }
 
 
-function getEnrollmentsByCourseId(courseId): Promise<Array<Enrollment>> {
+function getEnrollmentsByCourseId(courseId): Promise<Enrollment[]> {
     let options = {
         where: {courseId: courseId},
         include: studentModel

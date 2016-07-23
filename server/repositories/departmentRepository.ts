@@ -21,7 +21,7 @@ function init(db) {
     instructorModel = db.models.Instructor;
 }
 
-function getDepartments(): Promise<Array<Department>> {
+function getDepartments(): Promise<Department[]> {
     return departmentModel.findAll({
         include: instructorModel
     });

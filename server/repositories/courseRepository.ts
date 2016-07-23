@@ -21,7 +21,7 @@ function init(db) {
     departmentModel = db.models.Department;
 }
 
-function getCourses(departmentId): Promise<Array<Course>> {
+function getCourses(departmentId): Promise<Course[]> {
     let options = {
         include: departmentModel,
         where: {}

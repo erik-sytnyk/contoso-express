@@ -68,7 +68,7 @@ export interface Instructor {
     lastName: string,
     fullName: string,
     hireDate: Date,
-    courses?: Array<Course>
+    courses?: Course[]
     getFullName(): string
 }
 

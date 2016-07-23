@@ -32,7 +32,7 @@ function init(db) {
     userModel = db.models.User;
 }
 
-function getUsers(): Promise<Array<User>> {
+function getUsers(): Promise<User[]> {
     return userModel.findAll();
 }
 
