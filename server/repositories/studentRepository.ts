@@ -78,7 +78,7 @@ function addStudent(student): Promise<Student> {
 
 function deleteStudent(id): Promise<Student> {
     return studentModel.findById(id)
-        .then(function(student) {
+        .then((student) => {
             if (!student) throw new AppError('app', 'student_not_found');
 
             return student.destroy();

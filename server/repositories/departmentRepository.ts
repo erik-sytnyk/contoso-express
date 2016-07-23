@@ -53,7 +53,7 @@ function addDepartment(department): Promise<Department> {
 
 function deleteDepartment(id): Promise<Department> {
     return departmentModel.findById(id)
-        .then(function(department) {
+        .then((department) => {
             if (!department) throw new AppError('app', 'department_not_found');
 
             return department.destroy();

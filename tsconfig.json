@@ -5,7 +5,6 @@
     "sourceMap": true,
     "outDir": "build/server",
     "rootDir": "server",
-    "jsx": "react",
     "allowUnreachableCode": true
   },
   "exclude": [

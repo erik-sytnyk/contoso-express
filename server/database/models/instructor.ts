@@ -24,7 +24,7 @@ function Instructor(sequelize, DataTypes) {
         classMethods: {
             associate: function (models) {
                 model.belongsToMany(models.Course, {
-                    through: helper.getName('Course_Instructor'),
+                    through: helper.getName('courseInstructor'),
                     foreignKey: helper.defineForeignKey('instructorId')
                 });
                 model.hasOne(models.OfficeAssignment, {

@@ -60,7 +60,7 @@ function addCourse(course): Promise<Course> {
 
 function deleteCourse(id): Promise<Course> {
     return courseModel.findById(id)
-        .then(function(course) {
+        .then((course) => {
             if (!course) throw new AppError('app', 'course_not_found');
 
             return course.destroy();
