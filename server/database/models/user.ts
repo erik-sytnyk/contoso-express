@@ -1,9 +1,7 @@
 import helper from './_modelHelper';
 const bcrypt = require('bcrypt-nodejs');
 
-export default User;
-
-function User(sequelize, DataTypes) {
+export function init(sequelize, DataTypes) {
     let fields = {
         id: {
             type: DataTypes.INTEGER,

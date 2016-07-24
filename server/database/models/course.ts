@@ -1,8 +1,6 @@
 import helper from './_modelHelper';
 
-export default course;
-
-function course(sequelize, DataTypes) {
+export function init(sequelize, DataTypes) {
     let fields = {
         id: {
             type: DataTypes.INTEGER,
@@ -22,7 +20,7 @@ function course(sequelize, DataTypes) {
 
     let options = {
         classMethods: {
-            associate: function (models) {
+            associate(models) {
                 model.belongsToMany(models.Instructor, {
                     through: helper.getName('courseInstructor'),
                     foreignKey: helper.defineForeignKey('courseId')

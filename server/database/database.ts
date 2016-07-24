@@ -1,9 +1,7 @@
 import {DbModels} from '../../typings/app/models';
 import config from '../config';
 const Sequelize = require('sequelize');
-const path = require('path');
 const models = require('./models');
-import pathHelper from  '../helpers/pathHelper';
 
 interface Db {
     sequelize: any,

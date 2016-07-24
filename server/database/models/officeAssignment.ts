@@ -1,8 +1,6 @@
 import helper from './_modelHelper';
 
-export default OfficeAssignment;
-
-function OfficeAssignment(sequelize, DataTypes) {
+export function init(sequelize, DataTypes) {
     let fields = {
         id: {
             type: DataTypes.INTEGER,
@@ -16,7 +14,7 @@ function OfficeAssignment(sequelize, DataTypes) {
 
     let options = {
         classMethods: {
-            associate: function(models) {
+            associate(models) {
                 model.belongsTo(models.Instructor, {
                     foreignKey: helper.defineForeignKey('instructorId')
                 });

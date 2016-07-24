@@ -1,8 +1,6 @@
 import helper from './_modelHelper';
 
-export default Instructor;
-
-function Instructor(sequelize, DataTypes) {
+export function init(sequelize, DataTypes) {
     let fields = {
         id: {
             type: DataTypes.INTEGER,

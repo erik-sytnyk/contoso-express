@@ -1,8 +1,6 @@
 import helper from './_modelHelper';
 
-export default Student;
-
-function Student(sequelize, DataTypes) {
+export function init(sequelize, DataTypes) {
     let fields = {
         id: {
             type: DataTypes.INTEGER,
@@ -22,7 +20,7 @@ function Student(sequelize, DataTypes) {
 
     let options = {
         classMethods: {
-            associate: function(models) {
+            associate(models) {
                 model.hasMany(models.Enrollment, {
                     foreignKey: helper.defineForeignKey('studentId')
                 });
