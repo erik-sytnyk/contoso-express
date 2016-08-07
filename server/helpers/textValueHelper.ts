@@ -6,10 +6,10 @@ const textValuesPath = pathHelper.getDataRelative('text', 'textValues.json');
 const textValuesInfo = require(textValuesPath);
 
 export default {
-    byKey: byKey,
-    error: error,
-    info: info,
-    warning: warning
+    byKey,
+    error,
+    info,
+    warning
 };
 
 function byKey(key: string, data?: Object): string {

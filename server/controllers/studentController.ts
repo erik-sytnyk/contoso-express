@@ -4,11 +4,11 @@ import * as Joi from 'joi';
 import config from '../config';
 
 export default {
-    getStudentsStatistics: getStudentsStatistics,
-    getStudents: getStudents,
-    getStudent: getStudent,
-    saveStudent: saveStudent,
-    deleteStudent: deleteStudent
+    getStudentsStatistics,
+    getStudents,
+    getStudent,
+    saveStudent,
+    deleteStudent
 };
 
 async function getStudentsStatistics(req, res) {

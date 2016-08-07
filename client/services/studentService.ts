@@ -1,11 +1,11 @@
 import httpHelper from '../helpers/httpHelper';
 
 export default {
-    getStudentsStatistics: getStudentsStatistics,
-    getStudents: getStudents,
-    getStudent: getStudent,
-    saveStudent: saveStudent,
-    deleteStudent: deleteStudent
+    getStudentsStatistics,
+    getStudents,
+    getStudent,
+    saveStudent,
+    deleteStudent
 };
 
 function getStudentsStatistics() {

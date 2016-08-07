@@ -5,12 +5,12 @@ import {Instructor} from '../../typings/app/models';
 import AppError from '../appError';
 
 export default {
-    init: init,
-    getInstructors: getInstructors,
-    getInstructorById: getInstructorById,
-    updateInstructor: updateInstructor,
-    addInstructor: addInstructor,
-    deleteInstructor: deleteInstructor
+    init,
+    getInstructors,
+    getInstructorById,
+    updateInstructor,
+    addInstructor,
+    deleteInstructor
 };
 
 const db = dbInit.init();

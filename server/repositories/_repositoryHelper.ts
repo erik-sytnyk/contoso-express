@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import * as Promise from 'bluebird';
 
 export default {
-    stubData: stubData
+    stubData
 };
 
 function stubData(data: any, delay = 500) {

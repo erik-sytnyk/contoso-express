@@ -1,10 +1,10 @@
 import httpHelper from '../helpers/httpHelper';
 
 export default {
-    getDepartments: getDepartments,
-    getDepartment: getDepartment,
-    saveDepartment: saveDepartment,
-    deleteDepartment: deleteDepartment
+    getDepartments,
+    getDepartment,
+    saveDepartment,
+    deleteDepartment
 };
 
 function getDepartments() {

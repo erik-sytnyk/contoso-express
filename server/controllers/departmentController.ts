@@ -4,10 +4,10 @@ import * as Joi from 'joi';
 import config from '../config';
 
 export default {
-    getDepartments: getDepartments,
-    getDepartment: getDepartment,
-    saveDepartment: saveDepartment,
-    deleteDepartment: deleteDepartment
+    getDepartments,
+    getDepartment,
+    saveDepartment,
+    deleteDepartment
 };
 
 async function getDepartments(req, res) {

@@ -3,10 +3,10 @@ import helper from './_controllerHelper';
 import courseRepository from '../repositories/courseRepository';
 
 export default {
-    getCourses: getCourses,
-    getCourse: getCourse,
-    saveCourse: saveCourse,
-    deleteCourse: deleteCourse
+    getCourses,
+    getCourse,
+    saveCourse,
+    deleteCourse
 };
 
 async function getCourses(req, res) {

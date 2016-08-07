@@ -1,10 +1,10 @@
 import httpHelper from '../helpers/httpHelper';
 
 export default {
-    getInstructors: getInstructors,
-    getInstructor: getInstructor,
-    saveInstructor: saveInstructor,
-    deleteInstructor: deleteInstructor
+    getInstructors,
+    getInstructor,
+    saveInstructor,
+    deleteInstructor
 };
 
 function getInstructors() {

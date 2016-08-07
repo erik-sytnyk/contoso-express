@@ -6,8 +6,8 @@ const settings = {
 
 export default {
     getName: getDbName,
-    defineForeignKey: defineForeignKey,
-    defineModel: defineModel
+    defineForeignKey,
+    defineModel
 };
 
 function getDbName(name) {

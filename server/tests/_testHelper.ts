@@ -10,7 +10,7 @@ const db = dbInit.init(dbPath);
 let dbIsInitialized = false;
 
 export default {
-    initTestDb: initTestDb
+    initTestDb
 };
 
 function initTestDb() {

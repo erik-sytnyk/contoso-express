@@ -1,7 +1,7 @@
 import helper from './_controllerHelper';
 
 export default {
-    home: home
+    home
 };
 
 async function home(req, res) {

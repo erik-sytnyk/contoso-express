@@ -7,8 +7,8 @@ const EmailTemplate = require('email-templates').EmailTemplate;
 const emailTransport = nodemailer.createTransport();
 
 export default {
-    sendEmail: sendEmail,
-    sendEmailTemplate: sendEmailTemplate
+    sendEmail,
+    sendEmailTemplate
 };
 
 interface EmailOptions {

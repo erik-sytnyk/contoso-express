@@ -6,16 +6,16 @@ import textValue from '../helpers/textValueHelper';
 import controllerHelper from '../controllers/_controllerHelper';
 
 export default {
-    renderView: renderView,
-    setStatusMessage: setStatusMessage,
-    handleError: handleError,
-    redirectToLogIn: redirectToLogIn,
-    sendAuthErrorMessage: sendAuthErrorMessage,
-    sendAuthMessage: sendAuthMessage,
-    sendResetPasswordEmail: sendResetPasswordEmail,
-    sendActivationEmail: sendActivationEmail,
-    isValidEmail: isValidEmail,
-    isValidPassword: isValidPassword
+    renderView,
+    setStatusMessage,
+    handleError,
+    redirectToLogIn,
+    sendAuthErrorMessage,
+    sendAuthMessage,
+    sendResetPasswordEmail,
+    sendActivationEmail,
+    isValidEmail,
+    isValidPassword
 };
 
 function renderView(viewName, viewModel, req, res) {

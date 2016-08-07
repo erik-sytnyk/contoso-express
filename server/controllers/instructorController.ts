@@ -5,10 +5,10 @@ import instructorRepository from '../repositories/instructorRepository';
 import officeAssignmentRepository from '../repositories/officeAssignmentRepository';
 
 export default {
-    getInstructors: getInstructors,
-    getInstructor: getInstructor,
-    saveInstructor: saveInstructor,
-    deleteInstructor: deleteInstructor
+    getInstructors,
+    getInstructor,
+    saveInstructor,
+    deleteInstructor
 };
 
 async function getInstructors(req, res) {

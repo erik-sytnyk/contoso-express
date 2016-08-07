@@ -2,7 +2,7 @@ import helper from './_controllerHelper';
 import enrollmentRepository from '../repositories/enrollmentRepository';
 
 export default {
-    getEnrollmentsByCourse: getEnrollmentsByCourse
+    getEnrollmentsByCourse
 };
 
 async function getEnrollmentsByCourse(req, res) {

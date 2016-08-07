@@ -9,8 +9,8 @@ function init(expressApp, passportAuth) {
     app = expressApp;
     passport = passportAuth;
     return {
-        app: app,
-        isLoggedIn: isLoggedIn,
+        app,
+        isLoggedIn,
         get: httpGet,
         post: httpPost,
         put: httpPut,

@@ -5,7 +5,7 @@ let rootPath = path.join(__dirname, '../../..');
 let defaultDataPath = path.join(rootPath, 'data');
 
 export default {
-    path: path,
+    path,
     getRelative: getRelativePath,
     getDataRelative: getDataRelativePath
 };

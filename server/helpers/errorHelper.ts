@@ -3,8 +3,8 @@ import textValue from '../helpers/textValueHelper';
 import config from '../config';
 
 export default {
-    logError: logError,
-    getErrorMessage: getErrorMessage
+    logError,
+    getErrorMessage
 };
 
 function getErrorMessage(error): string {

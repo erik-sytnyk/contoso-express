@@ -5,11 +5,11 @@ import {Response} from 'express';
 import * as Joi from 'joi';
 
 export default {
-    sendFailureMessage: sendFailureMessage,
-    sendSuccessMessage: sendSuccessMessage,
-    sendData: sendData,
-    renderView: renderView,
-    loadSchema: loadSchema
+    sendFailureMessage,
+    sendSuccessMessage,
+    sendData,
+    renderView,
+    loadSchema
 };
 
 function sendFailureMessage(error, res) {

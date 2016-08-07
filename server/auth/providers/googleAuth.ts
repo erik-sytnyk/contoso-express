@@ -3,7 +3,7 @@ import config from '../../config';
 import userRepository from '../../repositories/userRepository';
 
 export default {
-    init: init
+    init
 };
 
 let providerName = 'google';

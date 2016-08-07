@@ -4,13 +4,13 @@ import {Student} from '../../typings/app/models';
 import AppError from '../appError';
 
 export default {
-    init: init,
-    getStudentStatistics: getStudentStatistics,
-    getStudents: getStudents,
-    getStudentById: getStudentById,
-    updateStudent: updateStudent,
-    addStudent: addStudent,
-    deleteStudent: deleteStudent
+    init,
+    getStudentStatistics,
+    getStudents,
+    getStudentById,
+    updateStudent,
+    addStudent,
+    deleteStudent
 };
 
 const db = dbInit.init();

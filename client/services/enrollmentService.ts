@@ -1,7 +1,7 @@
 import httpHelper from '../helpers/httpHelper';
 
 export default {
-    getEnrollments: getEnrollments
+    getEnrollments
 };
 
 function getEnrollments(courseId) {

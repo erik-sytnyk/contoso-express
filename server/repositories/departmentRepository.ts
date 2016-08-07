@@ -4,12 +4,12 @@ import {Department} from '../../typings/app/models';
 import AppError from '../appError';
 
 export default {
-    init: init,
-    getDepartments: getDepartments,
-    getDepartmentById: getDepartmentById,
-    updateDepartment: updateDepartment,
-    addDepartment: addDepartment,
-    deleteDepartment: deleteDepartment
+    init,
+    getDepartments,
+    getDepartmentById,
+    updateDepartment,
+    addDepartment,
+    deleteDepartment
 };
 
 const db = dbInit.init();

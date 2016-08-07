@@ -3,9 +3,9 @@ import * as Promise from 'bluebird';
 import {OfficeAssignment} from '../../typings/app/models';
 
 export default {
-    init: init,
-    saveOfficeAssignment: saveOfficeAssignment,
-    deleteOfficeAssignmentByInstructorId: deleteOfficeAssignmentByInstructorId
+    init,
+    saveOfficeAssignment,
+    deleteOfficeAssignmentByInstructorId
 };
 
 const db = dbInit.init();

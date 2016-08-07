@@ -2,9 +2,9 @@ import * as _ from 'lodash';
 import * as toastr from 'toastr';
 
 export default {
-    showMessage: showMessage,
-    showWarning: showWarning,
-    showError: showError
+    showMessage,
+    showWarning,
+    showError
 };
 
 function setToasterOptions() {

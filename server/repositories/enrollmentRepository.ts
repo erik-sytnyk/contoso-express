@@ -3,8 +3,8 @@ import * as Promise from 'bluebird';
 import {Enrollment} from '../../typings/app/models';
 
 export default {
-    init: init,
-    getEnrollmentsByCourseId: getEnrollmentsByCourseId
+    init,
+    getEnrollmentsByCourseId
 };
 
 const db = dbInit.init();

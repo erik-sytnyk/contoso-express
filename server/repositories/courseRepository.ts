@@ -4,12 +4,12 @@ import {Course} from '../../typings/app/models';
 import AppError from '../appError';
 
 export default {
-    init: init,
-    getCourses: getCourses,
-    getCourseById: getCourseById,
-    updateCourse: updateCourse,
-    addCourse: addCourse,
-    deleteCourse: deleteCourse
+    init,
+    getCourses,
+    getCourseById,
+    updateCourse,
+    addCourse,
+    deleteCourse
 };
 
 const db = dbInit.init();

@@ -1,10 +1,10 @@
 import httpHelper from '../helpers/httpHelper';
 
 export default {
-    getCourses: getCourses,
-    getCourse: getCourse,
-    saveCourse: saveCourse,
-    deleteCourse: deleteCourse
+    getCourses,
+    getCourse,
+    saveCourse,
+    deleteCourse
 };
 
 function getCourses(departmentId) {

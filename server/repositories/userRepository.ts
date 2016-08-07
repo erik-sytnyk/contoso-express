@@ -7,22 +7,22 @@ const bcrypt = require('bcrypt-nodejs');
 import AppError from '../appError';
 
 export default {
-    init: init,
-    getUsers: getUsers,
-    getById: getById,
-    getLocalUserByEmail: getLocalUserByEmail,
-    findUserWithEmail: findUserWithEmail,
-    saveLocalAccount: saveLocalAccount,
-    getUserByActivationToken: getUserByActivationToken,
-    refreshActivationToken: refreshActivationToken,
-    activateUser: activateUser,
-    comparePasswords: comparePasswords,
-    findUserByAuthProviderId: findUserByAuthProviderId,
-    saveAuthProviderProfile: saveAuthProviderProfile,
-    resetPassword: resetPassword,
-    getUserByResetToken: getUserByResetToken,
-    refreshResetToken: refreshResetToken,
-    updateUserPassword: updateUserPassword
+    init,
+    getUsers,
+    getById,
+    getLocalUserByEmail,
+    findUserWithEmail,
+    saveLocalAccount,
+    getUserByActivationToken,
+    refreshActivationToken,
+    activateUser,
+    comparePasswords,
+    findUserByAuthProviderId,
+    saveAuthProviderProfile,
+    resetPassword,
+    getUserByResetToken,
+    refreshResetToken,
+    updateUserPassword
 };
 
 const db = dbInit.init();
