@@ -56,7 +56,7 @@ class CourseSave extends React.Component {
             formIsValid = false;
         }
 
-        if (!_.inRange(this.state.course.credits, 0, 5)) {
+        if (!_.inRange(this.state.course.credits, 0, 6)) {
             errors.credits = 'The field Credits must be between 0 and 5.';
             formIsValid = false;
         }

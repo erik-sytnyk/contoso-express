@@ -14,7 +14,7 @@ function getCurrentDate() {
 }
 
 function formatDate(dateStr) {
-    if (!dateStr) return getCurrentDate();
+    if (!dateStr) dateStr = getCurrentDate();
 
     return moment(dateStr).format(config.format.date);
 }

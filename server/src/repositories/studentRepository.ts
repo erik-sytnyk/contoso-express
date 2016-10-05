@@ -25,7 +25,8 @@ function init(db) {
 }
 
 function getStudentStatistics() {
-    let queryString = 'SELECT enrollment_date, COUNT(*) AS "studentCount" FROM students GROUP BY enrollment_date';
+    let queryString = `SELECT enrollment_date as "enrollmentDate", COUNT(*) AS "studentCount" 
+                            FROM students GROUP BY enrollment_date`;
 
     return db.sequelize.query(queryString)
         .then((data) => {
