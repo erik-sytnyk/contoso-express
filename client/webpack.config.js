@@ -51,7 +51,7 @@ addExtras();
 
 function copyStaticAssets() {
     let copyPlugin = new CopyWebpackPlugin([
-        {from: 'index.html', to: 'index.html'},
+        {from: 'index.html', to: 'app.html'},
         {from: 'node_modules/font-awesome/css/font-awesome.min.css', to: 'libs/font-awesome/css'},
         {from: 'node_modules/font-awesome/fonts', to: 'libs/font-awesome/fonts'},
         {from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'libs/bootstrap/css'},

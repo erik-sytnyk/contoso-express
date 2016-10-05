@@ -9,11 +9,13 @@ export default {
     delete: httpDelete
 };
 
+const baseUlr = 'http://localhost:3500';
+
 function ajaxRequest(httpVerb: string, url: string, data): Promise<any> {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: httpVerb,
-            url: url,
+            url: baseUlr + url,
             dataType: 'json',
             cache: false,
             data: data,
