@@ -7,7 +7,7 @@ export default {
 
 async function home(req, res) {
     try {
-        return res.sendFile(pathHelper.getRelative('../client/build/app.html'));
+        return res.sendFile(pathHelper.getRelative('../client/build/index.html'));
     } catch (err) {
         helper.sendFailureMessage(err, res);
     }

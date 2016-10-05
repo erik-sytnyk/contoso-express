@@ -40,7 +40,7 @@ function initExpress() {
     app.use(bodyParser.json()); // get information from html forms
     app.use(bodyParser.urlencoded({extended: true}));
 
-    app.use(express.static(pathHelper.getRelative('../client/build')));
+    app.use('/static', express.static(pathHelper.getRelative('../client/build/static')));
 
     app.use(compression());
 
