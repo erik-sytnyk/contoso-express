@@ -26,7 +26,8 @@ module.exports = {
             {test: /\.tsx?$/, loader: "awesome-typescript-loader?tsconfig=tsconfig.webpack.json"},
             {test: /\.css$/, loader: ExtractTextPlugin.extract(cssLoaderStr)},
             {test: /\.less$/, loader: ExtractTextPlugin.extract(cssLoaderStr + '!less')},
-            {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'file?name=assets/[name]-[hash:3].[ext]'}
+            {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'file?name=assets/[name]-[hash:3].[ext]'},
+            {test: /\.json$/, loader: 'json'}
         ]
     },
     devtool: "cheap-inline-module-source-map",
@@ -50,6 +51,7 @@ addExtras();
 
 function copyStaticAssets() {
     let copyPlugin = new CopyWebpackPlugin([
+        {from: 'index.html', to: 'index.html'},
         {from: 'node_modules/font-awesome/css/font-awesome.min.css', to: 'libs/font-awesome/css'},
         {from: 'node_modules/font-awesome/fonts', to: 'libs/font-awesome/fonts'},
         {from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'libs/bootstrap/css'},

@@ -17,8 +17,8 @@ const DateTimePicker = ({name, label, onChange, value, error}) => {
             <div className="field">
                 <DateTimeField
                     dateTime={dateValue}
-                    format={config.dateFormat}
-                    inputFormat={config.dateFormat}
+                    format={config.format.date}
+                    inputFormat={config.format.date}
                     onChange={onChange}
                     viewMode="date"
                 />

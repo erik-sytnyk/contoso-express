@@ -1,4 +1,3 @@
-import config, {getClientConfig} from '../config';
 import errorHelper from '../helpers/errorHelper';
 import AppError from '../appError';
 import {Response} from 'express';
@@ -30,9 +29,6 @@ function sendData(data, res) {
 
 function renderView(viewName: string, data, res) {
     if (!data) data = {};
-
-    data.appName = config.app.appName;
-    data.config = getClientConfig();
 
     res.render(viewName, data);
 }

@@ -12,5 +12,5 @@ function moneyFormat(amount): string {
 
     let amountFormatted = amountNum.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 
-    return `${config.currencySymbol} ${amountFormatted}`;
+    return `${config.format.currencySymbol} ${amountFormatted}`;
 }

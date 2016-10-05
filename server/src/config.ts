@@ -46,15 +46,6 @@ const configReader = require('config');
 
 loadConfig();
 
-export function getClientConfig() {
-    return {
-        isDevLocal: configValues.app.isDevLocal,
-        dateFormat: configValues.format.date,
-        yearFormat: configValues.format.year,
-        currencySymbol: configValues.format.currencySymbol
-    };
-}
-
 export function loadConfig() {
 
     (<any>configValues).app = {};

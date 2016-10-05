@@ -1,16 +1,18 @@
-import * as $ from 'jquery';
+import * as _ from 'lodash';
 
 interface ClientConfig {
     idDevLocal: boolean,
-    dateFormat: string,
-    yearFormat: string,
-    currencySymbol: string
+    format: {
+        date: string,
+        year: string,
+        currencySymbol: string
+    }
 }
 
 function loadConfig() {
-    let jsonStr = $('#configVal').val();
+    let configData = require('../../config/config.json');
 
-    return JSON.parse(jsonStr);
+    return configData;
 }
 
 let configValues: ClientConfig = loadConfig();

@@ -1,0 +1,8 @@
+{
+  "isDevLocal": true,
+  "format": {
+    "date": "MM/DD/YYYY",
+    "year": "YYYY",
+    "currencySymbol": "$"
+  }
+}

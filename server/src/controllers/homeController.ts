@@ -1,4 +1,5 @@
 import helper from './_controllerHelper';
+import pathHelper from '../helpers/pathHelper';
 
 export default {
     home
@@ -6,7 +7,7 @@ export default {
 
 async function home(req, res) {
     try {
-        return helper.renderView('home', {}, res);
+        return res.sendFile(pathHelper.getRelative('../client/build/index.html'));
     } catch (err) {
         helper.sendFailureMessage(err, res);
     }

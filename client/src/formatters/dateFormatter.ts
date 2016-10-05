@@ -9,13 +9,13 @@ export default {
 };
 
 function getCurrentDate() {
-    return moment().format(config.dateFormat);
+    return moment().format(config.format.date);
 }
 
 function formatDate(dateStr) {
     if (!dateStr) return getCurrentDate();
 
-    return moment(dateStr).format(config.dateFormat);
+    return moment(dateStr).format(config.format.date);
 }
 
 function parseDate(dateStr) {
@@ -23,5 +23,5 @@ function parseDate(dateStr) {
 }
 
 function getCurrentYear() {
-    return moment().format(config.yearFormat);
+    return moment().format(config.format.year);
 }
