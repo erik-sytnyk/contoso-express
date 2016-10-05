@@ -59,7 +59,7 @@ function initViewEngine() {
     app.engine('hbs', hbs.express4({
         partialsDir: pathHelper.getRelative('views/partials'),
         layoutsDir: pathHelper.getRelative('views/layouts'),
-        defaultLayout: pathHelper.getRelative('views/layouts/main.hbs')
+        defaultLayout: pathHelper.getRelative('views/layouts/auth.hbs')
     }));
 
     hbs.registerHelper('json', function(obj) {
