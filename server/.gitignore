@@ -1,0 +1,10 @@
+node_modules/
+build/
+typings/globals/
+typings/modules/
+.idea/
+data/db/
+src/test.ts
+data/logs
+data/config/local.json
+.vscode/

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "rootDir": "client",
-    "outDir": "build/client",
+    "rootDir": "src",
+    "outDir": "build",
     "sourceMap": true,
     "module": "commonjs",
     "target": "es5",

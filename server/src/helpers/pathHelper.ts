@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as _ from 'lodash';
 
-let rootPath = path.join(__dirname, '../../..');
+let rootPath = path.join(__dirname, '../..');
 let defaultDataPath = path.join(rootPath, 'data');
 
 export default {

@@ -39,7 +39,7 @@ function initExpress() {
     app.use(bodyParser.json()); // get information from html forms
     app.use(bodyParser.urlencoded({extended: true}));
 
-    app.use(express.static(pathHelper.getRelative('build/client')));
+    app.use(express.static(pathHelper.getRelative('../client/build')));
 
     app.use(compression());
 
@@ -52,14 +52,14 @@ function initExpress() {
 
 function initViewEngine() {
     const hbs = require('express-hbs');
-    const viewsDir = pathHelper.getRelative('server/views');
+    const viewsDir = pathHelper.getRelative('views');
     const entities = require('entities');
 
     // Hook in express-hbs and tell it where known directories reside
     app.engine('hbs', hbs.express4({
-        partialsDir: pathHelper.getRelative('server/views/partials'),
-        layoutsDir: pathHelper.getRelative('server/views/layouts'),
-        defaultLayout: pathHelper.getRelative('server/views/layouts/main.hbs')
+        partialsDir: pathHelper.getRelative('views/partials'),
+        layoutsDir: pathHelper.getRelative('views/layouts'),
+        defaultLayout: pathHelper.getRelative('views/layouts/main.hbs')
     }));
 
     hbs.registerHelper('json', function(obj) {

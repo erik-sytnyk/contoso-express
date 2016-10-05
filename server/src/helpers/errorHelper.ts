@@ -1,5 +1,5 @@
 import logger from '../logger';
-import textValue from '../helpers/textValueHelper';
+import textValue from './textValueHelper';
 import config from '../config';
 
 export default {

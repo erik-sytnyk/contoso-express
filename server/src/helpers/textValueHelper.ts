@@ -1,5 +1,5 @@
 const _ = require('lodash');
-import pathHelper from '../helpers/pathHelper';
+import pathHelper from './/pathHelper';
 
 const template = require('es6-template-strings');
 const textValuesPath = pathHelper.getDataRelative('text', 'textValues.json');

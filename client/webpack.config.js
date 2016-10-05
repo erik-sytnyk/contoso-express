@@ -12,10 +12,10 @@ let cssLoaderStr = isProduction ? 'css?minimize' : 'css';
 
 module.exports = {
     entry: {
-        app: "./client/AppMain.tsx"
+        app: "./src/AppMain.tsx"
     },
     output: {
-        path: "./build/client",
+        path: "./build",
         filename: 'bundle.js'
     },
     resolve: {

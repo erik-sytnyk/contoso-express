@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {Router} from 'react-router';
 import {browserHistory} from 'react-router';
 import routes from './routes';
-import './styles/app.less';
+import '../styles/app.less';
 import {loadDepartments} from './actions/departmentActions';
 import {loadInstructors} from './actions/instructorActions';
 

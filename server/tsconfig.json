@@ -3,12 +3,12 @@
     "target": "es6",
     "module": "commonjs",
     "sourceMap": true,
-    "outDir": "build/server",
-    "rootDir": "server",
+    "outDir": "./build",
+    "rootDir": "src",
     "allowUnreachableCode": true
   },
   "exclude": [
-    "client",
+    ".",
     "node_modules"
   ]
 }
