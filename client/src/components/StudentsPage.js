@@ -109,6 +109,7 @@ class StudentsPage extends React.Component {
             case 'date':
                 newSortOrder = this.state.sortOrder === 'date' ? 'date_desc' : 'date';
                 break;
+            default:
         }
 
         this.setState({sortOrder: newSortOrder});

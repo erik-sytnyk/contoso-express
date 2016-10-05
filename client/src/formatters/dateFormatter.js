@@ -9,7 +9,8 @@ export default {
 };
 
 function getCurrentDate() {
-    return moment().format(config.format.date);
+    var now = new Date();
+    return now.toISOString();
 }
 
 function formatDate(dateStr) {

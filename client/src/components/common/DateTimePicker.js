@@ -6,7 +6,7 @@ import dateFormatter from '../../formatters/dateFormatter';
 const DateTimePicker = ({name, label, onChange, value, error}) => {
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
-        wrapperClass += ' ' + 'has-error';
+        wrapperClass += ' has-error';
     }
     
     let dateValue = dateFormatter.date(value);

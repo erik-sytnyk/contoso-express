@@ -41,7 +41,7 @@ async function saveInstructor(req, res) {
             id: Joi.number(),
             firstName: Joi.string().required(),
             lastName: Joi.string().required(),
-            hireDate: Joi.date().format(config.format.date),
+            hireDate: Joi.date(),
             courses: Joi.array().items(
                 Joi.object().keys({
                     id: Joi.number().required()

@@ -74,7 +74,7 @@ export function saveDepartment(department) {
 
         return departmentService.saveDepartment(department)
             .then((dep) => {
-                department.id ? dispatch(updateDepartmentSuccess(dep)) : dispatch(createDepartmentSuccess(dep));
+                return department.id ? dispatch(updateDepartmentSuccess(dep)) : dispatch(createDepartmentSuccess(dep));
             }).catch(error => {
                 throw(error);
             });

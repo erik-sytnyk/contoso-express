@@ -81,7 +81,7 @@ export function saveInstructor(instructor) {
 
         return instructorService.saveInstructor(instructor)
             .then((data) => {
-                instructor.id ? dispatch(updateInstructorSuccess(data)) : dispatch(createInstructorSuccess(data));
+                return instructor.id ? dispatch(updateInstructorSuccess(data)) : dispatch(createInstructorSuccess(data));
             }).catch(error => {
                 throw(error);
             });

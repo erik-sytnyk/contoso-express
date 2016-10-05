@@ -40,7 +40,7 @@ async function saveDepartment(req, res) {
             id: Joi.number(),
             name: Joi.string().required(),
             budget: Joi.number().required(),
-            startDate: Joi.date().format(config.format.date),
+            startDate: Joi.date(),
             instructorId: Joi.number().required()
         };
 

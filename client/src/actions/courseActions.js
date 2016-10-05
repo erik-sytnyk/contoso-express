@@ -72,7 +72,7 @@ export function saveCourse(course) {
 
         return courseService.saveCourse(course)
             .then((data) => {
-                course.id ? dispatch(updateCourseSuccess(data)) : dispatch(createCourseSuccess(data));
+                return course.id ? dispatch(updateCourseSuccess(data)) : dispatch(createCourseSuccess(data));
             }).catch(error => {
                 throw(error);
             });

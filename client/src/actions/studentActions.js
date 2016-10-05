@@ -93,7 +93,7 @@ export function saveStudent(student) {
 
         return studentService.saveStudent(student)
             .then((stud) => {
-                student.id ? dispatch(updateStudentSuccess(stud)) : dispatch(createStudentSuccess(stud));
+                return student.id ? dispatch(updateStudentSuccess(stud)) : dispatch(createStudentSuccess(stud));
             }).catch(error => {
                 throw(error);
             });

@@ -47,8 +47,8 @@ class InstructorSave extends React.Component {
             if (field === 'location') {
                 officeAssignment.location = event.target.value;
                 instructor.officeAssignment = officeAssignment;
-            } else if (!_.isNaN(parseInt(field))) {
-                let id = parseInt(field);
+            } else if (!_.isNaN(parseInt(field, 10))) {
+                let id = parseInt(field, 10);
 
                 let exist = _.find(courses, (item) => {
                    return item.id === id;

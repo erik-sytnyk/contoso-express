@@ -3,7 +3,7 @@ import React from 'react';
 const NumberInput = ({name, label, onChange, value, error}) => {
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
-        wrapperClass += ' ' + 'has-error';
+        wrapperClass += ' has-error';
     }
 
     return (

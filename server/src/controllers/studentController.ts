@@ -56,7 +56,7 @@ async function saveStudent(req, res) {
             id: Joi.number(),
             firstName: Joi.string().required(),
             lastName: Joi.string().required(),
-            enrollmentDate: Joi.date().format(config.format.date)
+            enrollmentDate: Joi.date()
         };
 
         let result = null;
