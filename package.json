@@ -24,8 +24,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "tslint": "^3.15.1",
+    "typescript": "^1.8.10"
   }
 }

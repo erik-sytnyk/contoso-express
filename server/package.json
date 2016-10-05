@@ -1,0 +1,37 @@
+{
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.4.0",
+    "body-parser": "^1.15.1",
+    "compression": "^1.6.2",
+    "config": "^1.21.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.1",
+    "crypto": "0.0.3",
+    "email-templates": "^2.3.0",
+    "entities": "^1.1.1",
+    "es6-template-strings": "^2.0.0",
+    "express": "^4.13.4",
+    "express-hbs": "^1.0.1",
+    "handlebars": "^4.0.5",
+    "joi": "^8.4.2",
+    "lodash": "^4.13.1",
+    "moment": "^2.14.1",
+    "morgan": "^1.7.0",
+    "nodemailer": "^2.4.2",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^6.0.1",
+    "pg-hstore": "^2.3.2",
+    "rimraf": "^2.5.3",
+    "sequelize": "^3.23.3",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
