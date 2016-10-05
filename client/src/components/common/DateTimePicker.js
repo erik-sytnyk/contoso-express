@@ -8,8 +8,12 @@ const DateTimePicker = ({name, label, onChange, value, error}) => {
     if (error && error.length > 0) {
         wrapperClass += ' has-error';
     }
-    
-    let dateValue = dateFormatter.date(value);
+
+    let dateValue = null;
+
+    if (dateFormatter.isValid(value)) {
+        dateValue = dateFormatter.date(value);
+    }
 
     return (
         <div className={wrapperClass}>

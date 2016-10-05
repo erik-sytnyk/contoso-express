@@ -5,6 +5,7 @@ export default {
     currentDate: getCurrentDate,
     date: formatDate,
     parse: parseDate,
+    isValid: isValidDate,
     currentYear: getCurrentYear
 };
 
@@ -21,6 +22,10 @@ function formatDate(dateStr) {
 
 function parseDate(dateStr) {
     return moment(dateStr).toDate();
+}
+
+function isValidDate(dateStr) {
+    return moment(dateStr, moment.ISO_8601, true).isValid();
 }
 
 function getCurrentYear() {
