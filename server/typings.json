@@ -2,9 +2,6 @@
   "dependencies": {
     "chai": "registry:npm/chai#3.5.0+20160415060238",
     "lodash": "registry:npm/lodash#4.0.0+20160416211519",
-    "react-redux": "registry:npm/react-redux#4.4.0+20160207114942",
-    "redux": "registry:npm/redux#3.0.6+20160214194820",
-    "redux-thunk": "registry:npm/redux-thunk#2.0.0+20160525185520",
     "rimraf": "registry:npm/rimraf#2.5.0+20160211003958"
   },
   "globalDependencies": {
@@ -15,7 +12,6 @@
     "express": "registry:dt/express#4.0.0+20160317120654",
     "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160602151406",
     "joi": "registry:dt/joi#9.0.0+20160626220651",
-    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "mocha": "registry:dt/mocha#2.2.5+20160317120654",
     "moment": "registry:dt/moment#2.8.0+20160316155526",
@@ -26,15 +22,8 @@
     "passport-facebook": "registry:dt/passport-facebook#1.0.3+20160316155526",
     "passport-google-oauth": "registry:dt/passport-google-oauth#1.0.3+20160316155526",
     "passport-local": "registry:dt/passport-local#0.0.0+20160316155526",
-    "react": "registry:dt/react#0.14.0+20160602151522",
-    "react-bootstrap": "registry:dt/react-bootstrap#0.0.0+20160526141239",
-    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
-    "react-router": "registry:dt/react-router#2.0.0+20160621215300",
-    "react-router-bootstrap": "registry:dt/react-router-bootstrap#0.0.0+20160316155526",
-    "react-router/history": "registry:dt/react-router/history#2.0.0+20160608102730",
     "serve-static": "registry:dt/serve-static#0.0.0+20160501131543",
     "shortid": "registry:dt/shortid#0.0.0+20160316155526",
-    "toastr": "registry:dt/toastr#2.1.1+20160510010435",
     "winston": "registry:dt/winston#0.0.0+20160417152829"
   }
 }

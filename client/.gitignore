@@ -1,0 +1,6 @@
+node_modules/
+build/
+typings/globals/
+typings/modules/
+.idea/
+.vscode/
