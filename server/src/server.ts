@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
+import * as cors from 'cors';
 import * as _ from 'lodash';
 
 import config from './config';
@@ -42,6 +43,8 @@ function initExpress() {
     app.use(express.static(pathHelper.getRelative('../client/build')));
 
     app.use(compression());
+
+    if (config.app.isDevLocal) app.use(cors());
 
     //NOTE following required for auth only
 

@@ -1,5 +1,6 @@
 import uiHelper from './uiHelper';
 import * as Promise from 'bluebird';
+import config from './clientConfig';
 import * as $ from 'jquery';
 
 export default {
@@ -9,13 +10,11 @@ export default {
     delete: httpDelete
 };
 
-const baseUlr = 'http://localhost:3500';
-
 function ajaxRequest(httpVerb: string, url: string, data): Promise<any> {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: httpVerb,
-            url: baseUlr + url,
+            url: config.apiBaseUrl + url,
             dataType: 'json',
             cache: false,
             data: data,

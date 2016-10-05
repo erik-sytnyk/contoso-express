@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 
 interface ClientConfig {
     idDevLocal: boolean,
+    apiBaseUrl: string,
     format: {
         date: string,
         year: string,

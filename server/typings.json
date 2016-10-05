@@ -9,6 +9,7 @@
     "body-parser": "registry:dt/body-parser#0.0.0+20160317120654",
     "compression": "registry:dt/compression#0.0.0+20160501162003",
     "config": "registry:dt/config#0.0.0+20160317120654",
+    "cors": "registry:dt/cors#0.0.0+20160708202709",
     "express": "registry:dt/express#4.0.0+20160317120654",
     "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160602151406",
     "joi": "registry:dt/joi#9.0.0+20160626220651",
