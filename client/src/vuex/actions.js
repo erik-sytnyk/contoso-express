@@ -1,6 +1,6 @@
 import helper from '../helpers/uiHelper';
 import dateFormatter from '../formatters/dateFormatter';
-import types from './mutationTypes';
+import * as types from './mutationTypes';
 import _ from 'lodash';
 import studentService from '../services/studentService';
 import courseService from '../services/courseService';

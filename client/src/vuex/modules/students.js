@@ -14,7 +14,9 @@ const PAGE_SIZES = [3, 5, 10];
 // initial state
 const state = {
     list: [],
-    student: {},
+    student: {
+        enrollmentDate: null
+    },
     statisticsList: [],
     totalCount: 0,
     pageSizes: PAGE_SIZES,

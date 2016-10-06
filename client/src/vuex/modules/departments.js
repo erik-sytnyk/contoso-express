@@ -6,7 +6,9 @@ import {
 // initial state
 const state = {
     list: [],
-    department: {}
+    department: {
+        startDate: null
+    }
 };
 
 // mutations

@@ -6,7 +6,12 @@ import {
 // initial state
 const state = {
     list: [],
-    instructor: {}
+    instructor: {
+        hireDate: null,
+        officeAssignment: {
+            location: null
+        }
+    }
 };
 
 // mutations
