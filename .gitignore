@@ -1,4 +1,4 @@
 node_modules/
 .idea/
 .vscode/
-client/public/static/
+client/public/vendor

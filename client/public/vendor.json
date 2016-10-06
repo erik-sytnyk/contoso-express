@@ -1,0 +1,10 @@
+{
+  "staticResources": [
+    {"from": "node_modules/font-awesome/css/font-awesome.min.css", "to": "vendor/font-awesome/css/font-awesome.min.css"},
+    {"from": "node_modules/font-awesome/fonts", "to": "vendor/font-awesome/fonts"},
+    {"from": "node_modules/bootstrap/dist/css/bootstrap.min.css", "to": "vendor/bootstrap/css/bootstrap.min.css"},
+    {"from": "node_modules/bootstrap/dist/css/bootstrap.min.css.map", "to": "vendor/bootstrap/css/bootstrap.min.css.map"},
+    {"from": "node_modules/bootstrap/dist/fonts", "to": "vendor/bootstrap/fonts"},
+    {"from": "node_modules/toastr/build/toastr.min.css", "to": "vendor/toastr/toastr.min.css"}
+  ]
+}
