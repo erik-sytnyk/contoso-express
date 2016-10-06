@@ -4,7 +4,7 @@ import config from '../helpers/clientConfig';
 
 let configure = null;
 
-if (config.idDevLocal) {
+if (config.isDevLocal) {
     configure = configureStoreDev;
 } else {
     configure = configureStoreProd;
