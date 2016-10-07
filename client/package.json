@@ -1,4 +1,12 @@
 {
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "webpack -w",
+    "build": "webpack",
+    "copy-assets": "node tasks/copyAssets.js"
+  },
   "dependencies": {
     "bluebird": "^3.4.0",
     "bootstrap": "^3.3.6",

@@ -1,6 +1,6 @@
 {
   "isDevLocal": true,
-  "apiBaseUrl": "http://localhost:3500",
+  "proxy": "http://localhost:3500",
   "format": {
     "date": "MM/DD/YYYY",
     "year": "YYYY",
