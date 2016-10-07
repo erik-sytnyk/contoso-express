@@ -12,7 +12,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "postinstall": "cd server && npm install && cd ../client && npm install",
+    "postinstall": "cd server && npm install && typings install && cd ../client && npm install",
     "start": "cd server && npm run start",
     "watch": "cd client && npm run start",
     "build": "cd server && npm run build && cd ../client && npm run copy-assets && npm run build"
