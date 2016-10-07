@@ -58,6 +58,8 @@ function updateInstructor(instructorData): Promise<Instructor> {
         .then((instructor) => {
             if (!instructor) throw new AppError('app', 'instructor_not_found');
 
+            if (instructor.userId !== instructorData.userId) throw new AppError('app', 'user_validation');
+
             instructor.firstName = instructorData.firstName;
             instructor.lastName = instructorData.lastName;
             instructor.hireDate = instructorData.hireDate;
@@ -87,10 +89,12 @@ function addInstructor(instructorData): Promise<Instructor> {
         });
 }
 
-function deleteInstructor(id): Promise<Instructor> {
+function deleteInstructor(id, userId): Promise<Instructor> {
     return instructorModel.findById(id)
         .then((instructor) => {
             if (!instructor) throw new AppError('app', 'instructor_not_found');
+
+            if (instructor.userId !== userId) throw new AppError('app', 'user_validation');
 
             return instructor.destroy();
         });

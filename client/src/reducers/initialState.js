@@ -20,5 +20,6 @@ export default {
     enrollment: {
         list: []
     },
-    ajaxCallsInProgress: 0
+    ajaxCallsInProgress: 0,
+    user: {}
 };

@@ -15,6 +15,9 @@ export function init(sequelize, DataTypes) {
         },
         startDate: {
             type: DataTypes.DATE
+        },
+        userId: {
+            type: DataTypes.INTEGER
         }
     };
 

@@ -57,6 +57,8 @@ async function saveInstructor(req, res) {
 
         let instructor = await helper.loadSchema(data, schema);
 
+        instructor.userId = req.user ? req.user.id : null;
+
         if (instructor.id) {
             result = await instructorRepository.updateInstructor(instructor);
         } else {
@@ -77,9 +79,11 @@ async function deleteInstructor(req, res) {
     try {
         let id = req.body.id;
 
+        let userId = req.user ? req.user.id : null;
+
+        await instructorRepository.deleteInstructor(id, userId);
+
         await officeAssignmentRepository.deleteOfficeAssignmentByInstructorId(id);
-        
-        await instructorRepository.deleteInstructor(id);
 
         return helper.sendData({}, res);
     } catch (err) {

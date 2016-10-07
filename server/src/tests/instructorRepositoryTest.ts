@@ -37,7 +37,8 @@ describe('Instructor Repository', () => {
                 courses: [
                     {id: 1},
                     {id: 2}
-                ]
+                ],
+                userId: 188
             };
 
             return instructorRepository.addInstructor(instructor)
@@ -61,7 +62,8 @@ describe('Instructor Repository', () => {
                 courses: [
                     {id: 2},
                     {id: 3}
-                ]
+                ],
+                userId: 188
             };
 
             return instructorRepository.updateInstructor(instructor)
@@ -91,7 +93,7 @@ describe('Instructor Repository', () => {
         });
 
         it('delete', (done) => {
-            return instructorRepository.deleteInstructor(6)
+            return instructorRepository.deleteInstructor(6, 188)
                 .then((data) => {
                     expect(data).not.to.be.null;
                     done();

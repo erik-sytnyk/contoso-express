@@ -6,7 +6,8 @@
       "department_not_found": "Department not found.",
       "course_not_found": "Course not found.",
       "instructor_not_found": "Instructor not found.",
-      "student_not_found": "Student not found."
+      "student_not_found": "Student not found.",
+      "user_validation": "You cannot edit/delete this entity."
     },
     "auth": {
       "email_taken": "This email is already registered.",

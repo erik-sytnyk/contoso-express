@@ -49,7 +49,8 @@ describe('Student Repository', () => {
             let student = {
                 firstName: 'Test name',
                 lastName: 'Test last name',
-                enrollmentDate: '11/03/1995'
+                enrollmentDate: '11/03/1995',
+                userId: 188
             };
 
             return studentRepository.addStudent(student)
@@ -69,7 +70,8 @@ describe('Student Repository', () => {
                 id: 9,
                 firstName: 'Name updated',
                 lastName: 'Last name updated',
-                enrollmentDate: '11/03/2015'
+                enrollmentDate: '11/03/2015',
+                userId: 188
             };
 
             return studentRepository.updateStudent(student)
@@ -97,7 +99,7 @@ describe('Student Repository', () => {
         });
 
         it('delete', (done) => {
-            return studentRepository.deleteStudent(9)
+            return studentRepository.deleteStudent(9, 188)
                 .then((data) => {
                     expect(data).not.to.be.null;
                     done();

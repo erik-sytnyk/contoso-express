@@ -47,7 +47,8 @@ describe('Course Repository', () => {
                 number: 1000,
                 title: 'Test course',
                 credits: 5,
-                departmentId: 4
+                departmentId: 4,
+                userId: 188
             };
 
             return courseRepository.addCourse(course)
@@ -68,7 +69,8 @@ describe('Course Repository', () => {
                 number: 1001,
                 title: 'Test course updated',
                 credits: 2,
-                departmentId: 3
+                departmentId: 3,
+                userId: 188
             };
 
             return courseRepository.updateCourse(course)
@@ -100,7 +102,7 @@ describe('Course Repository', () => {
         });
 
         it('delete', (done) => {
-            return courseRepository.deleteCourse(8)
+            return courseRepository.deleteCourse(8, 188)
                 .then((data) => {
                     expect(data).not.to.be.null;
                     done();

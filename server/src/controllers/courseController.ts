@@ -49,6 +49,8 @@ async function saveCourse(req, res) {
 
         let course = await helper.loadSchema(courseData, schema);
 
+        courseData.userId = req.user ? req.user.id : null;
+
         if (course.id) {
             result = await courseRepository.updateCourse(courseData);
         } else {
@@ -67,7 +69,9 @@ async function deleteCourse(req, res) {
     try {
         let id = req.body.id;
 
-        await courseRepository.deleteCourse(id);
+        let userId = req.user ? req.user.id : null;
+
+        await courseRepository.deleteCourse(id, userId);
 
         return helper.sendData({}, res);
     } catch (err) {

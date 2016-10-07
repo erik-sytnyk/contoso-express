@@ -34,7 +34,8 @@ describe('Department Repository', () => {
                 name: 'Test Department',
                 budget: 100000,
                 startDate: '09/01/2007',
-                instructorId: 2
+                instructorId: 2,
+                userId: 188
             };
 
             return departmentRepository.addDepartment(department)
@@ -55,7 +56,8 @@ describe('Department Repository', () => {
                 name: 'Test Department updated',
                 budget: 100001.00,
                 startDate: '10/01/2007',
-                instructorId: 3
+                instructorId: 3,
+                userId: 188
             };
 
             return departmentRepository.updateDepartment(department)
@@ -86,7 +88,7 @@ describe('Department Repository', () => {
         });
 
         it('delete', (done) => {
-            return departmentRepository.deleteDepartment(5)
+            return departmentRepository.deleteDepartment(5, 188)
                 .then((data) => {
                     expect(data).not.to.be.null;
                     done();

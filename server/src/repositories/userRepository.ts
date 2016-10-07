@@ -88,7 +88,7 @@ function getUserByActivationToken(token: string): Promise<User> {
     return getUsers()
         .then((users) => {
             let findUser = _.find(users, (user) => {
-                return user.profile.local &&
+                return user.profile.local && user.profile.local.activation &&
                     user.profile.local.activation.token === token;
             });
 

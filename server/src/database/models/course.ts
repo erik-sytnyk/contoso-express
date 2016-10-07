@@ -15,6 +15,9 @@ export function init(sequelize, DataTypes) {
         },
         credits: {
             type: DataTypes.INTEGER
+        },
+        userId: {
+            type: DataTypes.INTEGER
         }
     };
 

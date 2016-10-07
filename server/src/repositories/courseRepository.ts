@@ -45,6 +45,8 @@ function updateCourse(courseData): Promise<Course> {
         .then((course) => {
             if (!course) throw new AppError('app', 'course_not_found');
 
+            if (course.userId !== courseData.userId) throw new AppError('app', 'user_validation');
+
             course.number = courseData.number;
             course.title = courseData.title;
             course.credits = courseData.credits;
@@ -58,10 +60,12 @@ function addCourse(course): Promise<Course> {
     return courseModel.create(course);
 }
 
-function deleteCourse(id): Promise<Course> {
+function deleteCourse(id, userId): Promise<Course> {
     return courseModel.findById(id)
         .then((course) => {
             if (!course) throw new AppError('app', 'course_not_found');
+
+            if (course.userId !== userId) throw new AppError('app', 'user_validation');
 
             return course.destroy();
         });

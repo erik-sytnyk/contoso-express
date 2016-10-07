@@ -38,6 +38,8 @@ function updateDepartment(departmentData): Promise<Department> {
         .then((department) => {
             if (!department) throw new AppError('app', 'department_not_found');
 
+            if (department.userId !== departmentData.userId) throw new AppError('app', 'user_validation');
+
             department.name = departmentData.name;
             department.budget = departmentData.budget;
             department.startDate = departmentData.startDate;
@@ -51,10 +53,12 @@ function addDepartment(department): Promise<Department> {
     return departmentModel.create(department);
 }
 
-function deleteDepartment(id): Promise<Department> {
+function deleteDepartment(id, userId): Promise<Department> {
     return departmentModel.findById(id)
         .then((department) => {
             if (!department) throw new AppError('app', 'department_not_found');
+
+            if (department.userId !== userId) throw new AppError('app', 'user_validation');
 
             return department.destroy();
         });

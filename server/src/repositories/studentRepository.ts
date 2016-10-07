@@ -65,6 +65,8 @@ function updateStudent(stud): Promise<Student> {
         .then((student) => {
             if (!student) throw new AppError('app', 'student_not_found');
 
+            if (student.userId !== stud.userId) throw new AppError('app', 'user_validation');
+
             student.firstName = stud.firstName;
             student.lastName = stud.lastName;
             student.enrollmentDate = stud.enrollmentDate;
@@ -77,10 +79,12 @@ function addStudent(student): Promise<Student> {
     return studentModel.create(student);
 }
 
-function deleteStudent(id): Promise<Student> {
+function deleteStudent(id, userId): Promise<Student> {
     return studentModel.findById(id)
         .then((student) => {
             if (!student) throw new AppError('app', 'student_not_found');
+
+            if (student.userId !== userId) throw new AppError('app', 'user_validation');
 
             return student.destroy();
         });
