@@ -1,4 +1,12 @@
 {
+  "name": "server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "tsc && node build/startServer",
+    "seed": "node build/tasks/syncDb",
+    "build": "tsc"
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.0",

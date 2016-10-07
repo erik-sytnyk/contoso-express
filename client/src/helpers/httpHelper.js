@@ -11,10 +11,12 @@ export default {
 };
 
 function ajaxRequest(httpVerb, url, data) {
+    let fullUrl = config.isDevLocal ? config.proxy + url : url;
+
     return new Promise((resolve, reject) => {
         $.ajax({
             type: httpVerb,
-            url: config.apiBaseUrl + url,
+            url: fullUrl,
             dataType: 'json',
             cache: false,
             data: data,
