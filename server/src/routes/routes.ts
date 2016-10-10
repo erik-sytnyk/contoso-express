@@ -20,6 +20,9 @@ function initRoutes(app, passport) {
 
     helper.get('/', homeController.home, {view: true});
 
+    // make user data available to app
+    helper.get('/api/user', homeController.getUser);
+
     initStudentRoutes();
 
     initDepartmentRoutes();
@@ -29,11 +32,6 @@ function initRoutes(app, passport) {
     initCourseRoutes();
 
     helper.get('/api/enrollment/list', enrollmentController.getEnrollmentsByCourse, {view: true});
-
-    // make user data available to app
-    helper.get('/user', function (req, res) {
-        res.send(req.user);
-    });
 
     //all other routes are rendered as home (for client side routing)
     helper.get('*', homeController.home, {view: true});

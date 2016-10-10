@@ -24,7 +24,8 @@ class InstructorsPage extends React.Component {
             selectedCourseId: 0,
             saveModalVisible: false,
             detailsModalVisible: false,
-            confirmationVisible: false
+            confirmationVisible: false,
+            user: props.user
         };
 
         this.showCoursesList = this.showCoursesList.bind(this);
@@ -102,6 +103,7 @@ class InstructorsPage extends React.Component {
                 <a href="#" onClick={this.showSaveModal}>Create New</a>
 
                 <InstructorList instructors={this.props.instructors}
+                                user={this.props.user}
                                 selectedInstructorId={this.state.selectedInstructorId}
                                 onSelectClick={this.showCoursesList}
                                 onSaveClick={this.showSaveModal}
@@ -137,13 +139,15 @@ class InstructorsPage extends React.Component {
 InstructorsPage.propTypes = {
     instructors: React.PropTypes.array.isRequired,
     actions: React.PropTypes.object.isRequired,
-    enrollments: React.PropTypes.array.isRequired
+    enrollments: React.PropTypes.array.isRequired,
+    user: React.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
     return {
         instructors: state.instructor.list,
-        enrollments: state.enrollment.list
+        enrollments: state.enrollment.list,
+        user: state.user
     };
 }
 

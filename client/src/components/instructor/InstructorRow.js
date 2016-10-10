@@ -9,6 +9,12 @@ const InstructorRow = (props) => {
 
     let activeClass = props.selectedInstructorId === instructor.id ? 'success' : '';
 
+    let display = 'display-none';
+
+    if(props.user.id === instructor.userId) {
+        display = '';
+    }
+
     return (
         <tr className={activeClass}>
             <td>{instructor.lastName}</td>
@@ -22,11 +28,11 @@ const InstructorRow = (props) => {
             <td className="tools">
                 <a href="#" onClick={props.onSelectClick}><i className="fa fa-hand-o-up fa-lg"></i></a>
 
-                <a href="#" onClick={props.onSaveClick}><i className="fa fa-pencil fa-lg"></i></a>
+                <a href="#" onClick={props.onSaveClick} className={display}><i className="fa fa-pencil fa-lg"></i></a>
 
                 <a href="#" onClick={props.onDetailsClick}><i className="fa fa-info fa-lg"></i></a>
 
-                <a href="#" onClick={props.onDeleteClick}><i className="fa fa-trash-o fa-lg"></i></a>
+                <a href="#" onClick={props.onDeleteClick} className={display}><i className="fa fa-trash-o fa-lg"></i></a>
             </td>
         </tr>
     );
@@ -34,6 +40,7 @@ const InstructorRow = (props) => {
 
 InstructorRow.propTypes = {
     instructor: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired,
     selectedInstructorId: React.PropTypes.number.isRequired,
     onSelectClick: React.PropTypes.func.isRequired,
     onSaveClick: React.PropTypes.func.isRequired,

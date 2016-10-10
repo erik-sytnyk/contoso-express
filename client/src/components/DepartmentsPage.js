@@ -15,7 +15,8 @@ class DepartmentsPage extends React.Component {
             departments: props.departments,
             saveModalVisible: false,
             detailsModalVisible: false,
-            confirmationVisible: false
+            confirmationVisible: false,
+            user: props.user
         };
 
         this.showSaveModal = this.showSaveModal.bind(this);
@@ -66,6 +67,7 @@ class DepartmentsPage extends React.Component {
                 <a href="#" onClick={this.showSaveModal}>Create New</a>
 
                 <DepartmentsList departments={this.props.departments} 
+                                 user={this.props.user}
                                  onSaveClick={this.showSaveModal} 
                                  onDetailsClick={this.showDetailsModal} 
                                  onDeleteClick={this.showConfirmationModal}
@@ -89,12 +91,14 @@ class DepartmentsPage extends React.Component {
 
 DepartmentsPage.propTypes = {
     departments: React.PropTypes.array.isRequired,
-    actions: React.PropTypes.object.isRequired
+    actions: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        departments: state.department.list
+        departments: state.department.list,
+        user: state.user
     };
 }
 

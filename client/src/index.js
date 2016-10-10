@@ -9,12 +9,17 @@ import {browserHistory} from 'react-router';
 import routes from './routes';
 import {loadDepartments} from './actions/departmentActions';
 import {loadInstructors} from './actions/instructorActions';
+import {loadUser} from './actions/userActions';
 
 const store = configureStore();
 
-//TODO move into componentWillMount (as for about page)
-store.dispatch(loadDepartments());
-store.dispatch(loadInstructors());
+function loadInitialData() {
+    store.dispatch(loadUser());
+    store.dispatch(loadDepartments());
+    store.dispatch(loadInstructors());
+}
+
+loadInitialData();
 
 render(
     <Provider store={store}>

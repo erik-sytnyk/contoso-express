@@ -18,8 +18,9 @@ class CoursesPage extends React.Component {
             selectedDepartmentId: '',
             saveModalVisible: false,
             detailsModalVisible: false,
-            confirmationVisible: false
-        };
+            confirmationVisible: false,
+            user: props.user
+    };
 
         this.changeDepartmentState = this.changeDepartmentState.bind(this);
         this.showSaveModal = this.showSaveModal.bind(this);
@@ -91,6 +92,7 @@ class CoursesPage extends React.Component {
                 />
 
                 <CoursesList courses={this.props.courses} 
+                             user={this.props.user}
                              onSaveClick={this.showSaveModal}
                              onDetailsClick={this.showDetailsModal}
                              onDeleteClick={this.showConfirmationModal}
@@ -114,13 +116,15 @@ class CoursesPage extends React.Component {
 
 CoursesPage.propTypes = {
     courses: React.PropTypes.array.isRequired,
-    actions: React.PropTypes.object.isRequired
+    actions: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
     return {
         courses: state.course.list,
-        departments: departmentSelectListItem(state.department.list)
+        departments: departmentSelectListItem(state.department.list),
+        user: state.user
     };
 }
 

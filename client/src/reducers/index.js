@@ -5,7 +5,7 @@ import department from './departmentReducer';
 import instructor from './instructorReducer';
 import course from './courseReducer';
 import enrollment from './enrollmentReducer';
-import user from './userReduces';
+import user from './userReducer';
 
 const rootReducer = combineReducers({
     student,

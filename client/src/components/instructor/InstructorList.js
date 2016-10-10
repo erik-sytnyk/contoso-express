@@ -1,7 +1,7 @@
 import React from 'react';
 import InstructorRow from './InstructorRow';
 
-const InstructorList = ({instructors, selectedInstructorId, onSelectClick, onSaveClick, onDetailsClick, onDeleteClick}) => {
+const InstructorList = ({instructors, user, selectedInstructorId, onSelectClick, onSaveClick, onDetailsClick, onDeleteClick}) => {
     return (
         <table className="table">
             <thead>
@@ -16,7 +16,7 @@ const InstructorList = ({instructors, selectedInstructorId, onSelectClick, onSav
             </thead>
             <tbody>
             {instructors.map(instructor =>
-                <InstructorRow key={instructor.id} instructor={instructor}
+                <InstructorRow key={instructor.id} instructor={instructor} user={user}
                                selectedInstructorId={selectedInstructorId}
                                onSelectClick={() => onSelectClick(instructor.id)}
                                onSaveClick={() => onSaveClick(instructor.id)}
@@ -31,6 +31,7 @@ const InstructorList = ({instructors, selectedInstructorId, onSelectClick, onSav
 
 InstructorList.propTypes = {
     instructors: React.PropTypes.array.isRequired,
+    user: React.PropTypes.object.isRequired,
     selectedInstructorId: React.PropTypes.number.isRequired,
     onSaveClick: React.PropTypes.func.isRequired,
     onSelectClick: React.PropTypes.func.isRequired,

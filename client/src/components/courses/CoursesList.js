@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import CoursesRow from './CoursesRow';
 
-const CoursesList = ({courses, onSaveClick, onDetailsClick, onDeleteClick}) => {
+const CoursesList = ({courses, user, onSaveClick, onDetailsClick, onDeleteClick}) => {
     return (
         <table className="table">
             <thead>
@@ -16,7 +16,7 @@ const CoursesList = ({courses, onSaveClick, onDetailsClick, onDeleteClick}) => {
             </thead>
             <tbody>
             {courses.map(course =>
-                <CoursesRow key={course.id} course={course} 
+                <CoursesRow key={course.id} course={course} user={user}
                             onSaveClick={() => onSaveClick(course.id)}
                             onDetailsClick={() => onDetailsClick(course.id)}
                             onDeleteClick={() => onDeleteClick(course.id)}
@@ -29,6 +29,7 @@ const CoursesList = ({courses, onSaveClick, onDetailsClick, onDeleteClick}) => {
 
 CoursesList.propTypes = {
     courses: React.PropTypes.array.isRequired,
+    user: React.PropTypes.object.isRequired,
     onSaveClick: React.PropTypes.func.isRequired,
     onDetailsClick: React.PropTypes.func.isRequired,
     onDeleteClick: React.PropTypes.func.isRequired

@@ -23,7 +23,8 @@ class StudentsPage extends React.Component {
             confirmationVisible: false,
             activePage: 1,
             totalCount: props.totalCount,
-            pageSize: 3
+            pageSize: 3,
+            user: props.user
         };
 
         this.changeSearchState = this.changeSearchState.bind(this);
@@ -133,6 +134,7 @@ class StudentsPage extends React.Component {
                 />
 
                 <StudentsList students={this.props.students}
+                              user={this.props.user}
                               onSortClick={this.changeSortOrder}
                               onSaveClick={this.showSaveModal}
                               onDetailsClick={this.showDetailsModal}
@@ -173,13 +175,15 @@ class StudentsPage extends React.Component {
 StudentsPage.propTypes = {
     students: React.PropTypes.array.isRequired,
     totalCount: React.PropTypes.number.isRequired,
-    actions: React.PropTypes.object.isRequired
+    actions: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
     return {
         students: state.student.list,
-        totalCount: state.student.totalCount
+        totalCount: state.student.totalCount,
+        user: state.user
     };
 }
 
