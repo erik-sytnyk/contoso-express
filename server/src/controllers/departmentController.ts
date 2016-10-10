@@ -36,6 +36,9 @@ async function saveDepartment(req, res) {
     try {
         let data = req.body.department;
 
+        // check if budget is empty
+        if (!data.budget) data.budget = 0;
+
         let schema = {
             id: Joi.number(),
             name: Joi.string().required(),
