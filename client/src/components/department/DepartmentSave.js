@@ -50,6 +50,11 @@ class DepartmentSave extends React.Component {
             errors.name = 'Name must be at least 5 characters.';
             formIsValid = false;
         }
+        
+        if (this.state.department.startDate === 'Invalid date') {
+            errors.date = 'Invalid Start Date.';
+            formIsValid = false;
+        }
 
         if (!this.state.department.instructorId) {
             errors.instructorId = 'Administrator is required.';
