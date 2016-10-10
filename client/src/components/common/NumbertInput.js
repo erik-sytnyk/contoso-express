@@ -14,6 +14,7 @@ const NumberInput = ({name, label, onChange, value, error}) => {
                     type="number"
                     name={name}
                     className="form-control"
+                    min="0"
                     value={value ? value : '0'}
                     onChange={onChange}/>
                 {error && <div className="alert alert-danger">{error}</div>}
