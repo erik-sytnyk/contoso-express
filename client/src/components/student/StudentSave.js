@@ -56,11 +56,11 @@ class StudentSave extends React.Component {
             formIsValid = false;
         }
 
-        if (!student.enrollmentDate) {
-            errors.date = 'The Enrollment Date field is required.';
+        if (student.enrollmentDate === 'Invalid date') {
+            errors.date = 'Invalid Enrollment Date.';
             formIsValid = false;
         }
-
+        
         this.setState({errors: errors});
         return formIsValid;
     }

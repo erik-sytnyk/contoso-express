@@ -83,8 +83,8 @@ class InstructorSave extends React.Component {
             formIsValid = false;
         }
 
-        if (!this.state.instructor.hireDate) {
-            errors.hireDate = 'The Hire Date field is required.';
+        if (this.state.instructor.hireDate === 'Invalid date') {
+            errors.hireDate = 'Invalid Hire Date.';
             formIsValid = false;
         }
 
