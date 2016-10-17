@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Modal, Button} from 'react-bootstrap';
 import helper from '../../helpers/uiHelper';
 import _ from 'lodash';
 import * as instructorActions from '../../actions/instructorActions';
+import Confirm from '../common/Confirm';
 
 class InstructorDelete extends React.Component {
     constructor(props) {
@@ -33,18 +33,7 @@ class InstructorDelete extends React.Component {
     render() {
         return (
             <div>
-                <Modal show={this.props.visible} onHide={this.props.close}>
-                    <Modal.Header closeButton onClick={this.props.close}>
-                        <Modal.Title>Confirmation</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <h4>Are you sure you want to delete this?</h4>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button bsStyle="danger" onClick={this.deleteInstructor}>Delete</Button>
-                        <Button onClick={this.props.close}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
+                <Confirm visible={this.props.visible} action={this.deleteInstructor} close={this.props.close} />
             </div>
         );
     }
