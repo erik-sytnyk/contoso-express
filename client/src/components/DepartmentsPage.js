@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import autoBind from 'react-autobind';
+
 import DepartmentsList from './department/DepartmentsList';
 import DepartmentSave from './department/DepartmentSave';
 import DepartmentDetails from './department/DepartmentDetails';
@@ -18,12 +20,7 @@ class DepartmentsPage extends React.Component {
             confirmationVisible: false
         };
 
-        this.showSaveModal = this.showSaveModal.bind(this);
-        this.closeSaveModal = this.closeSaveModal.bind(this);
-        this.showDetailsModal = this.showDetailsModal.bind(this);
-        this.closeDetailsModal = this.closeDetailsModal.bind(this);
-        this.showConfirmationModal = this.showConfirmationModal.bind(this);
-        this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
+        autoBind(this);
     }
 
     showSaveModal(departmentId) {

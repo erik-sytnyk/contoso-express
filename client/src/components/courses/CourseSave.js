@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
+import autoBind from 'react-autobind';
+
 import helper from '../../helpers/uiHelper';
 import * as courseActions from '../../actions/courseActions';
 import {departmentSelectListItem} from '../../formatters/entityFromatter';
@@ -20,8 +22,7 @@ class CourseSave extends React.Component {
             close: props.close
         };
 
-        this.updateCourseState = this.updateCourseState.bind(this);
-        this.saveCourse = this.saveCourse.bind(this);
+        autoBind(this);
     }
 
     componentWillReceiveProps(nextProps) {

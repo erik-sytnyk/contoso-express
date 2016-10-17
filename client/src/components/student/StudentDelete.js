@@ -1,9 +1,11 @@
 import React from 'react';
+import _ from 'lodash';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Modal, Button} from 'react-bootstrap';
+import autoBind from 'react-autobind';
+
 import helper from '../../helpers/uiHelper';
-import _ from 'lodash';
 import * as studentActions from '../../actions/studentActions';
 
 class StudentDelete extends React.Component {
@@ -15,8 +17,8 @@ class StudentDelete extends React.Component {
             visible: props.visible,
             close: props.close
         };
-        
-        this.deleteStudent = this.deleteStudent.bind(this);
+
+        autoBind(this);
     }
 
     deleteStudent(event) {
