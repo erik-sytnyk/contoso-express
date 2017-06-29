@@ -4,7 +4,7 @@ import pathHelper from './pathHelper';
 const nodemailer = require('nodemailer');
 const EmailTemplate = require('email-templates').EmailTemplate;
 
-const emailTransport = nodemailer.createTransport();
+const emailTransport = nodemailer.createTransport({});
 
 export default {
     sendEmail,
