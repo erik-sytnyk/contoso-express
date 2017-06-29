@@ -1,98 +1,65 @@
+import * as fs from 'fs-extra';
+import * as _ from 'lodash';
+
 import pathHelper from './helpers/pathHelper';
 
-interface IConfigValues {
+let logConfig = true;
+
+let config = {
     app: {
-        appName: string,
-        isDevLocal: boolean,
-        logErrors: boolean,
-        rootUrl: string
+        appName: '',
+        isDevLocal: process.env.NODE_ENV !== 'production',
+        logErrors: true,
+        rootUrl: 'http://localhost:3500',
+        port: 3500
     },
     db: {
-        host: string,
-        dbName: string,
-        username: string,
-        password: string
+        host: 'localhost',
+        dbName: 'contoso',
+        username: '',
+        password: ''
     },
     web: {
-        port: number,
-        sessionSecret: string
+        sessionSecret: ''
     },
     email: {
-        fromNoReply: string
+        fromNoReply: ''
     },
     auth: {
-        useAuth: boolean,
+        useAuth: true,
         google: {
-            clientID: string,
-            clientSecret: string
+            clientID: '',
+            clientSecret: ''
         },
         facebook: {
-            clientID: string,
-            clientSecret: string
+            clientID: '',
+            clientSecret: ''
         }
     },
     format: {
-        date: string,
-        year: string,
-        currencySymbol: string
+        date: '',
+        year: '',
+        currencySymbol: ''
+    }
+};
+
+function tryReadConfigFile(path) {
+    try {
+        return fs.readJsonSync(path);
+    } catch (err) {
+        return {};
     }
 }
 
-let configValues = <IConfigValues>{};
+let defaultFile = tryReadConfigFile(pathHelper.getDataRelative('config.json'));
+_.merge(config, defaultFile);
 
-ensureConfigPath();
+let localFile = tryReadConfigFile(pathHelper.getLocalRelative('config.local.json'));
+_.merge(config, localFile);
 
-const configReader = require('config');
-
-loadConfig();
-
-export function loadConfig() {
-
-    (<any>configValues).app = {};
-    configValues.app.appName = get('app.appName');
-    configValues.app.isDevLocal = get('app.isDevLocal');
-    configValues.app.logErrors = get('app.logErrors');
-    configValues.app.rootUrl = get('app.rootUrl');
-
-    (<any>configValues).db = {};
-    configValues.db.host = get('db.host');
-    configValues.db.dbName = get('db.dbName');
-    configValues.db.username = get('db.username');
-    configValues.db.password = get('db.password');
-
-    (<any>configValues).web = {};
-    configValues.web.port = get('web.port');
-    configValues.web.sessionSecret = get('web.sessionSecret');
-
-    (<any>configValues).email = {};
-    configValues.email.fromNoReply = get('email.fromNoReply');
-
-    (<any>configValues).auth = {};
-    configValues.auth.useAuth = get('auth.useAuth');
-
-    (<any>configValues).auth.google = {};
-    configValues.auth.google.clientID = get('auth.google.clientID');
-    configValues.auth.google.clientSecret = get('auth.google.clientSecret');
-
-    (<any>configValues).auth.facebook = {};
-    configValues.auth.facebook.clientID = get('auth.facebook.clientID');
-    configValues.auth.facebook.clientSecret = get('auth.facebook.clientSecret');
-
-    (<any>configValues).format = {};
-    configValues.format.date = get('format.date');
-    configValues.format.year = get('format.year');
-    configValues.format.currencySymbol = get('format.currencySymbol');
+if (logConfig) {
+    console.log('App configuration:');
+    console.log(JSON.stringify(config, null, 2));
 }
 
-function get(key) {
-    return configReader.get(key);
-}
-
-function ensureConfigPath() {
-    if (!process.env['NODE_CONFIG_DIR']) {
-        let configPath = pathHelper.getDataRelative('config');
-        process.env['NODE_CONFIG_DIR'] = configPath;
-    }
-}
-
-export default configValues;
+export default config;

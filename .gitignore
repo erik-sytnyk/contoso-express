@@ -1,4 +1,2 @@
-node_modules/
-.idea/
-.vscode/
-client/public/vendor
+.idea
+/build

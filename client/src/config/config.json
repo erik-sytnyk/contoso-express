@@ -1,6 +1,5 @@
 {
   "isDevLocal": true,
-  "proxy": "http://localhost:3500",
   "format": {
     "date": "MM/DD/YYYY",
     "year": "YYYY",

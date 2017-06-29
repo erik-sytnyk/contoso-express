@@ -17,7 +17,7 @@ export default {
     start
 };
 
-function start(options: any) {
+function start(port) {
     initExpress();
 
     initViewEngine();
@@ -29,8 +29,10 @@ function start(options: any) {
     //should be after routes.init
     initErrorHandling(app);
 
-    app.listen(config.web.port, function () {
-        console.log(`Server is listening on port ${config.web.port}!`);
+    return new Promise((resolve, reject) => {
+        app.listen(port, () => {
+            return resolve(port);
+        });
     });
 }
 
@@ -39,8 +41,6 @@ function initExpress() {
 
     app.use(bodyParser.json()); // get information from html forms
     app.use(bodyParser.urlencoded({extended: true}));
-
-    app.use('/static', express.static(pathHelper.getRelative('../client/build/static')));
 
     app.use(compression());
 
@@ -55,14 +55,14 @@ function initExpress() {
 
 function initViewEngine() {
     const hbs = require('express-hbs');
-    const viewsDir = pathHelper.getRelative('views');
+    const viewsDir = pathHelper.getDataRelative('views');
     const entities = require('entities');
 
     // Hook in express-hbs and tell it where known directories reside
     app.engine('hbs', hbs.express4({
-        partialsDir: pathHelper.getRelative('views/partials'),
-        layoutsDir: pathHelper.getRelative('views/layouts'),
-        defaultLayout: pathHelper.getRelative('views/layouts/auth.hbs')
+        partialsDir: pathHelper.path.join(viewsDir + '/partials'),
+        layoutsDir: pathHelper.path.join(viewsDir + '/layouts'),
+        defaultLayout: pathHelper.path.join(viewsDir + '/layouts/auth.hbs')
     }));
 
     hbs.registerHelper('json', function(obj) {

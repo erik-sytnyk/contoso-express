@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import * as Promise from 'bluebird';
 import path from '../../helpers/pathHelper';
 import * as moment from 'moment';
 import config from '../../config';

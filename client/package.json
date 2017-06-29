@@ -2,15 +2,16 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "0.6.1"
-  },
+  "proxy": "http://localhost:3500",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "copy-assets": "node tasks/copyAssets.js"
+  },
+  "globalDependencies": {
+    "react-scripts": "1.0.7"
   },
   "dependencies": {
     "bluebird": "^3.4.0",

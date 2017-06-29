@@ -1,63 +1,118 @@
-import uiHelper from './uiHelper';
-import Promise from 'bluebird';
-import config from './clientConfig';
-import $ from 'jquery';
+import toastr from 'toastr';
 
 export default {
     get: httpGet,
     post: httpPost,
+    patch: httpPatch,
     put: httpPut,
     delete: httpDelete
-};
+}
 
-function ajaxRequest(httpVerb, url, data) {
-    let fullUrl = config.isDevLocal ? config.proxy + url : url;
-
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            type: httpVerb,
-            url: fullUrl,
-            dataType: 'json',
-            cache: false,
-            data: data,
-            timeout: 0,
-            success: function (response) {
-                if (response.status === 'failure') {
-                    let message = response.message;
-                    if (!message) message = 'Server Error';
-
-                    uiHelper.showError(message);
-                    
-                    reject(new Error(message));
-                } else {
-                    resolve(response.data);
-                }
-            },
-            error: function (err) {
-                let errMessage = getErrorMessage(err);
-                uiHelper.showError(errMessage);
-            }
-        });
+function httpGet(url, queryParams) {
+    let fetchData = fetch(`${url}${getQueryString(queryParams)}`, {
+        credentials: 'same-origin',
+        headers: new Headers({
+            'pragma': 'no-cache',
+            'cache-control': 'no-cache'
+        }),
     });
-}
 
-function getErrorMessage(err) {
-    if (err.status === 404 || err.data.error) return err.data.error;
-    return 'API error';
-}
-
-function httpGet(url, data) {
-    return ajaxRequest('GET', url, data);
+    return processRequest(fetchData);
 }
 
 function httpPost(url, data) {
-    return ajaxRequest('POST', url, data);
+    let request = new Request(url, {
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: 'same-origin',
+        method: 'POST',
+        body: JSON.stringify(data)
+    });
+
+    return processRequest(fetch(request));
 }
 
 function httpPut(url, data) {
-    return ajaxRequest('PUT', url, data);
+    let request = new Request(url, {
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: 'same-origin',
+        method: 'PUT',
+        body: JSON.stringify(data)
+    });
+
+    return processRequest(fetch(request));
 }
 
-function httpDelete(url, data) {
-    return ajaxRequest('DELETE', url, data);
+function httpPatch(url, data) {
+    let request = new Request(url, {
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: 'same-origin',
+        method: 'PATCH',
+        body: JSON.stringify(data)
+    });
+
+    return processRequest(fetch(request));
+}
+
+async function httpDelete(url, data) {
+    let fetchData = fetch(url, {
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: 'same-origin',
+        method: 'DELETE',
+        body: JSON.stringify(data)
+    });
+
+    return processRequest(fetchData);
+}
+
+async function processRequest(fetchRequest) {
+    try {
+        let response = await fetchRequest;
+
+        if (!response.ok) {
+            if (response.status === 400 || response.status === 500) {
+                let responseJson = await response.json();
+                throw new Error(responseJson.message);
+            }
+
+            throw new Error(`Invalid HTTP response status ${response.status}`);
+        }
+
+        let result = await response.json();
+
+        checkResult(result);
+
+        return result.data;
+    } catch (err) {
+        toastr.error(err);
+
+        throw new Error('API Request Error');
+    }
+}
+
+function checkResult(result) {
+    if (result.status === 'error' || result.status === 'validation error') {
+        throw new Error(result.message);
+    }
+}
+
+function getQueryString(params) {
+    if (!params || !Object.keys(params).length) return '';
+
+    const esc = encodeURIComponent;
+
+    let query = '?';
+
+    query += Object.keys(params)
+        .map(k => esc(k) + '=' + esc(params[k]))
+        .join('&');
+
+    return query;
 }

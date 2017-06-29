@@ -1,13 +1,12 @@
 import configureStoreProd from './configureStore.prod';
 import configureStoreDev from './configureStore.dev';
-import config from '../helpers/clientConfig';
 
 let configure = null;
 
-if (config.isDevLocal) {
-    configure = configureStoreDev;
-} else {
+if (process.env.NODE_ENV === 'production') {
     configure = configureStoreProd;
+} else {
+    configure = configureStoreDev;
 }
 
 export default configure;

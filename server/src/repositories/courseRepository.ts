@@ -27,7 +27,7 @@ function getCourses(departmentId): Promise<Course[]> {
         where: {}
     };
 
-    if (departmentId) {
+    if (departmentId && departmentId !== 'null') {
         options.where = {departmentId: departmentId};
     }
 
