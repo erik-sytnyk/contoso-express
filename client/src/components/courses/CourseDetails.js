@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import autoBind from 'react-autobind';
 
 import DisplayRow from '../common/DisplayRow';
 
@@ -12,6 +13,7 @@ class CourseDetails extends React.Component {
         visible: PropTypes.bool.isRequired,
         close: PropTypes.func.isRequired
     };
+
     constructor(props) {
         super(props);
 
@@ -20,6 +22,8 @@ class CourseDetails extends React.Component {
             visible: props.visible,
             close: props.close
         };
+
+        autoBind(this);
     }
 
     render() {

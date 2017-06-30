@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import autoBind from 'react-autobind';
 
 import helper from '../../helpers/uiHelper';
 import * as studentActions from '../../actions/studentActions';
@@ -28,8 +29,7 @@ class StudentSave extends React.Component {
             close: props.close
         };
 
-        this.updateStudentState = this.updateStudentState.bind(this);
-        this.saveStudent = this.saveStudent.bind(this);
+        autoBind(this);
     }
 
     componentWillReceiveProps(nextProps) {

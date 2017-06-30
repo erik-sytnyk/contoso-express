@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import autoBind from 'react-autobind';
 
 import helper from '../../helpers/uiHelper';
 import * as departmentActions from '../../actions/departmentActions';
@@ -29,8 +30,7 @@ class DepartmentSave extends React.Component {
             close: props.close
         };
 
-        this.updateDepartmentState = this.updateDepartmentState.bind(this);
-        this.saveDepartment = this.saveDepartment.bind(this);
+        autoBind(this);
     }
 
     componentWillReceiveProps(nextProps) {

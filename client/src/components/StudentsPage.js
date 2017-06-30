@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Pagination} from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import autoBind from 'react-autobind';
 
 import StudentsList from './student/StudentsList';
 import * as studentActions from '../actions/studentActions';
@@ -34,17 +35,7 @@ class StudentsPage extends React.Component {
             pageSize: 3
         };
 
-        this.changeSearchState = this.changeSearchState.bind(this);
-        this.searchStudents = this.searchStudents.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
-        this.showSaveModal = this.showSaveModal.bind(this);
-        this.closeSaveModal = this.closeSaveModal.bind(this);
-        this.showDetailsModal = this.showDetailsModal.bind(this);
-        this.closeDetailsModal = this.closeDetailsModal.bind(this);
-        this.showConfirmationModal = this.showConfirmationModal.bind(this);
-        this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
-        this.pageSelection = this.pageSelection.bind(this);
-        this.changeSortOrder = this.changeSortOrder.bind(this);
+        autoBind(this);
     }
 
     componentWillMount() {

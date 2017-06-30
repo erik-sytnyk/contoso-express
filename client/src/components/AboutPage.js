@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import autoBind from 'react-autobind';
 
 import StudentStatisticsList from './student/StudentStatisticsList';
 import {loadStudentsStatistics} from '../actions/studentActions';
@@ -16,6 +17,8 @@ class AboutPage extends React.Component {
         this.state = {
             statistics: props.statistics
         };
+
+        autoBind(this);
     }
 
     componentWillMount() {

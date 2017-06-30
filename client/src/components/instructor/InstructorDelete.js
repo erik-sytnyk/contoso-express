@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import autoBind from 'react-autobind';
 
 import helper from '../../helpers/uiHelper';
 import * as instructorActions from '../../actions/instructorActions';
@@ -25,7 +26,7 @@ class InstructorDelete extends React.Component {
             close: props.close
         };
 
-        this.deleteInstructor = this.deleteInstructor.bind(this);
+        autoBind(this);
     }
 
     deleteInstructor(event) {

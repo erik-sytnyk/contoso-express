@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import autoBind from 'react-autobind';
 
 import * as instructorActions from '../../actions/instructorActions';
 import InstructorCourseRow from './InstructorCourseRow';
@@ -23,6 +24,8 @@ class InstructorCoursesList extends React.Component {
             instructor: _.assign({}, props.instructor),
             visible: props.visible
         };
+
+        autoBind(this);
     }
     
     render() {

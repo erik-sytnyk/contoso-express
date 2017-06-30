@@ -3,6 +3,7 @@ import _ from 'lodash';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
+import autoBind from 'react-autobind';
 
 import InstructorList from './instructor/InstructorList';
 import * as instructorActions from '../actions/instructorActions';
@@ -35,14 +36,7 @@ class InstructorsPage extends React.Component {
             confirmationVisible: false
         };
 
-        this.showCoursesList = this.showCoursesList.bind(this);
-        this.showStudentsList = this.showStudentsList.bind(this);
-        this.showSaveModal = this.showSaveModal.bind(this);
-        this.closeSaveModal = this.closeSaveModal.bind(this);
-        this.showDetailsModal = this.showDetailsModal.bind(this);
-        this.closeDetailsModal = this.closeDetailsModal.bind(this);
-        this.showConfirmationModal = this.showConfirmationModal.bind(this);
-        this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
+        autoBind(this);
     }
 
     showCoursesList(instructorId) {

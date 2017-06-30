@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import autoBind from 'react-autobind';
 
 import DisplayRow from '../common/DisplayRow';
 import dateFormatter from '../../formatters/dateFormatter';
@@ -22,6 +23,8 @@ class InstructorDetails extends React.Component {
             visible: props.visible,
             close: props.close
         };
+
+        autoBind(this);
     }
 
     render() {

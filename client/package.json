@@ -23,6 +23,7 @@
     "moment": "2.18.1",
     "prop-types": "15.5.10",
     "react": "^15.3.2",
+    "react-autobind": "1.0.6",
     "react-bootstrap": "^0.30.5",
     "react-bootstrap-datetimepicker": "0.0.22",
     "react-dom": "^15.3.2",
