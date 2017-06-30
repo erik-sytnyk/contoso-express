@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+
 import TextInput from '../common/TextInput';
 import DateTimePicker from '../common/DateTimePicker';
 import CheckBox from '../common/CheckBox';
-import _ from 'lodash';
 
 const InstructorForm = ({instructor, allCourses, onChange, errors}) => {
     let office = instructor.officeAssignment ? instructor.officeAssignment.location : '';
@@ -66,10 +68,10 @@ const InstructorForm = ({instructor, allCourses, onChange, errors}) => {
 };
 
 InstructorForm.propTypes = {
-    instructor: React.PropTypes.object.isRequired,
-    allCourses: React.PropTypes.array,
-    onChange: React.PropTypes.func.isRequired,
-    errors: React.PropTypes.object
+    instructor: PropTypes.object.isRequired,
+    allCourses: PropTypes.array,
+    onChange: PropTypes.func.isRequired,
+    errors: PropTypes.object
 };
 
 export default InstructorForm;

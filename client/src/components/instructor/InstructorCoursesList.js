@@ -2,10 +2,20 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import * as instructorActions from '../../actions/instructorActions';
 import InstructorCourseRow from './InstructorCourseRow';
 
 class InstructorCoursesList extends React.Component {
+    static propTypes = {
+        instructor: PropTypes.object.isRequired,
+        actions: PropTypes.object.isRequired,
+        visible: PropTypes.bool.isRequired,
+        selectedCourseId: PropTypes.number.isRequired,
+        onSelectClick: PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
 
@@ -47,14 +57,6 @@ class InstructorCoursesList extends React.Component {
         );
     }
 }
-
-InstructorCoursesList.propTypes = {
-    instructor: React.PropTypes.object.isRequired,
-    actions: React.PropTypes.object.isRequired,
-    visible: React.PropTypes.bool.isRequired,
-    selectedCourseId: React.PropTypes.number.isRequired,
-    onSelectClick: React.PropTypes.func.isRequired
-};
 
 function mapStateToProps(state) {
     return {

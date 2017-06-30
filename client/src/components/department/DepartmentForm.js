@@ -1,12 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import TextInput from '../common/TextInput';
 import NumberInput from '../common/NumbertInput';
 import SelectInput from '../common/SelectInput';
 import DateTimePicker from '../common/DateTimePicker';
-import _ from 'lodash';
 
 const DepartmentForm = ({department, allInstructors, onChange, errors}) => {
-
     return (
         <form>
             <TextInput
@@ -48,10 +48,10 @@ const DepartmentForm = ({department, allInstructors, onChange, errors}) => {
 };
 
 DepartmentForm.propTypes = {
-    department: React.PropTypes.object.isRequired,
-    allInstructors: React.PropTypes.array,
-    onChange: React.PropTypes.func.isRequired,
-    errors: React.PropTypes.object
+    department: PropTypes.object.isRequired,
+    allInstructors: PropTypes.array,
+    onChange: PropTypes.func.isRequired,
+    errors: PropTypes.object
 };
 
 export default DepartmentForm;

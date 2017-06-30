@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import helper from '../../helpers/uiHelper';
 import * as instructorActions from '../../actions/instructorActions';
 import {loadCourses} from '../../actions/courseActions';
@@ -10,6 +12,13 @@ import InstructorForm from './InstructorForm';
 import {courseSelectListItem} from '../../formatters/entityFromatter';
 
 class InstructorSave extends React.Component {
+    static propTypes = {
+        instructor: PropTypes.object.isRequired,
+        actions: PropTypes.object.isRequired,
+        visible: PropTypes.bool.isRequired,
+        close: PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
 
@@ -141,13 +150,6 @@ class InstructorSave extends React.Component {
         );
     }
 }
-
-InstructorSave.propTypes = {
-    instructor: React.PropTypes.object.isRequired,
-    actions: React.PropTypes.object.isRequired,
-    visible: React.PropTypes.bool.isRequired,
-    close: React.PropTypes.func.isRequired
-};
 
 function mapStateToProps(state) {
     return {

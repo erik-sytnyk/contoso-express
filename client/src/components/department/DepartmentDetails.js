@@ -2,11 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import DisplayRow from '../common/DisplayRow';
 import dateFormatter from '../../formatters/dateFormatter';
 import currencyFormatter from '../../formatters/currencyFormatter';
 
 class DepartmentDetails extends React.Component {
+    static propTypes = {
+        department: PropTypes.object.isRequired,
+        visible: PropTypes.bool.isRequired,
+        close: PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
 
@@ -49,12 +57,6 @@ class DepartmentDetails extends React.Component {
         );
     }
 }
-
-DepartmentDetails.propTypes = {
-    department: React.PropTypes.object.isRequired,
-    visible: React.PropTypes.bool.isRequired,
-    close: React.PropTypes.func.isRequired
-};
 
 function mapStateToProps(state) {
     return {

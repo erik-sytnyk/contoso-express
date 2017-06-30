@@ -2,11 +2,20 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Modal, Button} from 'react-bootstrap';
-import helper from '../../helpers/uiHelper';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+
+import helper from '../../helpers/uiHelper';
 import * as instructorActions from '../../actions/instructorActions';
 
 class InstructorDelete extends React.Component {
+    static propTypes = {
+        instructor: PropTypes.object.isRequired,
+        actions: PropTypes.object.isRequired,
+        visible: PropTypes.bool.isRequired,
+        close: PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
 
@@ -49,13 +58,6 @@ class InstructorDelete extends React.Component {
         );
     }
 }
-
-InstructorDelete.propTypes = {
-    instructor: React.PropTypes.object.isRequired,
-    actions: React.PropTypes.object.isRequired,
-    visible: React.PropTypes.bool.isRequired,
-    close: React.PropTypes.func.isRequired
-};
 
 function mapStateToProps(state) {
     return {

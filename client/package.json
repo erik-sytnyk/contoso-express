@@ -14,25 +14,23 @@
     "react-scripts": "1.0.7"
   },
   "dependencies": {
-    "bluebird": "^3.4.0",
-    "bootstrap": "^3.3.6",
-    "copy": "^0.3.0",
-    "font-awesome": "^4.6.3",
-    "fs-extra": "^0.30.0",
-    "jquery": "^3.0.0",
-    "json-loader": "^0.5.4",
-    "lodash": "^4.13.1",
-    "moment": "^2.14.1",
+    "bluebird": "3.5.0",
+    "bootstrap": "3.3.7",
+    "font-awesome": "4.7.0",
+    "fs-extra": "3.0.1",
+    "jquery": "3.2.1",
+    "lodash": "4.17.4",
+    "moment": "2.18.1",
+    "prop-types": "15.5.10",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.5",
     "react-bootstrap-datetimepicker": "0.0.22",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
-    "react-router-bootstrap": "^0.23.0",
-    "redux": "^3.5.2",
-    "redux-immutable-state-invariant": "^1.2.3",
-    "redux-thunk": "^2.1.0",
-    "toastr": "^2.1.2"
+    "react-router-bootstrap": "0.23.0",
+    "redux": "3.7.1",
+    "redux-thunk": "2.2.0",
+    "toastr": "2.1.2"
   }
 }

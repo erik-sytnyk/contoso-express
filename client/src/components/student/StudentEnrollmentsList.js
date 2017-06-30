@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import StudentEnrollmentsRow from './StudentEnrollmentsRow';
 
 const StudentEnrollmentsList = ({enrollments}) => {
@@ -20,7 +22,7 @@ const StudentEnrollmentsList = ({enrollments}) => {
 };
 
 StudentEnrollmentsList.propTypes = {
-    enrollments: React.PropTypes.array.isRequired
+    enrollments: PropTypes.array.isRequired
 };
 
 export default StudentEnrollmentsList;

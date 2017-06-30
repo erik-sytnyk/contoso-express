@@ -3,12 +3,21 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import helper from '../../helpers/uiHelper';
 import * as departmentActions from '../../actions/departmentActions';
 import DepartmentForm from './DepartmentForm';
 import {instructorSelectListItem} from '../../formatters/entityFromatter';
 
 class DepartmentSave extends React.Component {
+    static propTypes = {
+        department: PropTypes.object.isRequired,
+        actions: PropTypes.object.isRequired,
+        visible: PropTypes.bool.isRequired,
+        close: PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
 
@@ -114,13 +123,6 @@ class DepartmentSave extends React.Component {
         );
     }
 }
-
-DepartmentSave.propTypes = {
-    department: React.PropTypes.object.isRequired,
-    actions: React.PropTypes.object.isRequired,
-    visible: React.PropTypes.bool.isRequired,
-    close: React.PropTypes.func.isRequired
-};
 
 function mapStateToProps(state) {
     return {

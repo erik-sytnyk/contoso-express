@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const StudentEnrollmentsRow = ({enrollment}) => {
     let grade = enrollment.grade ? enrollment.grade : 'No grade';
@@ -12,7 +13,7 @@ const StudentEnrollmentsRow = ({enrollment}) => {
 };
 
 StudentEnrollmentsRow.propTypes = {
-    enrollment: React.PropTypes.object.isRequired
+    enrollment: PropTypes.object.isRequired
 };
 
 export default StudentEnrollmentsRow;

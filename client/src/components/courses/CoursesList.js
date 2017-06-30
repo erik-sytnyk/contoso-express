@@ -1,5 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import CoursesRow from './CoursesRow';
 
 const CoursesList = ({courses, onSaveClick, onDetailsClick, onDeleteClick}) => {
@@ -28,10 +29,10 @@ const CoursesList = ({courses, onSaveClick, onDetailsClick, onDeleteClick}) => {
 };
 
 CoursesList.propTypes = {
-    courses: React.PropTypes.array.isRequired,
-    onSaveClick: React.PropTypes.func.isRequired,
-    onDetailsClick: React.PropTypes.func.isRequired,
-    onDeleteClick: React.PropTypes.func.isRequired
+    courses: PropTypes.array.isRequired,
+    onSaveClick: PropTypes.func.isRequired,
+    onDetailsClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired
 };
 
 export default CoursesList;

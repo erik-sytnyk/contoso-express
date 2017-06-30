@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 const SelectInput = ({name, label, onChange, defaultOption, value, error, options}) => {
     return (
@@ -23,13 +23,13 @@ const SelectInput = ({name, label, onChange, defaultOption, value, error, option
 };
 
 SelectInput.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    defaultOption: React.PropTypes.string,
-    value: React.PropTypes.string,
-    error: React.PropTypes.string,
-    options: React.PropTypes.arrayOf(React.PropTypes.object)
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    defaultOption: PropTypes.string,
+    value: PropTypes.string,
+    error: PropTypes.string,
+    options: PropTypes.arrayOf(React.PropTypes.object)
 };
 
 export default SelectInput;

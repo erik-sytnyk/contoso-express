@@ -1,5 +1,7 @@
 import React from 'react';
 import DateTimeField from 'react-bootstrap-datetimepicker';
+import PropTypes from 'prop-types';
+
 import config from '../../helpers/clientConfig';
 import dateFormatter from '../../formatters/dateFormatter';
 
@@ -33,11 +35,11 @@ const DateTimePicker = ({name, label, onChange, value, error}) => {
 };
 
 DateTimePicker.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    value: React.PropTypes.string,
-    error: React.PropTypes.string
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string,
+    error: PropTypes.string
 };
 
 export default DateTimePicker;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const InstructorCourseRow = (props) => {
     let course = props.course;
@@ -18,9 +19,9 @@ const InstructorCourseRow = (props) => {
 };
 
 InstructorCourseRow.propTypes = {
-    course: React.PropTypes.object.isRequired,
-    selectedCourseId: React.PropTypes.number.isRequired,
-    onSelectClick: React.PropTypes.func.isRequired
+    course: PropTypes.object.isRequired,
+    selectedCourseId: PropTypes.number.isRequired,
+    onSelectClick: PropTypes.func.isRequired
 };
 
 export default InstructorCourseRow;

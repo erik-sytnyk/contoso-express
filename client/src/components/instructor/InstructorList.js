@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import InstructorRow from './InstructorRow';
 
 const InstructorList = ({instructors, selectedInstructorId, onSelectClick, onSaveClick, onDetailsClick, onDeleteClick}) => {
@@ -11,7 +13,7 @@ const InstructorList = ({instructors, selectedInstructorId, onSelectClick, onSav
                 <th>Hire Date</th>
                 <th>Office</th>
                 <th>Courses</th>
-                <th></th>
+                <th/>
             </tr>
             </thead>
             <tbody>
@@ -30,12 +32,12 @@ const InstructorList = ({instructors, selectedInstructorId, onSelectClick, onSav
 };
 
 InstructorList.propTypes = {
-    instructors: React.PropTypes.array.isRequired,
-    selectedInstructorId: React.PropTypes.number.isRequired,
-    onSaveClick: React.PropTypes.func.isRequired,
-    onSelectClick: React.PropTypes.func.isRequired,
-    onDetailsClick: React.PropTypes.func.isRequired,
-    onDeleteClick: React.PropTypes.func.isRequired
+    instructors: PropTypes.array.isRequired,
+    selectedInstructorId: PropTypes.number.isRequired,
+    onSaveClick: PropTypes.func.isRequired,
+    onSelectClick: PropTypes.func.isRequired,
+    onDetailsClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired
 };
 
 export default InstructorList;

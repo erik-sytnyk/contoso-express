@@ -3,6 +3,8 @@ import _ from 'lodash';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Pagination} from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
 import StudentsList from './student/StudentsList';
 import * as studentActions from '../actions/studentActions';
 import StudentSave from './student/StudentSave';
@@ -11,6 +13,12 @@ import StudentDelete from './student/StudentDelete';
 import StudentSearch from './student/StudentSearch';
 
 class StudentsPage extends React.Component {
+    static propTypes = {
+        students: PropTypes.array.isRequired,
+        totalCount: PropTypes.number.isRequired,
+        actions: PropTypes.object.isRequired
+    };
+
     constructor(props, context) {
         super(props, context);
 
@@ -169,12 +177,6 @@ class StudentsPage extends React.Component {
         );
     }
 }
-
-StudentsPage.propTypes = {
-    students: React.PropTypes.array.isRequired,
-    totalCount: React.PropTypes.number.isRequired,
-    actions: React.PropTypes.object.isRequired
-};
 
 function mapStateToProps(state) {
     return {

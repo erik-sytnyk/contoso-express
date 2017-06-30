@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import dateFormatter from '../../formatters/dateFormatter';
 
 const StudentStatisticsRow = ({statistic}) => {
@@ -13,7 +15,7 @@ const StudentStatisticsRow = ({statistic}) => {
 };
 
 StudentStatisticsRow.propTypes = {
-    statistic: React.PropTypes.object.isRequired
+    statistic: PropTypes.object.isRequired
 };
 
 export default StudentStatisticsRow;

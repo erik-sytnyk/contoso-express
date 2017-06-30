@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import PropTypes from 'prop-types';
+
 import * as courseActions from '../actions/courseActions';
 import {departmentSelectListItem} from '../formatters/entityFromatter';
 import CoursesList from './courses/CoursesList';
@@ -10,6 +12,11 @@ import CourseDelete from './courses/CourseDelete';
 import CoursesFilter from './courses/CoursesFilter';
 
 class CoursesPage extends React.Component {
+    static propTypes = {
+        courses: PropTypes.array.isRequired,
+        actions: PropTypes.object.isRequired
+    };
+
     constructor(props, context) {
         super(props, context);
 
@@ -111,11 +118,6 @@ class CoursesPage extends React.Component {
         );
     }
 }
-
-CoursesPage.propTypes = {
-    courses: React.PropTypes.array.isRequired,
-    actions: React.PropTypes.object.isRequired
-};
 
 function mapStateToProps(state) {
     return {

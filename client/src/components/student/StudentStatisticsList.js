@@ -1,5 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import StudentStatisticsRow from './StudentStatisticsRow';
 
 const StudentStatisticsList = ({statistics}) => {
@@ -23,7 +24,7 @@ const StudentStatisticsList = ({statistics}) => {
 };
 
 StudentStatisticsList.propTypes = {
-    statistics: React.PropTypes.array.isRequired
+    statistics: PropTypes.array.isRequired
 };
 
 export default StudentStatisticsList;

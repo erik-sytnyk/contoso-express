@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import InstructorStudentRow from './InstructorStudentRow';
 
 const InstructorStudentsList = ({enrollments, visible}) => {
@@ -26,8 +28,8 @@ const InstructorStudentsList = ({enrollments, visible}) => {
 };
 
 InstructorStudentsList.propTypes = {
-    visible: React.PropTypes.bool.isRequired,
-    enrollments: React.PropTypes.array.isRequired
+    visible: PropTypes.bool.isRequired,
+    enrollments: PropTypes.array.isRequired
 };
 
 export default InstructorStudentsList;

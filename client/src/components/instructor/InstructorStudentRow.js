@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import personFormat from '../../formatters/personFormatter';
 
 const InstructorStudentRow = (props) => {
@@ -16,7 +18,7 @@ const InstructorStudentRow = (props) => {
 };
 
 InstructorStudentRow.propTypes = {
-    enrollment: React.PropTypes.object.isRequired
+    enrollment: PropTypes.object.isRequired
 };
 
 export default InstructorStudentRow;

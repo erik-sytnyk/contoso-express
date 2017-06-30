@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import TextInput from '../common/TextInput';
 import DateTimePicker from '../common/DateTimePicker';
 
 const StudentForm = ({student, onChange, errors}) => {
-
     return (
         <form>
             <TextInput
@@ -36,9 +37,9 @@ const StudentForm = ({student, onChange, errors}) => {
 };
 
 StudentForm.propTypes = {
-    student: React.PropTypes.object.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    errors: React.PropTypes.object
+    student: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired,
+    errors: PropTypes.object
 };
 
 export default StudentForm;

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import dateFormatter from '../../formatters/dateFormatter';
 
 const InstructorRow = (props) => {
@@ -20,25 +22,25 @@ const InstructorRow = (props) => {
             )}
             </td>
             <td className="tools">
-                <a href="#" onClick={props.onSelectClick}><i className="fa fa-hand-o-up fa-lg"></i></a>
+                <a href="#" onClick={props.onSelectClick}><i className="fa fa-hand-o-up fa-lg"/></a>
 
-                <a href="#" onClick={props.onSaveClick}><i className="fa fa-pencil fa-lg"></i></a>
+                <a href="#" onClick={props.onSaveClick}><i className="fa fa-pencil fa-lg"/></a>
 
-                <a href="#" onClick={props.onDetailsClick}><i className="fa fa-info fa-lg"></i></a>
+                <a href="#" onClick={props.onDetailsClick}><i className="fa fa-info fa-lg"/></a>
 
-                <a href="#" onClick={props.onDeleteClick}><i className="fa fa-trash-o fa-lg"></i></a>
+                <a href="#" onClick={props.onDeleteClick}><i className="fa fa-trash-o fa-lg"/></a>
             </td>
         </tr>
     );
 };
 
 InstructorRow.propTypes = {
-    instructor: React.PropTypes.object.isRequired,
-    selectedInstructorId: React.PropTypes.number.isRequired,
-    onSelectClick: React.PropTypes.func.isRequired,
-    onSaveClick: React.PropTypes.func.isRequired,
-    onDetailsClick: React.PropTypes.func.isRequired,
-    onDeleteClick: React.PropTypes.func.isRequired
+    instructor: PropTypes.object.isRequired,
+    selectedInstructorId: PropTypes.number.isRequired,
+    onSelectClick: PropTypes.func.isRequired,
+    onSaveClick: PropTypes.func.isRequired,
+    onDetailsClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired
 };
 
 export default InstructorRow;

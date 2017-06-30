@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const StudentSearch = ({search, onChange, onKeyPress, onClick}) => {
     let searchStyle = {marginTop: 10 + 'px'};
@@ -20,10 +21,10 @@ const StudentSearch = ({search, onChange, onKeyPress, onClick}) => {
 };
 
 StudentSearch.propTypes = {
-    search: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    onKeyPress: React.PropTypes.func.isRequired,
-    onClick: React.PropTypes.func.isRequired
+    search: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onKeyPress: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired
 };
 
 export default StudentSearch;

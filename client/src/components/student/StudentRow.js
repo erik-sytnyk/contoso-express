@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import dateFormatter from '../../formatters/dateFormatter';
 
 const StudentRow = ({student, onSaveClick, onDetailsClick, onDeleteClick}) => {
@@ -21,10 +23,10 @@ const StudentRow = ({student, onSaveClick, onDetailsClick, onDeleteClick}) => {
 };
 
 StudentRow.propTypes = {
-    student: React.PropTypes.object.isRequired,
-    onSaveClick: React.PropTypes.func.isRequired,
-    onDetailsClick: React.PropTypes.func.isRequired,
-    onDeleteClick: React.PropTypes.func.isRequired
+    student: PropTypes.object.isRequired,
+    onSaveClick: PropTypes.func.isRequired,
+    onDetailsClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired
 };
 
 export default StudentRow;

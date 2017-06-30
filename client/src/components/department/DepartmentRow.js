@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import dateFormatter from '../../formatters/dateFormatter';
 import personFormat from '../../formatters/personFormatter';
 import currencyFormatter from '../../formatters/currencyFormatter';
@@ -30,10 +32,10 @@ const DepartmentRow = ({department, onSaveClick, onDetailsClick, onDeleteClick})
 };
 
 DepartmentRow.propTypes = {
-    department: React.PropTypes.object.isRequired,
-    onSaveClick: React.PropTypes.func.isRequired,
-    onDetailsClick: React.PropTypes.func.isRequired,
-    onDeleteClick: React.PropTypes.func.isRequired,
+    department: PropTypes.object.isRequired,
+    onSaveClick: PropTypes.func.isRequired,
+    onDetailsClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired,
 };
 
 export default DepartmentRow;

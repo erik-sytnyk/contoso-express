@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CoursesFilter = ({departmentId, departments, onChange, onClick}) => {
     let filterStyle = {marginTop: 10 + 'px'};
@@ -25,10 +26,10 @@ const CoursesFilter = ({departmentId, departments, onChange, onClick}) => {
 };
 
 CoursesFilter.propTypes = {
-    departmentId: React.PropTypes.string.isRequired,
-    departments: React.PropTypes.array.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    onClick: React.PropTypes.func.isRequired
+    departmentId: PropTypes.string.isRequired,
+    departments: PropTypes.array.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired
 };
 
 export default CoursesFilter;

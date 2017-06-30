@@ -1,5 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import DepartmentRow from './DepartmentRow';
 
 const DepartmentsList = ({departments, onSaveClick, onDetailsClick, onDeleteClick}) => {
@@ -11,7 +12,7 @@ const DepartmentsList = ({departments, onSaveClick, onDetailsClick, onDeleteClic
                 <th>Budget</th>
                 <th>Start Date</th>
                 <th>Administrator</th>
-                <th></th>
+                <th/>
             </tr>
             </thead>
             <tbody>
@@ -28,10 +29,10 @@ const DepartmentsList = ({departments, onSaveClick, onDetailsClick, onDeleteClic
 };
 
 DepartmentsList.propTypes = {
-    departments: React.PropTypes.array.isRequired,
-    onSaveClick: React.PropTypes.func.isRequired, 
-    onDetailsClick: React.PropTypes.func.isRequired,
-    onDeleteClick: React.PropTypes.func.isRequired
+    departments: PropTypes.array.isRequired,
+    onSaveClick: PropTypes.func.isRequired,
+    onDetailsClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired
 };
 
 export default DepartmentsList;

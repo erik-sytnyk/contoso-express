@@ -1,5 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import StudentRow from './StudentRow';
 
 const StudentsList = ({students, onSortClick, onSaveClick, onDetailsClick, onDeleteClick}) => {
@@ -33,11 +35,11 @@ const StudentsList = ({students, onSortClick, onSaveClick, onDetailsClick, onDel
 };
 
 StudentsList.propTypes = {
-    students: React.PropTypes.array.isRequired,
-    onSortClick: React.PropTypes.func.isRequired,
-    onSaveClick: React.PropTypes.func.isRequired,
-    onDetailsClick: React.PropTypes.func.isRequired,
-    onDeleteClick: React.PropTypes.func.isRequired
+    students: PropTypes.array.isRequired,
+    onSortClick: PropTypes.func.isRequired,
+    onSaveClick: PropTypes.func.isRequired,
+    onDetailsClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired
 };
 
 export default StudentsList;

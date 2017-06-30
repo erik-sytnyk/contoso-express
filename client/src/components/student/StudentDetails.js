@@ -2,11 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import dateFormatter from '../../formatters/dateFormatter';
 import StudentEnrollmentsList from './StudentEnrollmentsList';
 import DisplayRow from '../common/DisplayRow';
 
 class StudentDetails extends React.Component {
+    static propTypes = {
+        student: PropTypes.object.isRequired,
+        visible: PropTypes.bool.isRequired,
+        close: PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
 
@@ -54,12 +62,6 @@ class StudentDetails extends React.Component {
         );
     }
 }
-
-StudentDetails.propTypes = {
-    student: React.PropTypes.object.isRequired,
-    visible: React.PropTypes.bool.isRequired,
-    close: React.PropTypes.func.isRequired
-};
 
 function mapStateToProps(state) {
     return {

@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const DisplayRow = ({label, value}) => {
-
     return (
         <div className="form-group">
             <label className="col-xs-3 form-label">{label}:</label>
@@ -12,8 +12,8 @@ const DisplayRow = ({label, value}) => {
 };
 
 DisplayRow.propTypes = {
-    label: React.PropTypes.string.isRequired,
-    value: React.PropTypes.string
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string
 };
 
 export default DisplayRow;

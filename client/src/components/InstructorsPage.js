@@ -2,6 +2,8 @@ import React from 'react';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import PropTypes from 'prop-types';
+
 import InstructorList from './instructor/InstructorList';
 import * as instructorActions from '../actions/instructorActions';
 import * as enrollmentActions from '../actions/enrollmentActions';
@@ -12,6 +14,12 @@ import InstructorCoursesList from './instructor/InstructorCoursesList';
 import InstructorStudentsList from './instructor/InstructorStudentsList';
 
 class InstructorsPage extends React.Component {
+    static propTypes = {
+        instructors: PropTypes.array.isRequired,
+        actions: PropTypes.object.isRequired,
+        enrollments: PropTypes.array.isRequired
+    };
+
     constructor(props, context) {
         super(props, context);
 
@@ -133,12 +141,6 @@ class InstructorsPage extends React.Component {
         );
     }
 }
-
-InstructorsPage.propTypes = {
-    instructors: React.PropTypes.array.isRequired,
-    actions: React.PropTypes.object.isRequired,
-    enrollments: React.PropTypes.array.isRequired
-};
 
 function mapStateToProps(state) {
     return {

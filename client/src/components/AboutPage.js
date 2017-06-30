@@ -1,9 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
 import StudentStatisticsList from './student/StudentStatisticsList';
 import {loadStudentsStatistics} from '../actions/studentActions';
 
 class AboutPage extends React.Component {
+    static propTypes = {
+        statistics: PropTypes.array.isRequired
+    };
+
     constructor(props, context) {
         super(props, context);
 
@@ -28,10 +34,6 @@ class AboutPage extends React.Component {
         );
     }
 }
-
-AboutPage.propTypes = {
-    statistics: React.PropTypes.array.isRequired
-};
 
 function mapStateToProps(state) {
     return {

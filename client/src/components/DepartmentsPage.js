@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import PropTypes from 'prop-types';
+
 import DepartmentsList from './department/DepartmentsList';
 import DepartmentSave from './department/DepartmentSave';
 import DepartmentDetails from './department/DepartmentDetails';
@@ -8,6 +10,11 @@ import DepartmentDelete from './department/DepartmentDelete';
 import * as departmentActions from '../actions/departmentActions';
 
 class DepartmentsPage extends React.Component {
+    static propTypes = {
+        departments: PropTypes.array.isRequired,
+        actions: PropTypes.object.isRequired
+    };
+
     constructor(props, context) {
         super(props, context);
 
@@ -86,11 +93,6 @@ class DepartmentsPage extends React.Component {
         );
     }
 }
-
-DepartmentsPage.propTypes = {
-    departments: React.PropTypes.array.isRequired,
-    actions: React.PropTypes.object.isRequired
-};
 
 function mapStateToProps(state) {
     return {

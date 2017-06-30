@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CheckBox = ({name, label, onChange, value}) => {
-
     return (
         <div className="col-xs-4">
             <input
@@ -17,10 +17,10 @@ const CheckBox = ({name, label, onChange, value}) => {
 };
 
 CheckBox.propTypes = {
-    name: React.PropTypes.number.isRequired,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    value: React.PropTypes.string,
+    name: PropTypes.number.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string,
 };
 
 export default CheckBox;

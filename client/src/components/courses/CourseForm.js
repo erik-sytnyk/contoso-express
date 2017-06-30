@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import TextInput from '../common/TextInput';
 import NumberInput from '../common/NumbertInput';
 import SelectInput from '../common/SelectInput';
 
 const CourseForm = ({course, allDepartments, onChange, errors}) => {
-
     return (
         <form>
             <NumberInput
@@ -46,10 +47,10 @@ const CourseForm = ({course, allDepartments, onChange, errors}) => {
 };
 
 CourseForm.propTypes = {
-    course: React.PropTypes.object.isRequired,
-    allDepartments: React.PropTypes.array,
-    onChange: React.PropTypes.func.isRequired,
-    errors: React.PropTypes.object
+    course: PropTypes.object.isRequired,
+    allDepartments: PropTypes.array,
+    onChange: PropTypes.func.isRequired,
+    errors: PropTypes.object
 };
 
 export default CourseForm;

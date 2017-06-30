@@ -1,10 +1,16 @@
 // This component handles the App template used on every page.
 import React from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
 import Navigation from './Navigation';
 import dateFormatter from '../formatters/dateFormatter';
 
 class App extends React.Component {
+    static propTypes = {
+        children: PropTypes.object.isRequired
+    };
+
     render() {
         let date = dateFormatter.currentYear();
 
@@ -23,11 +29,6 @@ class App extends React.Component {
             </div>
         );
     }
-
-    static propTypes = {
-        children: React.PropTypes.object.isRequired
-    };
-
 }
 
 
