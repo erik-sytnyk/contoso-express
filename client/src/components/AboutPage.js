@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import {withRouter} from 'react-router-dom';
 
+import PageContent from './common/PageContent';
 import StudentStatisticsList from './student/StudentStatisticsList';
 import {loadStudentsStatistics} from '../actions/studentActions';
 
@@ -28,13 +29,15 @@ class AboutPage extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <h2>Student Body Statistics</h2>
+            <PageContent>
+                <div className="container">
+                    <h2>Student Body Statistics</h2>
 
-                <div className="col-xs-3">
-                    <StudentStatisticsList statistics={this.props.statistics}/>
+                    <div className="col-xs-3">
+                        <StudentStatisticsList statistics={this.props.statistics}/>
+                    </div>
                 </div>
-            </div>
+            </PageContent>
         );
     }
 }

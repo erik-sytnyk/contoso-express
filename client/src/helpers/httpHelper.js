@@ -77,6 +77,10 @@ async function processRequest(fetchRequest) {
         let response = await fetchRequest;
 
         if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+                return window.location = '/login';
+            }
+
             if (response.status === 400 || response.status === 500) {
                 let responseJson = await response.json();
                 throw new Error(responseJson.message);

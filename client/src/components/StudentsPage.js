@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import {withRouter} from 'react-router-dom';
 
+import PageContent from './common/PageContent';
 import StudentsList from './student/StudentsList';
 import * as studentActions from '../actions/studentActions';
 import StudentSave from './student/StudentSave';
@@ -122,51 +123,53 @@ class StudentsPage extends React.Component {
         let showTable = _.isEmpty(this.props.students) ? {display: 'none'} : {};
 
         return (
-            <div className="container">
-                <h2>Students</h2>
+            <PageContent>
+                <div className="container">
+                    <h2>Students</h2>
 
-                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
+                    <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
 
-                <StudentSearch search={this.state.search}
-                               onChange={this.changeSearchState}
-                               onKeyPress={this.handleKeyPress}
-                               onClick={this.searchStudents}
-                />
+                    <StudentSearch search={this.state.search}
+                                   onChange={this.changeSearchState}
+                                   onKeyPress={this.handleKeyPress}
+                                   onClick={this.searchStudents}
+                    />
 
-                <StudentsList students={this.props.students}
-                              onSortClick={this.changeSortOrder}
-                              onSaveClick={this.showSaveModal}
-                              onDetailsClick={this.showDetailsModal}
-                              onDeleteClick={this.showConfirmationModal}
-                />
+                    <StudentsList students={this.props.students}
+                                  onSortClick={this.changeSortOrder}
+                                  onSaveClick={this.showSaveModal}
+                                  onDetailsClick={this.showDetailsModal}
+                                  onDeleteClick={this.showConfirmationModal}
+                    />
 
-                <br/>
-                <div style={showTable}>Page {this.state.activePage} of {numberOfPages}</div>
+                    <br/>
+                    <div style={showTable}>Page {this.state.activePage} of {numberOfPages}</div>
 
-                <Pagination
-                    bsSize="medium"
-                    first
-                    last
-                    ellipsis
-                    maxButtons={5}
-                    items={numberOfPages}
-                    activePage={this.state.activePage}
-                    onSelect={this.pageSelection}
-                    style={showTable}
-                />
+                    <Pagination
+                        bsSize="medium"
+                        first
+                        last
+                        ellipsis
+                        maxButtons={5}
+                        items={numberOfPages}
+                        activePage={this.state.activePage}
+                        onSelect={this.pageSelection}
+                        style={showTable}
+                    />
 
-                <StudentSave visible={this.state.saveModalVisible}
-                             close={this.closeSaveModal}
-                />
+                    <StudentSave visible={this.state.saveModalVisible}
+                                 close={this.closeSaveModal}
+                    />
 
-                <StudentDetails visible={this.state.detailsModalVisible}
-                                close={this.closeDetailsModal}
-                />
+                    <StudentDetails visible={this.state.detailsModalVisible}
+                                    close={this.closeDetailsModal}
+                    />
 
-                <StudentDelete visible={this.state.confirmationVisible}
-                                  close={this.closeConfirmationModal}
-                />
-            </div>
+                    <StudentDelete visible={this.state.confirmationVisible}
+                                      close={this.closeConfirmationModal}
+                    />
+                </div>
+            </PageContent>
         );
     }
 }

@@ -5,20 +5,16 @@ import departmentController from '../controllers/departmentController';
 import instructorController from '../controllers/instructorController';
 import courseController from '../controllers/courseController';
 import enrollmentController from '../controllers/enrollmentController';
-import helperInit from './routesHelper';
+import helper from './routesHelper';
 
 export default {
     init: initRoutes
 };
 
-let helper = helperInit(null, null);
-
 function initRoutes(app, passport) {
-    helper = helperInit(app, passport);
+    helper.init(app, passport);
 
     initAuthRoutes(passport);
-
-    helper.get('/', homeController.home, {view: true});
 
     initStudentRoutes();
 
@@ -28,10 +24,12 @@ function initRoutes(app, passport) {
 
     initCourseRoutes();
 
-    helper.get('/api/enrollment/list', enrollmentController.getEnrollmentsByCourse, {view: true});
+    helper.get('/api/current-user', homeController.currentUser);
+
+    helper.get('/api/enrollment/list', enrollmentController.getEnrollmentsByCourse);
 
     //all other routes are rendered as home (for client side routing)
-    helper.get('*', homeController.home, {view: true});
+    helper.get('*', homeController.home, {auth: false});
 }
 
 function initStudentRoutes() {
@@ -66,20 +64,17 @@ function initCourseRoutes() {
 function initAuthRoutes(passport) {
     let authController = authControllerInit(passport);
 
-    helper.get('/activate/:token', authController.activate, {auth: false});
-    helper.get('/login', authController.logIn, {auth: false, view: true});
-    helper.post('/login', authController.logInPost, {auth: false, view: true});
-    helper.get('/signup', authController.signUp, {auth: false, view: true});
-    helper.post('/signup', authController.signUpPost, {auth: false, view: true});
-    helper.get('/logout', authController.logOut, {auth: false, view: true});
-    helper.get('/passwordForgot', authController.forgotPassword, {auth: false, view: true});
-    helper.post('/passwordForgot', authController.forgotPasswordPost, {auth: false, view: true});
-    helper.get('/passwordReset/:token', authController.resetPassword, {auth: false, view: true});
-    helper.post('/passwordReset/:token', authController.resetPasswordPost, {auth: false, view: true});
+    helper.get('/api/activate/:token', authController.activate, {auth: false});
+    helper.post('/api/login', authController.logInPost, {auth: false});
+    helper.post('/api/sign-up', authController.signUpPost, {auth: false});
+    helper.get('/api/logout', authController.logOut, {auth: false});
+    helper.post('/api/passwordForgot', authController.forgotPasswordPost, {auth: false});
+    helper.get('/api/passwordReset/:token', authController.resetPassword, {auth: false});
+    helper.post('/api/passwordReset/:token', authController.resetPasswordPost, {auth: false});
 
-    helper.get('/auth/google', authController.google, {auth: false, view: true});
-    helper.get('/auth/google/callback', authController.googleCallback, {auth: false, view: true});
+    helper.get('/api/auth/google', authController.google, {auth: false});
+    helper.get('/api/auth/google/callback', authController.googleCallback, {auth: false});
 
-    helper.get('/auth/facebook', authController.facebook, {auth: false, view: true});
-    helper.get('/auth/facebook/callback', authController.facebookCallback, {auth: false, view: true});
+    helper.get('/api/auth/facebook', authController.facebook, {auth: false});
+    helper.get('/api/auth/facebook/callback', authController.facebookCallback, {auth: false});
 }

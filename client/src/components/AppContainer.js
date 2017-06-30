@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Switch, Route, withRouter} from 'react-router-dom';
 
-import Navigation from './Navigation';
 import dateFormatter from '../formatters/dateFormatter';
 
 class App extends React.Component {
@@ -16,7 +15,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <Navigation />
+
                 <div id="page-body" className="container-fluid">
                     <Switch>
                         {this.props.routes.map((route, index) => (

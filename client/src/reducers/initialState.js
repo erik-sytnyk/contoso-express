@@ -1,4 +1,7 @@
 export default {
+    user: {
+        current: {}
+    },
     student: {
         list: [],
         current: {},

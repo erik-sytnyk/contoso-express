@@ -1,9 +1,11 @@
 import {Strategy as LocalStrategy} from 'passport-local';
+import * as moment from 'moment';
+
 import userRepository from '../repositories/userRepository';
 import textValue from '../helpers/textValueHelper';
-import * as moment from 'moment';
 import AppError from '../appError';
 import helper from './authHelper';
+import controllerHelper from '../controllers/_controllerHelper';
 
 export default function init(passport) {
     let strategySettings = {
@@ -23,21 +25,18 @@ export default function init(passport) {
     passport.use('local-login', new LocalStrategy(strategySettings, logInPostLocal));
 
     return {
-        logIn: logIn,
         logInPost: passport.authenticate('local-login', {
             successRedirect: routes.home,
             failureRedirect: routes.logIn,
             failureFlash: true
         }),
         logOut: logOut,
-        signUp: signUp,
         signUpPost: passport.authenticate('local-signup', {
             successRedirect: routes.home,
             failureRedirect: routes.signUp,
             failureFlash: true
         }),
         activate: activate,
-        forgotPassword: forgotPassword,
         forgotPasswordPost: forgotPasswordPost,
         resetPassword: resetPassword,
         resetPasswordPost: resetPasswordPost,
@@ -52,11 +51,6 @@ export default function init(passport) {
             failureRedirect: routes.logIn
         })
     };
-}
-
-async function logIn(req, res) {
-    let viewModel = {};
-    helper.renderView('login', viewModel, req, res);
 }
 
 async function logInPostLocal(req, email, password, done) {
@@ -81,13 +75,8 @@ async function logInPostLocal(req, email, password, done) {
     }
     catch (err) {
         let errorMessage = helper.handleError(err);
-        helper.sendAuthErrorMessage(errorMessage, done, req);
+        controllerHelper.sendFailureMessage(errorMessage, done);
     }
-}
-
-async function signUp(req, res) {
-    let viewModel = {};
-    helper.renderView('signup', viewModel, req, res);
 }
 
 async function signUpPostLocal(req, email, password, done) {
@@ -128,9 +117,9 @@ function validateSingUpModel(model) {
 
     if (!model.password) return textValue.warning('auth', 'required_field', {name: 'Password'});
 
-    if (!model['confirm_password']) return textValue.warning('auth', 'required_field', {name: 'Confirm Password'});
+    if (!model.confirmPassword) return textValue.warning('auth', 'required_field', {name: 'Confirm Password'});
 
-    if (model.password !== model['confirm_password']) return textValue.warning('auth', 'passwords_not_match');
+    if (model.password !== model.confirmPassword) return textValue.warning('auth', 'passwords_not_match');
 
     return helper.isValidPassword(model.password);
 }
@@ -167,13 +156,13 @@ async function activate(req, res) {
 }
 
 async function logOut(req, res) {
-    req.logOut();
-    res.redirect('/login');
-}
+    try {
+        req.session.user = null;
 
-async function forgotPassword(req, res) {
-    let viewModel = {};
-    helper.renderView('password-forgot', viewModel, req, res);
+        return controllerHelper.sendData({}, res);
+    } catch (err) {
+        controllerHelper.sendFailureMessage(err, res);
+    }
 }
 
 async function forgotPasswordPost(req, res) {

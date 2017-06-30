@@ -7,6 +7,7 @@ import autoBind from 'react-autobind';
 import {Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 
+import PageContent from './common/PageContent';
 import InstructorList from './instructor/InstructorList';
 import * as instructorActions from '../actions/instructorActions';
 import * as enrollmentActions from '../actions/enrollmentActions';
@@ -101,40 +102,42 @@ class InstructorsPage extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <h2>Instructors</h2>
+            <PageContent>
+                <div className="container">
+                    <h2>Instructors</h2>
 
-                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
+                    <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
 
-                <InstructorList instructors={this.props.instructors}
-                                selectedInstructorId={this.state.selectedInstructorId}
-                                onSelectClick={this.showCoursesList}
-                                onSaveClick={this.showSaveModal}
-                                onDetailsClick={this.showDetailsModal}
-                                onDeleteClick={this.showConfirmationModal}
-                />
-                
-                <InstructorCoursesList visible={this.state.selectInstructorVisible}
-                                       selectedCourseId={this.state.selectedCourseId}
-                                       onSelectClick={this.showStudentsList}
-                />
+                    <InstructorList instructors={this.props.instructors}
+                                    selectedInstructorId={this.state.selectedInstructorId}
+                                    onSelectClick={this.showCoursesList}
+                                    onSaveClick={this.showSaveModal}
+                                    onDetailsClick={this.showDetailsModal}
+                                    onDeleteClick={this.showConfirmationModal}
+                    />
 
-                <InstructorStudentsList visible={this.state.selectCourseVisible}
-                                        enrollments={this.props.enrollments}
-                />
-                
-                <InstructorSave visible={this.state.saveModalVisible}
-                                close={this.closeSaveModal}
-                />
+                    <InstructorCoursesList visible={this.state.selectInstructorVisible}
+                                           selectedCourseId={this.state.selectedCourseId}
+                                           onSelectClick={this.showStudentsList}
+                    />
 
-                <InstructorDetails visible={this.state.detailsModalVisible}
-                                   close={this.closeDetailsModal}
-                />
+                    <InstructorStudentsList visible={this.state.selectCourseVisible}
+                                            enrollments={this.props.enrollments}
+                    />
 
-                <InstructorDelete visible={this.state.confirmationVisible}
-                                  close={this.closeConfirmationModal}
-                />
-            </div>
+                    <InstructorSave visible={this.state.saveModalVisible}
+                                    close={this.closeSaveModal}
+                    />
+
+                    <InstructorDetails visible={this.state.detailsModalVisible}
+                                       close={this.closeDetailsModal}
+                    />
+
+                    <InstructorDelete visible={this.state.confirmationVisible}
+                                      close={this.closeConfirmationModal}
+                    />
+                </div>
+            </PageContent>
         );
     }
 }

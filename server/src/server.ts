@@ -20,8 +20,6 @@ export default {
 function start(port) {
     initExpress();
 
-    initViewEngine();
-
     const passport = require('passport');
 
     routes.init(app, passport);
@@ -51,30 +49,6 @@ function initExpress() {
     initSession();
 
     initAuth();
-}
-
-function initViewEngine() {
-    const hbs = require('express-hbs');
-    const viewsDir = pathHelper.getDataRelative('views');
-    const entities = require('entities');
-
-    // Hook in express-hbs and tell it where known directories reside
-    app.engine('hbs', hbs.express4({
-        partialsDir: pathHelper.path.join(viewsDir + '/partials'),
-        layoutsDir: pathHelper.path.join(viewsDir + '/layouts'),
-        defaultLayout: pathHelper.path.join(viewsDir + '/layouts/auth.hbs')
-    }));
-
-    hbs.registerHelper('json', function(obj) {
-        let jsonValue = JSON.stringify(obj);
-
-        let val = entities.encodeHTML(jsonValue);
-
-        return new hbs.SafeString(val);
-    });
-
-    app.set('view engine', 'hbs');
-    app.set('views', viewsDir);
 }
 
 function initAuth() {

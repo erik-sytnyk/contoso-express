@@ -6,6 +6,7 @@ import autoBind from 'react-autobind';
 import {Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 
+import PageContent from './common/PageContent';
 import DepartmentsList from './department/DepartmentsList';
 import DepartmentSave from './department/DepartmentSave';
 import DepartmentDetails from './department/DepartmentDetails';
@@ -66,29 +67,31 @@ class DepartmentsPage extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <h2>Departments</h2>
+            <PageContent>
+                <div className="container">
+                    <h2>Departments</h2>
 
-                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
+                    <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
 
-                <DepartmentsList departments={this.props.departments} 
-                                 onSaveClick={this.showSaveModal} 
-                                 onDetailsClick={this.showDetailsModal} 
-                                 onDeleteClick={this.showConfirmationModal}
-                />
+                    <DepartmentsList departments={this.props.departments}
+                                     onSaveClick={this.showSaveModal}
+                                     onDetailsClick={this.showDetailsModal}
+                                     onDeleteClick={this.showConfirmationModal}
+                    />
 
-                <DepartmentSave visible={this.state.saveModalVisible}
-                                close={this.closeSaveModal}
-                />
-                
-                <DepartmentDetails visible={this.state.detailsModalVisible}
-                                   close={this.closeDetailsModal}
-                />
-                
-                <DepartmentDelete visible={this.state.confirmationVisible}
-                                  close={this.closeConfirmationModal}
-                />
-            </div>
+                    <DepartmentSave visible={this.state.saveModalVisible}
+                                    close={this.closeSaveModal}
+                    />
+
+                    <DepartmentDetails visible={this.state.detailsModalVisible}
+                                       close={this.closeDetailsModal}
+                    />
+
+                    <DepartmentDelete visible={this.state.confirmationVisible}
+                                      close={this.closeConfirmationModal}
+                    />
+                </div>
+            </PageContent>
         );
     }
 }

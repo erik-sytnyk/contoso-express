@@ -17,8 +17,8 @@ import './app.css';
 const store = configureStore();
 
 //TODO move into componentWillMount (as for about page)
-store.dispatch(loadDepartments());
-store.dispatch(loadInstructors());
+//store.dispatch(loadDepartments());
+//store.dispatch(loadInstructors());
 
 ReactDOM.render(
     <Provider store={store}>

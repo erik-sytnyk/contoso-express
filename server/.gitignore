@@ -5,6 +5,6 @@ typings/modules/
 data/db/
 src/test.ts
 data/logs
-data/config/local.json
 .vscode/
 shrinkwrap.yaml
+local/config.local.json

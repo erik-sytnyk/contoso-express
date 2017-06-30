@@ -6,6 +6,7 @@ import autoBind from 'react-autobind';
 import {Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 
+import PageContent from './common/PageContent';
 import * as courseActions from '../actions/courseActions';
 import {departmentSelectListItem} from '../formatters/entityFromatter';
 import CoursesList from './courses/CoursesList';
@@ -83,35 +84,37 @@ class CoursesPage extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <h2>Courses</h2>
+            <PageContent>
+                <div className="container">
+                    <h2>Courses</h2>
 
-                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
+                    <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
 
-                <CoursesFilter departmentId={this.state.selectedDepartmentId}
-                               departments={this.props.departments}
-                               onChange={this.changeDepartmentState}
-                               onClick={this.filterCourses}
-                />
+                    <CoursesFilter departmentId={this.state.selectedDepartmentId}
+                                   departments={this.props.departments}
+                                   onChange={this.changeDepartmentState}
+                                   onClick={this.filterCourses}
+                    />
 
-                <CoursesList courses={this.props.courses} 
-                             onSaveClick={this.showSaveModal}
-                             onDetailsClick={this.showDetailsModal}
-                             onDeleteClick={this.showConfirmationModal}
-                />
+                    <CoursesList courses={this.props.courses}
+                                 onSaveClick={this.showSaveModal}
+                                 onDetailsClick={this.showDetailsModal}
+                                 onDeleteClick={this.showConfirmationModal}
+                    />
 
-                <CourseSave visible={this.state.saveModalVisible} 
-                            close={this.closeSaveModal}
-                />
-                
-                <CourseDetails visible={this.state.detailsModalVisible}
-                               close={this.closeDetailsModal}
-                />
+                    <CourseSave visible={this.state.saveModalVisible}
+                                close={this.closeSaveModal}
+                    />
 
-                <CourseDelete visible={this.state.confirmationVisible}
-                               close={this.closeConfirmationModal}
-                />
-            </div >
+                    <CourseDetails visible={this.state.detailsModalVisible}
+                                   close={this.closeDetailsModal}
+                    />
+
+                    <CourseDelete visible={this.state.confirmationVisible}
+                                   close={this.closeConfirmationModal}
+                    />
+                </div >
+            </PageContent>
         );
     }
 }
