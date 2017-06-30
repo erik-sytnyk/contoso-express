@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import {Button} from 'react-bootstrap';
 
 import StudentRow from './StudentRow';
 
@@ -12,13 +13,13 @@ const StudentsList = ({students, onSortClick, onSaveClick, onDetailsClick, onDel
             <thead>
                 <tr>
                     <th>
-                        <a href="#" value="name" onClick={onSortClick}>Last Name</a>
+                        <Button bsStyle="link" value="name" onClick={onSortClick}>Last Name</Button>
                     </th>
                     <th>First Name</th>
                     <th>
-                        <a href="#" value="date" onClick={onSortClick}>Enrollment Date</a>
+                        <Button bsStyle="link" value="date" onClick={onSortClick}>Enrollment Date</Button>
                     </th>
-                    <th></th>
+                    <th/>
                 </tr>
             </thead>
             <tbody>

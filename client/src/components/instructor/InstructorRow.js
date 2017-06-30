@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Button} from 'react-bootstrap';
 
 import dateFormatter from '../../formatters/dateFormatter';
 
@@ -21,14 +22,23 @@ const InstructorRow = (props) => {
                 <div key={course.id}>{course.number}&nbsp;{course.title}</div>
             )}
             </td>
+
             <td className="tools">
-                <a href="#" onClick={props.onSelectClick}><i className="fa fa-hand-o-up fa-lg"/></a>
+                <Button bsStyle="link" onClick={props.onSelectClick}>
+                    <i className="fa fa-hand-o-up fa-lg"/>
+                </Button>
 
-                <a href="#" onClick={props.onSaveClick}><i className="fa fa-pencil fa-lg"/></a>
+                <Button bsStyle="link" onClick={props.onSaveClick}>
+                    <i className="fa fa-pencil fa-lg"/>
+                </Button>
 
-                <a href="#" onClick={props.onDetailsClick}><i className="fa fa-info fa-lg"/></a>
+                <Button bsStyle="link" onClick={props.onDetailsClick}>
+                    <i className="fa fa-info fa-lg"/>
+                </Button>
 
-                <a href="#" onClick={props.onDeleteClick}><i className="fa fa-trash-o fa-lg"/></a>
+                <Button bsStyle="link" onClick={props.onDeleteClick}>
+                    <i className="fa fa-trash-o fa-lg"/>
+                </Button>
             </td>
         </tr>
     );

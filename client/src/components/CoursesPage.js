@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import {Button} from 'react-bootstrap';
 
 import * as courseActions from '../actions/courseActions';
 import {departmentSelectListItem} from '../formatters/entityFromatter';
@@ -83,7 +84,8 @@ class CoursesPage extends React.Component {
         return (
             <div className="container">
                 <h2>Courses</h2>
-                <a href="#" onClick={this.showSaveModal}>Create New</a>
+
+                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
 
                 <CoursesFilter departmentId={this.state.selectedDepartmentId}
                                departments={this.props.departments}

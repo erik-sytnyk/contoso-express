@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import {Button} from 'react-bootstrap';
 
 import DepartmentsList from './department/DepartmentsList';
 import DepartmentSave from './department/DepartmentSave';
@@ -66,7 +67,8 @@ class DepartmentsPage extends React.Component {
         return (
             <div className="container">
                 <h2>Departments</h2>
-                <a href="#" onClick={this.showSaveModal}>Create New</a>
+
+                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
 
                 <DepartmentsList departments={this.props.departments} 
                                  onSaveClick={this.showSaveModal} 

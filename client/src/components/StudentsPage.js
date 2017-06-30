@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Pagination} from 'react-bootstrap';
+import {Pagination, Button} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 
@@ -123,7 +123,8 @@ class StudentsPage extends React.Component {
         return (
             <div className="container">
                 <h2>Students</h2>
-                <a href="#" onClick={this.showSaveModal}>Create New</a>
+
+                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
 
                 <StudentSearch search={this.state.search}
                                onChange={this.changeSearchState}

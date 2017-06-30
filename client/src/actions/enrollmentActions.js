@@ -1,7 +1,6 @@
 import * as types from './actionTypes';
 import {beginAjaxCall} from './ajaxStatusActions';
 import enrollmentService from '../services/enrollmentService';
-import _ from 'lodash';
 
 export function loadEnrollmentsSuccess(enrollments) {
     return {type: types.LOAD_ENROLLMENTS_SUCCESS, enrollments};

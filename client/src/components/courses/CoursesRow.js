@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Button} from 'react-bootstrap';
 
 const CoursesRow = ({course, onSaveClick, onDetailsClick, onDeleteClick}) => {
     return (
@@ -8,12 +9,19 @@ const CoursesRow = ({course, onSaveClick, onDetailsClick, onDeleteClick}) => {
             <td>{course.title}</td>
             <td>{course.credits}</td>
             <td>{course.department.name}</td>
-            <td className="tools">
-                <a href="#" onClick={onSaveClick}><i className="fa fa-pencil fa-lg"/></a>
-                
-                <a href="#" onClick={onDetailsClick}><i className="fa fa-info fa-lg"/></a>
 
-                <a href="#" onClick={onDeleteClick}><i className="fa fa-trash-o fa-lg"/></a>
+            <td className="tools">
+                <Button bsStyle="link" onClick={onSaveClick}>
+                    <i className="fa fa-pencil fa-lg"/>
+                </Button>
+
+                <Button bsStyle="link" onClick={onDetailsClick}>
+                    <i className="fa fa-info fa-lg"/>
+                </Button>
+
+                <Button bsStyle="link" onClick={onDeleteClick}>
+                    <i className="fa fa-trash-o fa-lg"/>
+                </Button>
             </td>
         </tr>
     );
