@@ -1,14 +1,14 @@
-// This component handles the App template used on every page.
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {Switch, Route, withRouter} from 'react-router-dom';
 
 import Navigation from './Navigation';
 import dateFormatter from '../formatters/dateFormatter';
 
 class App extends React.Component {
     static propTypes = {
-        children: PropTypes.object.isRequired
+        routes: PropTypes.array.isRequired
     };
 
     render() {
@@ -18,6 +18,12 @@ class App extends React.Component {
             <div>
                 <Navigation />
                 <div id="page-body" className="container-fluid">
+                    <Switch>
+                        {this.props.routes.map((route, index) => (
+                            <Route key={index} exact={route.exact} path={route.path} component={route.main} />
+                        ))};
+                    </Switch>
+
                     {this.props.children}
 
                     <div className="container">
@@ -33,9 +39,7 @@ class App extends React.Component {
 
 
 function mapStateToProps(state, ownProps) {
-    return {
-
-    };
+    return {};
 }
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

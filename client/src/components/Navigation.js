@@ -1,7 +1,6 @@
 import React from 'react';
-import {IndexLink } from 'react-router';
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
-import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
+import {Navbar, Nav, NavItem, Button} from 'react-bootstrap';
+import {LinkContainer, IndexLinkContainer} from 'react-router-bootstrap';
 
 class Navigation extends React.Component {
     render() {
@@ -9,7 +8,7 @@ class Navigation extends React.Component {
             <Navbar inverse fixedTop>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <IndexLink to="/" className="navbar-brand">Contoso University</IndexLink>
+                        <Button bsStyle="link">Contoso University</Button>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
@@ -41,7 +40,7 @@ class Navigation extends React.Component {
                         </LinkContainer>
                     </Nav>
                     <Nav pullRight>
-                        <NavItem eventKey={1} href="/logout">LogOut   <i className="fa fa-sign-out fa-lg"></i></NavItem>
+                        <NavItem eventKey={1} href="/logout">LogOut   <i className="fa fa-sign-out fa-lg"/></NavItem>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

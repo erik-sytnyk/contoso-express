@@ -1,22 +1,41 @@
 import React from 'react';
-import {Route, IndexRoute} from 'react-router';
-import App from './components/AppContainer';
+
 import HomePage from './components/HomePage';
 import AboutPage from './components/AboutPage';
 import CoursesPage from './components/CoursesPage';
 import StudentsPage from './components/StudentsPage';
 import InstructorsPage from './components/InstructorsPage';
 import DepartmentsPage from './components/DepartmentsPage';
-import NotFountPage from './components/NotFoundPage';
+import NotFoundPage from './components/NotFoundPage';
 
-export default (
-    <Route path="/" component={App}>
-        <IndexRoute component={HomePage} />
-        <Route path="about" component={AboutPage} />
-        <Route path="courses" component={CoursesPage} />
-        <Route path="students" component={StudentsPage} />
-        <Route path="instructors" component={InstructorsPage} />
-        <Route path="departments" component={DepartmentsPage} />
-        <Route path="*" component={NotFountPage}/>
-    </Route>
-);
+export const routes = [
+    {
+        path: '/',
+        exact: true,
+        main: (props) => <HomePage {...props} />
+    },
+    {
+        path: '/about',
+        main: (props) => <AboutPage {...props} />
+    },
+    {
+        path: '/courses',
+        main: (props) => <CoursesPage {...props} />
+    },
+    {
+        path: '/students',
+        main: (props) => <StudentsPage {...props} />
+    },
+    {
+        path: '/instructors',
+        main: (props) => <InstructorsPage {...props} />
+    },
+    {
+        path: '/departments',
+        main: (props) => <DepartmentsPage {...props} />
+    },
+    {
+        path: '/*',
+        main: (props) => <NotFoundPage {...props} />
+    }
+];

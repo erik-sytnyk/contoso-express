@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import {Pagination, Button} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import {withRouter} from 'react-router-dom';
 
 import StudentsList from './student/StudentsList';
 import * as studentActions from '../actions/studentActions';
@@ -184,4 +185,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentsPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StudentsPage));

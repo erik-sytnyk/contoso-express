@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import {Button} from 'react-bootstrap';
+import {withRouter} from 'react-router-dom';
 
 import * as courseActions from '../actions/courseActions';
 import {departmentSelectListItem} from '../formatters/entityFromatter';
@@ -129,4 +130,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CoursesPage));

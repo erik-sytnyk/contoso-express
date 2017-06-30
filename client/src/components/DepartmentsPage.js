@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import {Button} from 'react-bootstrap';
+import {withRouter} from 'react-router-dom';
 
 import DepartmentsList from './department/DepartmentsList';
 import DepartmentSave from './department/DepartmentSave';
@@ -104,4 +105,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DepartmentsPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DepartmentsPage));

@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import {Button} from 'react-bootstrap';
+import {withRouter} from 'react-router-dom';
 
 import InstructorList from './instructor/InstructorList';
 import * as instructorActions from '../actions/instructorActions';
@@ -151,4 +152,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InstructorsPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(InstructorsPage));

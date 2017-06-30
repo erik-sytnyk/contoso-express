@@ -1,11 +1,11 @@
 import React from 'react';
-import {render} from 'react-dom';
+import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {Router} from 'react-router';
-import {browserHistory} from 'react-router';
+import {BrowserRouter} from 'react-router-dom';
 
 import configureStore from './store/configureStore';
-import routes from './routes';
+import {routes} from './routes';
+import AppContainer from './components/AppContainer';
 import {loadDepartments} from './actions/departmentActions';
 import {loadInstructors} from './actions/instructorActions';
 
@@ -20,9 +20,11 @@ const store = configureStore();
 store.dispatch(loadDepartments());
 store.dispatch(loadInstructors());
 
-render(
+ReactDOM.render(
     <Provider store={store}>
-        <Router history={browserHistory} routes={routes}/>
+        <BrowserRouter basename="/">
+            <AppContainer routes={routes} />
+        </BrowserRouter>
     </Provider>,
     document.getElementById('root')
 );
