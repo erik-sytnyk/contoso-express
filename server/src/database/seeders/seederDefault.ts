@@ -30,74 +30,65 @@ async function seedData(db) {
     console.log('DB was seeded!');
 }
 
-function seedUsers(db, usersData) {
-    return Promise.resolve(usersData)
-        .map((user) => {
-            return db.models.User.create(user);
-        });
+async function seedUsers(db, usersData) {
+    for (let user of usersData) {
+        await db.models.User.create(user);
+    }
 }
 
-function seedDepartments(db, departmentsData) {
-    return Promise.resolve(departmentsData)
-        .map((department: any) => {
-            department.startDate = parseDate(department.startDate);
-            
-            return db.models.Department.create(department);
-        });
+async function seedDepartments(db, departmentsData) {
+    for (let department of departmentsData) {
+        department.startDate = parseDate(department.startDate);
+
+        await db.models.Department.create(department);
+    }
 }
 
-function seedCourses(db, coursesData) {
-    return Promise.resolve(coursesData)
-        .map((course: any) => {
-            return db.models.Course.create(course)
-                .then((courseModel) => {
-                    courseModel.setInstructors(course.instructorsIds);
-                });
-        });
+async function seedCourses(db, coursesData) {
+    for (let course of coursesData) {
+        let courseModel = await db.models.Course.create(course);
+
+        await courseModel.setInstructors(course.instructorsIds);
+    }
 }
 
-function seedStudents(db, studentsData) {
-    return Promise.resolve(studentsData)
-        .map((student) => {
-            return db.models.Student.create(student);
-        });
+async function seedStudents(db, studentsData) {
+    for (let student of studentsData) {
+        await db.models.Student.create(student);
+    }
 }
 
-function seedEnrollments(db, enrollmentsData) {
-    return Promise.resolve(enrollmentsData)
-        .map((enrollment: any) => {
-            enrollment.enrollmentDate = parseDate(enrollment.enrollmentDate);
+async function seedEnrollments(db, enrollmentsData) {
+    for (let enrollment of enrollmentsData) {
+        enrollment.enrollmentDate = parseDate(enrollment.enrollmentDate);
 
-            return db.models.Enrollment.create(enrollment);
-        });
+        await db.models.Enrollment.create(enrollment);
+    }
 }
 
-function seedInstructors(db, instructorsData) {
-    return Promise.resolve(instructorsData)
-        .map((instructor: any) => {
-            instructor.hireDate = parseDate(instructor.hireDate);
+async function seedInstructors(db, instructorsData) {
+    for (let instructor of instructorsData) {
+        instructor.hireDate = parseDate(instructor.hireDate);
 
-            return db.models.Instructor.create(instructor);
-        });
+        await db.models.Instructor.create(instructor);
+    }
 }
 
-function seedOfficeAssignments(db, officeAssignmentsData) {
-    return Promise.resolve(officeAssignmentsData)
-        .map((officeAssignment) => {
-            return db.models.OfficeAssignment.create(officeAssignment);
-        });
+async function seedOfficeAssignments(db, officeAssignmentsData) {
+    for (let officeAssignment of officeAssignmentsData) {
+        await db.models.OfficeAssignment.create(officeAssignment);
+    }
 }
 
 function parseDate(dateStr) {
     return moment(dateStr, config.format.date).toDate();
 }
 
-function postImportRoutine(db) {
+async function postImportRoutine(db) {
     if (db.sequelize.dialect.name === 'postgres') {
-        return Promise.resolve(_.toArray(db.models))
-            .map(model => {
-                return updatePostgresSequence(model, db);
-            });
+        return await _.toArray(db.models).map(model => {
+            return updatePostgresSequence(model, db);
+        });
     }
 
     return Promise.resolve(null);

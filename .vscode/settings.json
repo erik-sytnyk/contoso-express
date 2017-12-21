@@ -1,0 +1,22 @@
+{
+  // Place your settings in this file to overwrite default and user settings.
+  "search.exclude": {
+    "build/**": true,
+    "deploy/**": true,
+    "server/build/**": true,
+    "client/build/**": true,
+    "server/local/emails/**": true,
+    "server/local/logs/**": true
+  },
+  "editor.formatOnSave": true,
+  "prettier.cssEnable": ["css", "scss"],
+  "prettier.semi": true,
+  "prettier.javascriptEnable": ["javascript", "javascriptreact"],
+  "prettier.typescriptEnable": ["typescript"],
+  "prettier.jsxBracketSameLine": true,
+  "prettier.singleQuote": true,
+  "prettier.printWidth": 120,
+  "prettier.tabWidth": 2,
+  "prettier.bracketSpacing": false,
+  "prettier.jsonEnable": ["json"]
+}
