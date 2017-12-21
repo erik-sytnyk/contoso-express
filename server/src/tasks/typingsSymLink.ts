@@ -4,8 +4,8 @@ import * as fs from 'fs';
 let originalPath = pathHelper.getRelative('typings');
 let destinationPath = pathHelper.getRelative('client', 'typings');
 
-fs.symlink(originalPath, destinationPath, 'dir', (err) => {
-    if (err) return console.log(err);
+fs.symlink(originalPath, destinationPath, 'dir', err => {
+  if (err) return console.log(err);
 
-    console.log('Symlink successfully created!');
+  console.log('Symlink successfully created!');
 });

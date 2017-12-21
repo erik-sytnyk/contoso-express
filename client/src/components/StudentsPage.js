@@ -15,174 +15,181 @@ import StudentDelete from './student/StudentDelete';
 import StudentSearch from './student/StudentSearch';
 
 class StudentsPage extends React.Component {
-    static propTypes = {
-        students: PropTypes.array.isRequired,
-        totalCount: PropTypes.number.isRequired,
-        actions: PropTypes.object.isRequired
+  static propTypes = {
+    students: PropTypes.array.isRequired,
+    totalCount: PropTypes.number.isRequired,
+    actions: PropTypes.object.isRequired
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      students: props.students,
+      search: '',
+      sortOrder: 'name',
+      saveModalVisible: false,
+      detailsModalVisible: false,
+      confirmationVisible: false,
+      activePage: 1,
+      totalCount: props.totalCount,
+      pageSize: 3
     };
 
-    constructor(props, context) {
-        super(props, context);
+    autoBind(this);
+  }
 
-        this.state = {
-            students: props.students,
-            search: '',
-            sortOrder: 'name',
-            saveModalVisible: false,
-            detailsModalVisible: false,
-            confirmationVisible: false,
-            activePage: 1,
-            totalCount: props.totalCount,
-            pageSize: 3
-        };
+  componentWillMount() {
+    this.props.actions.loadStudents(
+      this.state.search,
+      this.state.sortOrder,
+      this.state.activePage,
+      this.state.pageSize
+    );
+  }
 
-        autoBind(this);
+  changeSearchState(event) {
+    return this.setState({search: event.target.value});
+  }
+
+  searchStudents() {
+    this.props.actions.loadStudents(
+      this.state.search,
+      this.state.sortOrder,
+      this.state.activePage,
+      this.state.pageSize
+    );
+  }
+
+  handleKeyPress(target) {
+    if (target.charCode === 13) {
+      this.searchStudents();
+    }
+  }
+
+  showSaveModal(studentId) {
+    this.props.actions.loadStudent(studentId).then(() => {
+      this.setState({saveModalVisible: true});
+    });
+  }
+
+  closeSaveModal() {
+    this.setState({saveModalVisible: false});
+  }
+
+  showDetailsModal(studentId) {
+    this.props.actions.loadStudent(studentId).then(() => {
+      this.setState({detailsModalVisible: true});
+    });
+  }
+
+  closeDetailsModal() {
+    this.setState({detailsModalVisible: false});
+  }
+
+  showConfirmationModal(studentId) {
+    this.props.actions.loadStudent(studentId).then(() => {
+      this.setState({confirmationVisible: true});
+    });
+  }
+
+  closeConfirmationModal() {
+    this.setState({confirmationVisible: false});
+  }
+
+  pageSelection(eventKey) {
+    this.setState({
+      activePage: eventKey
+    });
+
+    this.props.actions.loadStudents(this.state.search, this.state.sortOrder, eventKey, this.state.pageSize);
+  }
+
+  changeSortOrder(event) {
+    let sortOrder = event.target.value;
+    let newSortOrder = '';
+
+    switch (sortOrder) {
+      case 'name':
+        newSortOrder = this.state.sortOrder === 'name' ? 'name_desc' : 'name';
+        break;
+      case 'date':
+        newSortOrder = this.state.sortOrder === 'date' ? 'date_desc' : 'date';
+        break;
+      default:
     }
 
-    componentWillMount() {
-        this.props.actions.loadStudents(this.state.search, this.state.sortOrder, this.state.activePage, this.state.pageSize);
-    }
+    this.setState({sortOrder: newSortOrder});
 
-    changeSearchState(event) {
-        return this.setState({search: event.target.value});
-    }
+    this.props.actions.loadStudents(this.state.search, newSortOrder, this.state.activePage, this.state.pageSize);
+  }
 
-    searchStudents() {
-        this.props.actions.loadStudents(this.state.search, this.state.sortOrder, this.state.activePage, this.state.pageSize);
-    }
+  render() {
+    let numberOfPages = Math.ceil(this.props.totalCount / this.state.pageSize);
+    let showTable = _.isEmpty(this.props.students) ? {display: 'none'} : {};
 
-    handleKeyPress(target) {
-        if (target.charCode === 13) {
-            this.searchStudents();
-        }
-    }
+    return (
+      <div className="container">
+        <h2>Students</h2>
 
-    showSaveModal(studentId) {
-        this.props.actions.loadStudent(studentId)
-            .then(() => {
-                this.setState({saveModalVisible: true});
-            });
-    }
+        <Button bsStyle="link" onClick={this.showSaveModal}>
+          Create New
+        </Button>
 
-    closeSaveModal() {
-        this.setState({saveModalVisible: false});
-    }
+        <StudentSearch
+          search={this.state.search}
+          onChange={this.changeSearchState}
+          onKeyPress={this.handleKeyPress}
+          onClick={this.searchStudents}
+        />
 
-    showDetailsModal(studentId) {
-        this.props.actions.loadStudent(studentId)
-            .then(() => {
-                this.setState({detailsModalVisible: true});
-            });
-    }
+        <StudentsList
+          students={this.props.students}
+          onSortClick={this.changeSortOrder}
+          onSaveClick={this.showSaveModal}
+          onDetailsClick={this.showDetailsModal}
+          onDeleteClick={this.showConfirmationModal}
+        />
 
-    closeDetailsModal() {
-        this.setState({detailsModalVisible: false});
-    }
+        <br />
+        <div style={showTable}>
+          Page {this.state.activePage} of {numberOfPages}
+        </div>
 
-    showConfirmationModal(studentId) {
-        this.props.actions.loadStudent(studentId)
-            .then(() => {
-                this.setState({confirmationVisible: true});
-            });
-    }
+        <Pagination
+          bsSize="medium"
+          first
+          last
+          ellipsis
+          maxButtons={5}
+          items={numberOfPages}
+          activePage={this.state.activePage}
+          onSelect={this.pageSelection}
+          style={showTable}
+        />
 
-    closeConfirmationModal() {
-        this.setState({confirmationVisible: false});
-    }
+        <StudentSave visible={this.state.saveModalVisible} close={this.closeSaveModal} />
 
-    pageSelection(eventKey) {
-        this.setState({
-            activePage: eventKey
-        });
+        <StudentDetails visible={this.state.detailsModalVisible} close={this.closeDetailsModal} />
 
-        this.props.actions.loadStudents(this.state.search, this.state.sortOrder, eventKey, this.state.pageSize);
-    }
-
-    changeSortOrder(event) {
-        let sortOrder = event.target.value;
-        let newSortOrder = '';
-
-        switch (sortOrder) {
-            case 'name':
-                newSortOrder = this.state.sortOrder === 'name' ? 'name_desc' : 'name';
-                break;
-            case 'date':
-                newSortOrder = this.state.sortOrder === 'date' ? 'date_desc' : 'date';
-                break;
-            default:
-        }
-
-        this.setState({sortOrder: newSortOrder});
-
-        this.props.actions.loadStudents(this.state.search, newSortOrder, this.state.activePage, this.state.pageSize);
-    }
-
-    render() {
-        let numberOfPages = Math.ceil(this.props.totalCount / this.state.pageSize);
-        let showTable = _.isEmpty(this.props.students) ? {display: 'none'} : {};
-
-        return (
-            <div className="container">
-                <h2>Students</h2>
-
-                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
-
-                <StudentSearch search={this.state.search}
-                               onChange={this.changeSearchState}
-                               onKeyPress={this.handleKeyPress}
-                               onClick={this.searchStudents}
-                />
-
-                <StudentsList students={this.props.students}
-                              onSortClick={this.changeSortOrder}
-                              onSaveClick={this.showSaveModal}
-                              onDetailsClick={this.showDetailsModal}
-                              onDeleteClick={this.showConfirmationModal}
-                />
-
-                <br/>
-                <div style={showTable}>Page {this.state.activePage} of {numberOfPages}</div>
-
-                <Pagination
-                    bsSize="medium"
-                    first
-                    last
-                    ellipsis
-                    maxButtons={5}
-                    items={numberOfPages}
-                    activePage={this.state.activePage}
-                    onSelect={this.pageSelection}
-                    style={showTable}
-                />
-
-                <StudentSave visible={this.state.saveModalVisible}
-                             close={this.closeSaveModal}
-                />
-
-                <StudentDetails visible={this.state.detailsModalVisible}
-                                close={this.closeDetailsModal}
-                />
-
-                <StudentDelete visible={this.state.confirmationVisible}
-                                  close={this.closeConfirmationModal}
-                />
-            </div>
-        );
-    }
+        <StudentDelete visible={this.state.confirmationVisible} close={this.closeConfirmationModal} />
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        students: state.student.list,
-        totalCount: state.student.totalCount
-    };
+  return {
+    students: state.student.list,
+    totalCount: state.student.totalCount
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(studentActions, dispatch),
-        loadStudents: () => studentActions.loadStudents('', '', 1, 3)(dispatch)
-    };
+  return {
+    actions: bindActionCreators(studentActions, dispatch),
+    loadStudents: () => studentActions.loadStudents('', '', 1, 3)(dispatch)
+  };
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StudentsPage));

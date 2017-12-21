@@ -13,156 +13,155 @@ import InstructorForm from './InstructorForm';
 import {courseSelectListItem} from '../../formatters/entityFromatter';
 
 class InstructorSave extends React.Component {
-    static propTypes = {
-        instructor: PropTypes.object.isRequired,
-        actions: PropTypes.object.isRequired,
-        visible: PropTypes.bool.isRequired,
-        close: PropTypes.func.isRequired
+  static propTypes = {
+    instructor: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired,
+    visible: PropTypes.bool.isRequired,
+    close: PropTypes.func.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      instructor: _.assign({}, props.instructor),
+      errors: {},
+      saving: false,
+      visible: props.visible,
+      close: props.close
     };
 
-    constructor(props) {
-        super(props);
+    autoBind(this);
+  }
 
-        this.state = {
-            instructor: _.assign({}, props.instructor),
-            errors: {},
-            saving: false,
-            visible: props.visible,
-            close: props.close
-        };
+  componentWillReceiveProps(nextProps) {
+    this.setState({instructor: _.assign({}, nextProps.instructor)});
+  }
 
-        autoBind(this);
-    }
+  componentWillMount() {
+    this.props.loadCourses();
+  }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({instructor: _.assign({}, nextProps.instructor)});
-    }
+  updateInstructorState(event) {
+    let instructor = this.state.instructor;
+    let officeAssignment = instructor.officeAssignment;
+    let courses = instructor.courses;
 
-    componentWillMount() {
-        this.props.loadCourses();
-    }
+    //for date picker change
+    if (_.isString(event)) {
+      instructor.hireDate = event;
+    } else {
+      const field = event.target.name;
 
-    updateInstructorState(event) {
-        let instructor = this.state.instructor;
-        let officeAssignment = instructor.officeAssignment;
-        let courses = instructor.courses;
+      if (field === 'location') {
+        officeAssignment.location = event.target.value;
+        instructor.officeAssignment = officeAssignment;
+      } else if (!_.isNaN(parseInt(field, 10))) {
+        let id = parseInt(field, 10);
 
-        //for date picker change
-        if (_.isString(event)) {
-            instructor.hireDate = event;
+        let exist = _.find(courses, item => {
+          return item.id === id;
+        });
+
+        if (exist) {
+          instructor.courses = _.filter(courses, course => {
+            return course.id !== id;
+          });
         } else {
-            const field = event.target.name;
-
-            if (field === 'location') {
-                officeAssignment.location = event.target.value;
-                instructor.officeAssignment = officeAssignment;
-            } else if (!_.isNaN(parseInt(field, 10))) {
-                let id = parseInt(field, 10);
-
-                let exist = _.find(courses, (item) => {
-                   return item.id === id;
-                });
-
-                if (exist) {
-                    instructor.courses = _.filter(courses, (course) => {
-                       return course.id !== id;
-                    });
-                } else {
-                    courses.push({id: id});
-                }
-            } else {
-                instructor[field] = event.target.value;
-            }
+          courses.push({id: id});
         }
-
-        return this.setState({instructor: instructor});
+      } else {
+        instructor[field] = event.target.value;
+      }
     }
 
-    instructorFormIsValid() {
-        let formIsValid = true;
-        let errors = {};
+    return this.setState({instructor: instructor});
+  }
 
-        if (!this.state.instructor.firstName) {
-            errors.firstName = 'The First Name field is required.';
-            formIsValid = false;
-        }
+  instructorFormIsValid() {
+    let formIsValid = true;
+    let errors = {};
 
-        if (!this.state.instructor.lastName) {
-            errors.lastName = 'The Last Name field is required.';
-            formIsValid = false;
-        }
-
-        if (this.state.instructor.hireDate === 'Invalid date') {
-            errors.hireDate = 'Invalid Hire Date.';
-            formIsValid = false;
-        }
-
-        this.setState({errors: errors});
-        return formIsValid;
-    }
-    
-    saveInstructor(event) {
-        event.preventDefault();
-
-        if (!this.instructorFormIsValid()) {
-            return;
-        }
-
-        this.setState({saving: true});
-        
-        this.props.actions.saveInstructor(this.state.instructor)
-            .then(() => {
-                this.props.close();
-
-                let message = this.state.instructor.id ? 'Instructor updated' : 'Instructor added';
-                helper.showMessage(message);
-            })
-            .catch(err => {
-                this.setState({saving: false});
-            });
+    if (!this.state.instructor.firstName) {
+      errors.firstName = 'The First Name field is required.';
+      formIsValid = false;
     }
 
-    render() {
-        let header = this.props.instructor.id ? 'Edit Instructor' : 'Create Instructor';
-
-        return (
-            <div>
-                <Modal show={this.props.visible} onHide={this.props.close}>
-                    <Modal.Header closeButton onClick={this.props.close}>
-                        <Modal.Title>{header}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <InstructorForm
-                            instructor={this.state.instructor}
-                            allCourses={this.props.courses}
-                            onChange={this.updateInstructorState}
-                            errors={this.state.errors}
-                        />
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.saveInstructor}>
-                            {this.props.saving ? 'Saving...' : 'Save'}
-                        </Button>
-                        <Button onClick={this.props.close}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
-        );
+    if (!this.state.instructor.lastName) {
+      errors.lastName = 'The Last Name field is required.';
+      formIsValid = false;
     }
+
+    if (this.state.instructor.hireDate === 'Invalid date') {
+      errors.hireDate = 'Invalid Hire Date.';
+      formIsValid = false;
+    }
+
+    this.setState({errors: errors});
+    return formIsValid;
+  }
+
+  saveInstructor(event) {
+    event.preventDefault();
+
+    if (!this.instructorFormIsValid()) {
+      return;
+    }
+
+    this.setState({saving: true});
+
+    this.props.actions
+      .saveInstructor(this.state.instructor)
+      .then(() => {
+        this.props.close();
+
+        let message = this.state.instructor.id ? 'Instructor updated' : 'Instructor added';
+        helper.showMessage(message);
+      })
+      .catch(err => {
+        this.setState({saving: false});
+      });
+  }
+
+  render() {
+    let header = this.props.instructor.id ? 'Edit Instructor' : 'Create Instructor';
+
+    return (
+      <div>
+        <Modal show={this.props.visible} onHide={this.props.close}>
+          <Modal.Header closeButton onClick={this.props.close}>
+            <Modal.Title>{header}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <InstructorForm
+              instructor={this.state.instructor}
+              allCourses={this.props.courses}
+              onChange={this.updateInstructorState}
+              errors={this.state.errors}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.saveInstructor}>{this.props.saving ? 'Saving...' : 'Save'}</Button>
+            <Button onClick={this.props.close}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        instructor: _.cloneDeep(state.instructor.current),
-        courses: courseSelectListItem(state.course.list)
-    };
+  return {
+    instructor: _.cloneDeep(state.instructor.current),
+    courses: courseSelectListItem(state.course.list)
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(instructorActions, dispatch),
-        loadCourses: () => loadCourses(null)(dispatch)
-    };
+  return {
+    actions: bindActionCreators(instructorActions, dispatch),
+    loadCourses: () => loadCourses(null)(dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InstructorSave);

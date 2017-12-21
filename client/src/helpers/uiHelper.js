@@ -2,31 +2,31 @@ import _ from 'lodash';
 import toastr from 'toastr';
 
 export default {
-    showMessage,
-    showWarning,
-    showError
+  showMessage,
+  showWarning,
+  showError
 };
 
 function setToasterOptions() {
-    toastr.options.positionClass = 'toast-bottom-right';
+  toastr.options.positionClass = 'toast-bottom-right';
 }
 
 setToasterOptions();
 
 function showError(err) {
-    let errorMessage = err;
+  let errorMessage = err;
 
-    if (_.isError(err)) {
-        errorMessage = err.message;
-    }
+  if (_.isError(err)) {
+    errorMessage = err.message;
+  }
 
-    toastr.error(errorMessage);
+  toastr.error(errorMessage);
 }
 
 function showWarning(message) {
-    toastr.warning(message);
+  toastr.warning(message);
 }
 
 function showMessage(message) {
-    toastr.success(message);
+  toastr.success(message);
 }

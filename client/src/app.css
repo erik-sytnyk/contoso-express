@@ -1,16 +1,16 @@
 #page-body {
-    position: absolute;
-    top: 53px;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  position: absolute;
+  top: 53px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .tools button {
-    color: #000;
-    padding: 0 6px;
+  color: #000;
+  padding: 0 6px;
 }
 
 .form-label {
-    text-align: right;
+  text-align: right;
 }

@@ -10,21 +10,22 @@ const db = dbInit.init(dbPath);
 let dbIsInitialized = false;
 
 export default {
-    initTestDb
+  initTestDb
 };
 
 function initTestDb() {
-    if (dbIsInitialized) return Promise.resolve(db);
-    
-    return db.sequelize.sync({force: true})
-        .then(() => {
-            return seeder.seedData(db);
-        })
-        .then(() => {
-            dbIsInitialized = true;
-            return db;
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+  if (dbIsInitialized) return Promise.resolve(db);
+
+  return db.sequelize
+    .sync({force: true})
+    .then(() => {
+      return seeder.seedData(db);
+    })
+    .then(() => {
+      dbIsInitialized = true;
+      return db;
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }

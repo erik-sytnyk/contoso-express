@@ -2,15 +2,15 @@ import config from '../helpers/clientConfig';
 import _ from 'lodash';
 
 export default {
-    money: moneyFormat
+  money: moneyFormat
 };
 
 function moneyFormat(amount) {
-    let amountNum = parseFloat(amount);
+  let amountNum = parseFloat(amount);
 
-    if (!_.isNumber(amountNum)) return 'invalid value';
+  if (!_.isNumber(amountNum)) return 'invalid value';
 
-    let amountFormatted = amountNum.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+  let amountFormatted = amountNum.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 
-    return `${config.format.currencySymbol} ${amountFormatted}`;
+  return `${config.format.currencySymbol} ${amountFormatted}`;
 }

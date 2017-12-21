@@ -7,39 +7,38 @@ import Navigation from './Navigation';
 import dateFormatter from '../formatters/dateFormatter';
 
 class App extends React.Component {
-    static propTypes = {
-        routes: PropTypes.array.isRequired
-    };
+  static propTypes = {
+    routes: PropTypes.array.isRequired
+  };
 
-    render() {
-        let date = dateFormatter.currentYear();
+  render() {
+    let date = dateFormatter.currentYear();
 
-        return (
-            <div>
-                <Navigation />
-                <div id="page-body" className="container-fluid">
-                    <Switch>
-                        {this.props.routes.map((route, index) => (
-                            <Route key={index} exact={route.exact} path={route.path} component={route.main} />
-                        ))};
-                    </Switch>
+    return (
+      <div>
+        <Navigation />
+        <div id="page-body" className="container-fluid">
+          <Switch>
+            {this.props.routes.map((route, index) => (
+              <Route key={index} exact={route.exact} path={route.path} component={route.main} />
+            ))};
+          </Switch>
 
-                    {this.props.children}
+          {this.props.children}
 
-                    <div className="container">
-                        <hr/>
+          <div className="container">
+            <hr />
 
-                        <p>&copy; {date} - Contoso University</p>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+            <p>&copy; {date} - Contoso University</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-
 function mapStateToProps(state, ownProps) {
-    return {};
+  return {};
 }
 
 export default withRouter(connect(mapStateToProps)(App));

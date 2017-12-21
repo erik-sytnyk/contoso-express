@@ -7,12 +7,12 @@ import course from './courseReducer';
 import enrollment from './enrollmentReducer';
 
 const rootReducer = combineReducers({
-    student,
-    department,
-    instructor,
-    course,
-    enrollment,
-    ajaxCallsInProgress,
+  student,
+  department,
+  instructor,
+  course,
+  enrollment,
+  ajaxCallsInProgress
 });
 
 export default rootReducer;

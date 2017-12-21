@@ -11,82 +11,71 @@ let infoLogger = null;
 let performanceCache = {};
 
 export default {
-    error: logError,
-    info: logInfo,
-    timeStart: logTimeStart,
-    timeEnd: logTimeEnd,
-    logMessage: logMessage
+  error: logError,
+  info: logInfo,
+  timeStart: logTimeStart,
+  timeEnd: logTimeEnd,
+  logMessage: logMessage
 };
 
 function initLoggers() {
-    let getTransportFile = (logFileName) =>
-        new winston.transports.File({filename: pathHelper.getDataRelative('logs', logFileName)});
+  let getTransportFile = logFileName =>
+    new winston.transports.File({filename: pathHelper.getDataRelative('logs', logFileName)});
 
-    performanceLogger = new (winston.Logger)({
-        transports: [
-            getTransportFile('performance.log')
-        ]
-    });
+  performanceLogger = new winston.Logger({
+    transports: [getTransportFile('performance.log')]
+  });
 
-    errorLogger = new (winston.Logger)({
-        transports: [
-            getTransportFile('errors.log')
-        ]
-    });
+  errorLogger = new winston.Logger({
+    transports: [getTransportFile('errors.log')]
+  });
 
-    if (config.app.logErrors) {
-        winston.handleExceptions(
-            (new (winston.transports.Console)()),
-            getTransportFile('errors.log')
-        );
-    }
+  if (config.app.logErrors) {
+    winston.handleExceptions(new winston.transports.Console(), getTransportFile('errors.log'));
+  }
 
-    infoLogger = new (winston.Logger)({
-        transports: [
-            new (winston.transports.Console)(),
-            getTransportFile('info.log')
-        ]
-    });
+  infoLogger = new winston.Logger({
+    transports: [new winston.transports.Console(), getTransportFile('info.log')]
+  });
 }
 
 initLoggers();
 
 function logTimeStart(timerName) {
-    if (!config.app.isDevLocal) return;
+  if (!config.app.isDevLocal) return;
 
-    if (performanceCache[timerName]) throw new AppError('Timer was already created. Timer name: ' + timerName);
+  if (performanceCache[timerName]) throw new AppError('Timer was already created. Timer name: ' + timerName);
 
-    performanceCache[timerName] = new Date().getTime();
-
+  performanceCache[timerName] = new Date().getTime();
 }
 
 function logTimeEnd(timerName) {
-    if (!config.app.isDevLocal) return;
+  if (!config.app.isDevLocal) return;
 
-    if (!performanceCache[timerName]) throw new AppError('Timer was not previously created. Timer name: ' + timerName);
+  if (!performanceCache[timerName]) throw new AppError('Timer was not previously created. Timer name: ' + timerName);
 
-    let endTime = new Date().getTime();
-    let startTime = performanceCache[timerName];
+  let endTime = new Date().getTime();
+  let startTime = performanceCache[timerName];
 
-    let ms = endTime - startTime;
-    performanceLogger.info('Timer ' + timerName + ': ' + moment.utc(ms).format('HH:mm:ss.SSS'));
+  let ms = endTime - startTime;
+  performanceLogger.info('Timer ' + timerName + ': ' + moment.utc(ms).format('HH:mm:ss.SSS'));
 
-    performanceCache = _.omit(performanceCache, timerName);
+  performanceCache = _.omit(performanceCache, timerName);
 }
 
 function logError(err) {
-    if (_.isError(err)) {
-        errorLogger.error('Error', {errorMessage: err.message, stack: err.stack});
-        return;
-    }
+  if (_.isError(err)) {
+    errorLogger.error('Error', {errorMessage: err.message, stack: err.stack});
+    return;
+  }
 
-    errorLogger.error(err);
+  errorLogger.error(err);
 }
 
 function logInfo(message) {
-    infoLogger.info(message);
+  infoLogger.info(message);
 }
 
 function logMessage(message, metadata) {
-    infoLogger.info(message, metadata);
+  infoLogger.info(message, metadata);
 }

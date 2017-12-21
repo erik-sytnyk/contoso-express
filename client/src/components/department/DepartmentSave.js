@@ -12,129 +12,128 @@ import DepartmentForm from './DepartmentForm';
 import {instructorSelectListItem} from '../../formatters/entityFromatter';
 
 class DepartmentSave extends React.Component {
-    static propTypes = {
-        department: PropTypes.object.isRequired,
-        actions: PropTypes.object.isRequired,
-        visible: PropTypes.bool.isRequired,
-        close: PropTypes.func.isRequired
+  static propTypes = {
+    department: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired,
+    visible: PropTypes.bool.isRequired,
+    close: PropTypes.func.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      department: _.assign({}, props.department),
+      errors: {},
+      saving: false,
+      visible: props.visible,
+      close: props.close
     };
 
-    constructor(props) {
-        super(props);
+    autoBind(this);
+  }
 
-        this.state = {
-            department: _.assign({}, props.department),
-            errors: {},
-            saving: false,
-            visible: props.visible,
-            close: props.close
-        };
+  componentWillReceiveProps(nextProps) {
+    this.setState({department: _.assign({}, nextProps.department)});
+  }
 
-        autoBind(this);
+  updateDepartmentState(event) {
+    let department = this.state.department;
+
+    //for date picker change
+    if (_.isString(event)) {
+      department.startDate = event;
+    } else {
+      const field = event.target.name;
+      department[field] = event.target.value;
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({department: _.assign({}, nextProps.department)});
+    return this.setState({department: department});
+  }
+
+  departmentFormIsValid() {
+    let formIsValid = true;
+    let errors = {};
+
+    if (this.state.department.name.length < 5) {
+      errors.name = 'Name must be at least 5 characters.';
+      formIsValid = false;
     }
 
-    updateDepartmentState(event) {
-        let department = this.state.department;
-
-        //for date picker change
-        if (_.isString(event)) {
-            department.startDate = event;
-        } else {
-            const field = event.target.name;
-            department[field] = event.target.value;
-        }
-
-        return this.setState({department: department});
+    if (this.state.department.startDate === 'Invalid date') {
+      errors.date = 'Invalid Start Date.';
+      formIsValid = false;
     }
 
-    departmentFormIsValid() {
-        let formIsValid = true;
-        let errors = {};
-
-        if (this.state.department.name.length < 5) {
-            errors.name = 'Name must be at least 5 characters.';
-            formIsValid = false;
-        }
-        
-        if (this.state.department.startDate === 'Invalid date') {
-            errors.date = 'Invalid Start Date.';
-            formIsValid = false;
-        }
-
-        if (!this.state.department.instructorId) {
-            errors.instructorId = 'Administrator is required.';
-            formIsValid = false;
-        }
-
-        this.setState({errors: errors});
-        return formIsValid;
-    }
-    
-    saveDepartment(event) {
-        event.preventDefault();
-
-        if (!this.departmentFormIsValid()) {
-            return;
-        }
-
-        this.setState({saving: true});
-
-        this.props.actions.saveDepartment(this.state.department)
-            .then(() => {
-                this.props.close();
-
-                let message = this.state.department.id ? 'Department updated' : 'Department added';
-                helper.showMessage(message);
-            })
-            .catch(err => {
-                this.setState({saving: false});
-            });
+    if (!this.state.department.instructorId) {
+      errors.instructorId = 'Administrator is required.';
+      formIsValid = false;
     }
 
-    render() {
-        let header = this.props.department.id ? 'Edit Department' : 'Create Department';
+    this.setState({errors: errors});
+    return formIsValid;
+  }
 
-        return (
-            <div>
-                <Modal show={this.props.visible} onHide={this.props.close}>
-                    <Modal.Header closeButton onClick={this.props.close}>
-                        <Modal.Title>{header}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <DepartmentForm
-                            department={this.state.department}
-                            allInstructors={this.props.instructors}
-                            onChange={this.updateDepartmentState}
-                            errors={this.state.errors}
-                        />
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.saveDepartment}>
-                            {this.props.saving ? 'Saving...' : 'Save'}
-                        </Button>
-                        <Button onClick={this.props.close}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
-        );
+  saveDepartment(event) {
+    event.preventDefault();
+
+    if (!this.departmentFormIsValid()) {
+      return;
     }
+
+    this.setState({saving: true});
+
+    this.props.actions
+      .saveDepartment(this.state.department)
+      .then(() => {
+        this.props.close();
+
+        let message = this.state.department.id ? 'Department updated' : 'Department added';
+        helper.showMessage(message);
+      })
+      .catch(err => {
+        this.setState({saving: false});
+      });
+  }
+
+  render() {
+    let header = this.props.department.id ? 'Edit Department' : 'Create Department';
+
+    return (
+      <div>
+        <Modal show={this.props.visible} onHide={this.props.close}>
+          <Modal.Header closeButton onClick={this.props.close}>
+            <Modal.Title>{header}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <DepartmentForm
+              department={this.state.department}
+              allInstructors={this.props.instructors}
+              onChange={this.updateDepartmentState}
+              errors={this.state.errors}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.saveDepartment}>{this.props.saving ? 'Saving...' : 'Save'}</Button>
+            <Button onClick={this.props.close}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        department: _.cloneDeep(state.department.current),
-        instructors: instructorSelectListItem(state.instructor.list)
-    };
+  return {
+    department: _.cloneDeep(state.department.current),
+    instructors: instructorSelectListItem(state.instructor.list)
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(departmentActions, dispatch)
-    };
+  return {
+    actions: bindActionCreators(departmentActions, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepartmentSave);

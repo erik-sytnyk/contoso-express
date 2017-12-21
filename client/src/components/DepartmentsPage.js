@@ -13,96 +13,90 @@ import DepartmentDelete from './department/DepartmentDelete';
 import * as departmentActions from '../actions/departmentActions';
 
 class DepartmentsPage extends React.Component {
-    static propTypes = {
-        departments: PropTypes.array.isRequired,
-        actions: PropTypes.object.isRequired
+  static propTypes = {
+    departments: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      departments: props.departments,
+      saveModalVisible: false,
+      detailsModalVisible: false,
+      confirmationVisible: false
     };
 
-    constructor(props, context) {
-        super(props, context);
+    autoBind(this);
+  }
 
-        this.state = {
-            departments: props.departments,
-            saveModalVisible: false,
-            detailsModalVisible: false,
-            confirmationVisible: false
-        };
+  showSaveModal(departmentId) {
+    this.props.actions.loadDepartment(departmentId).then(() => {
+      this.setState({saveModalVisible: true});
+    });
+  }
 
-        autoBind(this);
-    }
+  closeSaveModal() {
+    this.setState({saveModalVisible: false});
+  }
 
-    showSaveModal(departmentId) {
-        this.props.actions.loadDepartment(departmentId)
-            .then(() => {
-                this.setState({saveModalVisible: true});
-            });
-    }
+  showDetailsModal(departmentId) {
+    this.props.actions.loadDepartment(departmentId).then(() => {
+      this.setState({detailsModalVisible: true});
+    });
+  }
 
-    closeSaveModal() {
-        this.setState({saveModalVisible: false});
-    }
+  closeDetailsModal() {
+    this.setState({detailsModalVisible: false});
+  }
 
-    showDetailsModal(departmentId) {
-        this.props.actions.loadDepartment(departmentId)
-            .then(() => {
-                this.setState({detailsModalVisible: true});
-            });
-    }
+  showConfirmationModal(departmentId) {
+    this.props.actions.loadDepartment(departmentId).then(() => {
+      this.setState({confirmationVisible: true});
+    });
+  }
 
-    closeDetailsModal() {
-        this.setState({detailsModalVisible: false});
-    }
+  closeConfirmationModal() {
+    this.setState({confirmationVisible: false});
+  }
 
-    showConfirmationModal(departmentId) {
-        this.props.actions.loadDepartment(departmentId)
-            .then(() => {
-                this.setState({confirmationVisible: true});
-            });
-    }
+  render() {
+    return (
+      <div className="container">
+        <h2>Departments</h2>
 
-    closeConfirmationModal() {
-        this.setState({confirmationVisible: false});
-    }
+        <Button bsStyle="link" onClick={this.showSaveModal}>
+          Create New
+        </Button>
 
-    render() {
-        return (
-            <div className="container">
-                <h2>Departments</h2>
+        <DepartmentsList
+          departments={this.props.departments}
+          onSaveClick={this.showSaveModal}
+          onDetailsClick={this.showDetailsModal}
+          onDeleteClick={this.showConfirmationModal}
+        />
 
-                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
+        <DepartmentSave visible={this.state.saveModalVisible} close={this.closeSaveModal} />
 
-                <DepartmentsList departments={this.props.departments} 
-                                 onSaveClick={this.showSaveModal} 
-                                 onDetailsClick={this.showDetailsModal} 
-                                 onDeleteClick={this.showConfirmationModal}
-                />
+        <DepartmentDetails visible={this.state.detailsModalVisible} close={this.closeDetailsModal} />
 
-                <DepartmentSave visible={this.state.saveModalVisible}
-                                close={this.closeSaveModal}
-                />
-                
-                <DepartmentDetails visible={this.state.detailsModalVisible}
-                                   close={this.closeDetailsModal}
-                />
-                
-                <DepartmentDelete visible={this.state.confirmationVisible}
-                                  close={this.closeConfirmationModal}
-                />
-            </div>
-        );
-    }
+        <DepartmentDelete visible={this.state.confirmationVisible} close={this.closeConfirmationModal} />
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        departments: state.department.list
-    };
+  return {
+    departments: state.department.list
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(departmentActions, dispatch)
-    };
+  return {
+    actions: bindActionCreators(departmentActions, dispatch)
+  };
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DepartmentsPage));

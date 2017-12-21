@@ -8,7 +8,14 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "copy-assets": "node tasks/copyAssets.js"
+    "copy-assets": "node tasks/copyAssets.js",
+    "format": "prettier \"src/**/*.{js,json,css}\" --write"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "bracketSpacing": false
   },
   "globalDependencies": {
     "react-scripts": "1.0.7"

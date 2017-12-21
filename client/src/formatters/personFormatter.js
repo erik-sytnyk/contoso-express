@@ -1,7 +1,7 @@
 export default {
-    fullName: getFullName
+  fullName: getFullName
 };
 
 function getFullName(firstName, lastName) {
-    return `${lastName}, ${firstName}`;
+  return `${lastName}, ${firstName}`;
 }

@@ -15,119 +15,114 @@ import CourseDelete from './courses/CourseDelete';
 import CoursesFilter from './courses/CoursesFilter';
 
 class CoursesPage extends React.Component {
-    static propTypes = {
-        courses: PropTypes.array.isRequired,
-        actions: PropTypes.object.isRequired
+  static propTypes = {
+    courses: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      courses: props.courses,
+      selectedDepartmentId: '',
+      saveModalVisible: false,
+      detailsModalVisible: false,
+      confirmationVisible: false
     };
 
-    constructor(props, context) {
-        super(props, context);
+    autoBind(this);
+  }
 
-        this.state = {
-            courses: props.courses,
-            selectedDepartmentId: '',
-            saveModalVisible: false,
-            detailsModalVisible: false,
-            confirmationVisible: false
-        };
+  componentWillMount() {
+    this.props.loadCourses();
+  }
 
-        autoBind(this);
-    }
+  changeDepartmentState(event) {
+    let departmentId = event.target.value;
 
-    componentWillMount() {
-        this.props.loadCourses();
-    }
+    return this.setState({selectedDepartmentId: departmentId});
+  }
 
-    changeDepartmentState(event) {
-        let departmentId = event.target.value;
-        
-        return this.setState({selectedDepartmentId: departmentId});
-    }
+  filterCourses() {
+    this.props.actions.loadCourses(this.state.selectedDepartmentId);
+  }
 
-    filterCourses() {
-        this.props.actions.loadCourses(this.state.selectedDepartmentId);
-    }
-    
-    showSaveModal(courseId) {
-        this.props.actions.loadCourse(courseId)
-            .then(() => {
-                this.setState({saveModalVisible: true});
-            });
-    }
+  showSaveModal(courseId) {
+    this.props.actions.loadCourse(courseId).then(() => {
+      this.setState({saveModalVisible: true});
+    });
+  }
 
-    closeSaveModal() {
-        this.setState({saveModalVisible: false});
-    }
+  closeSaveModal() {
+    this.setState({saveModalVisible: false});
+  }
 
-    showDetailsModal(courseId) {
-        this.props.actions.loadCourse(courseId)
-            .then(() => {
-                this.setState({detailsModalVisible: true});
-            });
-    }
+  showDetailsModal(courseId) {
+    this.props.actions.loadCourse(courseId).then(() => {
+      this.setState({detailsModalVisible: true});
+    });
+  }
 
-    closeDetailsModal() {
-        this.setState({detailsModalVisible: false});
-    }
+  closeDetailsModal() {
+    this.setState({detailsModalVisible: false});
+  }
 
-    showConfirmationModal(courseId) {
-        this.props.actions.loadCourse(courseId)
-            .then(() => {
-                this.setState({confirmationVisible: true});
-            });
-    }
+  showConfirmationModal(courseId) {
+    this.props.actions.loadCourse(courseId).then(() => {
+      this.setState({confirmationVisible: true});
+    });
+  }
 
-    closeConfirmationModal() {
-        this.setState({confirmationVisible: false});
-    }
+  closeConfirmationModal() {
+    this.setState({confirmationVisible: false});
+  }
 
-    render() {
-        return (
-            <div className="container">
-                <h2>Courses</h2>
+  render() {
+    return (
+      <div className="container">
+        <h2>Courses</h2>
 
-                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
+        <Button bsStyle="link" onClick={this.showSaveModal}>
+          Create New
+        </Button>
 
-                <CoursesFilter departmentId={this.state.selectedDepartmentId}
-                               departments={this.props.departments}
-                               onChange={this.changeDepartmentState}
-                               onClick={this.filterCourses}
-                />
+        <CoursesFilter
+          departmentId={this.state.selectedDepartmentId}
+          departments={this.props.departments}
+          onChange={this.changeDepartmentState}
+          onClick={this.filterCourses}
+        />
 
-                <CoursesList courses={this.props.courses} 
-                             onSaveClick={this.showSaveModal}
-                             onDetailsClick={this.showDetailsModal}
-                             onDeleteClick={this.showConfirmationModal}
-                />
+        <CoursesList
+          courses={this.props.courses}
+          onSaveClick={this.showSaveModal}
+          onDetailsClick={this.showDetailsModal}
+          onDeleteClick={this.showConfirmationModal}
+        />
 
-                <CourseSave visible={this.state.saveModalVisible} 
-                            close={this.closeSaveModal}
-                />
-                
-                <CourseDetails visible={this.state.detailsModalVisible}
-                               close={this.closeDetailsModal}
-                />
+        <CourseSave visible={this.state.saveModalVisible} close={this.closeSaveModal} />
 
-                <CourseDelete visible={this.state.confirmationVisible}
-                               close={this.closeConfirmationModal}
-                />
-            </div >
-        );
-    }
+        <CourseDetails visible={this.state.detailsModalVisible} close={this.closeDetailsModal} />
+
+        <CourseDelete visible={this.state.confirmationVisible} close={this.closeConfirmationModal} />
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        courses: state.course.list,
-        departments: departmentSelectListItem(state.department.list)
-    };
+  return {
+    courses: state.course.list,
+    departments: departmentSelectListItem(state.department.list)
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(courseActions, dispatch),
-        loadCourses: () => courseActions.loadCourses(null)(dispatch)
-    };
+  return {
+    actions: bindActionCreators(courseActions, dispatch),
+    loadCourses: () => courseActions.loadCourses(null)(dispatch)
+  };
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CoursesPage));

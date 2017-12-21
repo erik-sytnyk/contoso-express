@@ -8,61 +8,61 @@ import autoBind from 'react-autobind';
 import DisplayRow from '../common/DisplayRow';
 
 class CourseDetails extends React.Component {
-    static propTypes = {
-        course: PropTypes.object.isRequired,
-        visible: PropTypes.bool.isRequired,
-        close: PropTypes.func.isRequired
+  static propTypes = {
+    course: PropTypes.object.isRequired,
+    visible: PropTypes.bool.isRequired,
+    close: PropTypes.func.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      course: _.assign({}, props.course),
+      visible: props.visible,
+      close: props.close
     };
 
-    constructor(props) {
-        super(props);
+    autoBind(this);
+  }
 
-        this.state = {
-            course: _.assign({}, props.course),
-            visible: props.visible,
-            close: props.close
-        };
+  render() {
+    let course = this.props.course;
+    let department = course.department;
+    let departmentName = department ? department.name : '';
+    let courseNumber = course.number ? course.number.toString() : '';
+    let courseCredits = course.credits ? course.credits.toString() : '';
 
-        autoBind(this);
-    }
+    return (
+      <div>
+        <Modal show={this.props.visible} onHide={this.props.close}>
+          <Modal.Header closeButton onClick={this.props.close}>
+            <Modal.Title>Course Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="form-horizontal">
+              <DisplayRow label="Department" value={departmentName} />
 
-    render() {
-        let course = this.props.course;
-        let department = course.department;
-        let departmentName = department ? department.name : '';
-        let courseNumber = course.number ? course.number.toString() : '';
-        let courseCredits = course.credits ? course.credits.toString() : '';
+              <DisplayRow label="Number" value={courseNumber} />
 
-        return (
-            <div>
-                <Modal show={this.props.visible} onHide={this.props.close}>
-                    <Modal.Header closeButton onClick={this.props.close}>
-                        <Modal.Title>Course Details</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="form-horizontal">
-                            <DisplayRow label="Department" value={departmentName} />
+              <DisplayRow label="Title" value={course.title} />
 
-                            <DisplayRow label="Number" value={courseNumber} />
-
-                            <DisplayRow label="Title" value={course.title} />
-
-                            <DisplayRow label="Credits" value={courseCredits} />
-                        </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.props.close}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
+              <DisplayRow label="Credits" value={courseCredits} />
             </div>
-        );
-    }
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.props.close}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        course: _.cloneDeep(state.course.current)
-    };
+  return {
+    course: _.cloneDeep(state.course.current)
+  };
 }
 
 export default connect(mapStateToProps)(CourseDetails);

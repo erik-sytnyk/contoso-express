@@ -4,9 +4,9 @@ import configureStoreDev from './configureStore.dev';
 let configure = null;
 
 if (process.env.NODE_ENV === 'production') {
-    configure = configureStoreProd;
+  configure = configureStoreProd;
 } else {
-    configure = configureStoreDev;
+  configure = configureStoreDev;
 }
 
 export default configure;

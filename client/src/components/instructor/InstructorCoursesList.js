@@ -9,68 +9,70 @@ import * as instructorActions from '../../actions/instructorActions';
 import InstructorCourseRow from './InstructorCourseRow';
 
 class InstructorCoursesList extends React.Component {
-    static propTypes = {
-        instructor: PropTypes.object.isRequired,
-        actions: PropTypes.object.isRequired,
-        visible: PropTypes.bool.isRequired,
-        selectedCourseId: PropTypes.number.isRequired,
-        onSelectClick: PropTypes.func.isRequired
+  static propTypes = {
+    instructor: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired,
+    visible: PropTypes.bool.isRequired,
+    selectedCourseId: PropTypes.number.isRequired,
+    onSelectClick: PropTypes.func.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      instructor: _.assign({}, props.instructor),
+      visible: props.visible
     };
 
-    constructor(props) {
-        super(props);
+    autoBind(this);
+  }
 
-        this.state = {
-            instructor: _.assign({}, props.instructor),
-            visible: props.visible
-        };
+  render() {
+    let instructor = this.props.instructor;
+    let courses = instructor && instructor.courses ? instructor.courses : [];
 
-        autoBind(this);
-    }
-    
-    render() {
-        let instructor = this.props.instructor;
-        let courses = (instructor && instructor.courses) ? instructor.courses : [];
+    let style = this.props.visible ? {display: 'block'} : {display: 'none'};
 
-        let style = this.props.visible ? {display: 'block'} : {display: 'none'};
+    return (
+      <div style={style}>
+        <h3>Courses Taught by Selected Instructor</h3>
 
-        return (
-            <div style={style}>
-                <h3>Courses Taught by Selected Instructor</h3>
-
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Number</th>
-                            <th>Title</th>
-                            <th>Department</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {courses.map(course =>
-                            <InstructorCourseRow key={course.id} course={course}
-                                                 selectedCourseId={this.props.selectedCourseId}
-                                                 onSelectClick={() => this.props.onSelectClick(course.id)}
-                            />
-                        )}
-                    </tbody>
-                </table>
-            </div>
-        );
-    }
+        <table className="table">
+          <thead>
+            <tr>
+              <th />
+              <th>Number</th>
+              <th>Title</th>
+              <th>Department</th>
+            </tr>
+          </thead>
+          <tbody>
+            {courses.map(course => (
+              <InstructorCourseRow
+                key={course.id}
+                course={course}
+                selectedCourseId={this.props.selectedCourseId}
+                onSelectClick={() => this.props.onSelectClick(course.id)}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        instructor: _.cloneDeep(state.instructor.current)
-    };
+  return {
+    instructor: _.cloneDeep(state.instructor.current)
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(instructorActions, dispatch)
-    };
+  return {
+    actions: bindActionCreators(instructorActions, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InstructorCoursesList);

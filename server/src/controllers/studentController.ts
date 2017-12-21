@@ -4,85 +4,85 @@ import * as Joi from 'joi';
 import config from '../config';
 
 export default {
-    getStudentsStatistics,
-    getStudents,
-    getStudent,
-    saveStudent,
-    deleteStudent
+  getStudentsStatistics,
+  getStudents,
+  getStudent,
+  saveStudent,
+  deleteStudent
 };
 
 async function getStudentsStatistics(req, res) {
-    try {
-        let studentStatistics = await studentRepository.getStudentStatistics();
+  try {
+    let studentStatistics = await studentRepository.getStudentStatistics();
 
-        return helper.sendData({data: studentStatistics}, res);
-    } catch (err) {
-        helper.sendFailureMessage(err, res);
-    }
+    return helper.sendData({data: studentStatistics}, res);
+  } catch (err) {
+    helper.sendFailureMessage(err, res);
+  }
 }
 
 async function getStudents(req, res) {
-    try {
-        let search = req.query.search;
-        let sortOrder = req.query.sortOrder;
-        let pageNumber = req.query.pageNumber;
-        let pageSize = req.query.pageSize;
-        
-        let result = await studentRepository.getStudents(search, sortOrder, pageNumber, pageSize);
+  try {
+    let search = req.query.search;
+    let sortOrder = req.query.sortOrder;
+    let pageNumber = req.query.pageNumber;
+    let pageSize = req.query.pageSize;
 
-        return helper.sendData({data: result}, res);
-    } catch (err) {
-        helper.sendFailureMessage(err, res);
-    }
+    let result = await studentRepository.getStudents(search, sortOrder, pageNumber, pageSize);
+
+    return helper.sendData({data: result}, res);
+  } catch (err) {
+    helper.sendFailureMessage(err, res);
+  }
 }
 
 async function getStudent(req, res) {
-    try {
-        let id = req.query.id;
+  try {
+    let id = req.query.id;
 
-        let student = await studentRepository.getStudentById(id);
+    let student = await studentRepository.getStudentById(id);
 
-        return helper.sendData({data: student}, res);
-    } catch (err) {
-        helper.sendFailureMessage(err, res);
-    }
+    return helper.sendData({data: student}, res);
+  } catch (err) {
+    helper.sendFailureMessage(err, res);
+  }
 }
 
 async function saveStudent(req, res) {
-    try {
-        let data = req.body.student;
+  try {
+    let data = req.body.student;
 
-        let schema = {
-            id: Joi.number(),
-            firstName: Joi.string().required(),
-            lastName: Joi.string().required(),
-            enrollmentDate: Joi.date()
-        };
+    let schema = {
+      id: Joi.number(),
+      firstName: Joi.string().required(),
+      lastName: Joi.string().required(),
+      enrollmentDate: Joi.date()
+    };
 
-        let result = null;
+    let result = null;
 
-        let student = await helper.loadSchema(data, schema);
+    let student = await helper.loadSchema(data, schema);
 
-        if (student.id) {
-            result = await studentRepository.updateStudent(student);
-        } else {
-            result = await studentRepository.addStudent(student);
-        }
-
-        return helper.sendData({data: result}, res);
-    } catch (err) {
-        helper.sendFailureMessage(err, res);
+    if (student.id) {
+      result = await studentRepository.updateStudent(student);
+    } else {
+      result = await studentRepository.addStudent(student);
     }
+
+    return helper.sendData({data: result}, res);
+  } catch (err) {
+    helper.sendFailureMessage(err, res);
+  }
 }
 
 async function deleteStudent(req, res) {
-    try {
-        let id = req.body.id;
+  try {
+    let id = req.body.id;
 
-        await studentRepository.deleteStudent(id);
+    await studentRepository.deleteStudent(id);
 
-        return helper.sendData({}, res);
-    } catch (err) {
-        helper.sendFailureMessage(err, res);
-    }
+    return helper.sendData({}, res);
+  } catch (err) {
+    helper.sendFailureMessage(err, res);
+  }
 }

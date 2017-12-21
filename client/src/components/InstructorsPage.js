@@ -17,139 +17,130 @@ import InstructorCoursesList from './instructor/InstructorCoursesList';
 import InstructorStudentsList from './instructor/InstructorStudentsList';
 
 class InstructorsPage extends React.Component {
-    static propTypes = {
-        instructors: PropTypes.array.isRequired,
-        actions: PropTypes.object.isRequired,
-        enrollments: PropTypes.array.isRequired
+  static propTypes = {
+    instructors: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired,
+    enrollments: PropTypes.array.isRequired
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      instructors: props.instructors,
+      enrollments: props.enrollments,
+      selectInstructorVisible: false,
+      selectedInstructorId: 0,
+      selectCourseVisible: false,
+      selectedCourseId: 0,
+      saveModalVisible: false,
+      detailsModalVisible: false,
+      confirmationVisible: false
     };
 
-    constructor(props, context) {
-        super(props, context);
+    autoBind(this);
+  }
 
-        this.state = {
-            instructors: props.instructors,
-            enrollments: props.enrollments,
-            selectInstructorVisible: false,
-            selectedInstructorId: 0,
-            selectCourseVisible: false,
-            selectedCourseId: 0,
-            saveModalVisible: false,
-            detailsModalVisible: false,
-            confirmationVisible: false
-        };
+  showCoursesList(instructorId) {
+    this.props.actions.loadInstructor(instructorId).then(() => {
+      this.setState({
+        selectedInstructorId: instructorId,
+        selectInstructorVisible: true,
+        selectCourseVisible: false
+      });
+    });
+  }
 
-        autoBind(this);
+  showStudentsList(courseId) {
+    this.props.actions.loadEnrollments(courseId).then(() => {
+      this.setState({
+        selectedCourseId: courseId,
+        selectCourseVisible: true
+      });
+    });
+  }
+
+  showSaveModal(instructorId) {
+    this.props.actions.loadInstructor(instructorId).then(() => {
+      this.setState({saveModalVisible: true});
+    });
+  }
+
+  closeSaveModal() {
+    this.setState({saveModalVisible: false});
+  }
+
+  showDetailsModal(instructorId) {
+    this.props.actions.loadInstructor(instructorId).then(() => {
+      this.setState({detailsModalVisible: true});
+    });
+  }
+
+  closeDetailsModal() {
+    this.setState({detailsModalVisible: false});
+  }
+
+  showConfirmationModal(instructorId) {
+    this.props.actions.loadInstructor(instructorId).then(() => {
+      this.setState({confirmationVisible: true});
+    });
+  }
+
+  closeConfirmationModal(isDeleted) {
+    this.setState({confirmationVisible: false});
+
+    if (isDeleted === true) {
+      this.setState({selectInstructorVisible: false, selectCourseVisible: false});
     }
+  }
 
-    showCoursesList(instructorId) {
-        this.props.actions.loadInstructor(instructorId)
-            .then(() => {
-                this.setState({
-                    selectedInstructorId: instructorId,
-                    selectInstructorVisible: true,
-                    selectCourseVisible: false
-                });
-            });
-    }
+  render() {
+    return (
+      <div className="container">
+        <h2>Instructors</h2>
 
-    showStudentsList(courseId) {
-        this.props.actions.loadEnrollments(courseId)
-            .then(() => {
-                this.setState({
-                    selectedCourseId: courseId,
-                    selectCourseVisible: true
-                });
-            });
-    }
-    
-    showSaveModal(instructorId) {
-        this.props.actions.loadInstructor(instructorId)
-            .then(() => {
-                this.setState({saveModalVisible: true});
-            });
-    }
+        <Button bsStyle="link" onClick={this.showSaveModal}>
+          Create New
+        </Button>
 
-    closeSaveModal() {
-        this.setState({saveModalVisible: false});
-    }
+        <InstructorList
+          instructors={this.props.instructors}
+          selectedInstructorId={this.state.selectedInstructorId}
+          onSelectClick={this.showCoursesList}
+          onSaveClick={this.showSaveModal}
+          onDetailsClick={this.showDetailsModal}
+          onDeleteClick={this.showConfirmationModal}
+        />
 
-    showDetailsModal(instructorId) {
-        this.props.actions.loadInstructor(instructorId)
-            .then(() => {
-                this.setState({detailsModalVisible: true});
-            });
-    }
+        <InstructorCoursesList
+          visible={this.state.selectInstructorVisible}
+          selectedCourseId={this.state.selectedCourseId}
+          onSelectClick={this.showStudentsList}
+        />
 
-    closeDetailsModal() {
-        this.setState({detailsModalVisible: false});
-    }
+        <InstructorStudentsList visible={this.state.selectCourseVisible} enrollments={this.props.enrollments} />
 
-    showConfirmationModal(instructorId) {
-        this.props.actions.loadInstructor(instructorId)
-            .then(() => {
-                this.setState({confirmationVisible: true});
-            });
-    }
+        <InstructorSave visible={this.state.saveModalVisible} close={this.closeSaveModal} />
 
-    closeConfirmationModal(isDeleted) {
-        this.setState({confirmationVisible: false});
+        <InstructorDetails visible={this.state.detailsModalVisible} close={this.closeDetailsModal} />
 
-        if (isDeleted === true) {
-            this.setState({selectInstructorVisible: false, selectCourseVisible: false});
-        }
-    }
-
-    render() {
-        return (
-            <div className="container">
-                <h2>Instructors</h2>
-
-                <Button bsStyle="link" onClick={this.showSaveModal}>Create New</Button>
-
-                <InstructorList instructors={this.props.instructors}
-                                selectedInstructorId={this.state.selectedInstructorId}
-                                onSelectClick={this.showCoursesList}
-                                onSaveClick={this.showSaveModal}
-                                onDetailsClick={this.showDetailsModal}
-                                onDeleteClick={this.showConfirmationModal}
-                />
-                
-                <InstructorCoursesList visible={this.state.selectInstructorVisible}
-                                       selectedCourseId={this.state.selectedCourseId}
-                                       onSelectClick={this.showStudentsList}
-                />
-
-                <InstructorStudentsList visible={this.state.selectCourseVisible}
-                                        enrollments={this.props.enrollments}
-                />
-                
-                <InstructorSave visible={this.state.saveModalVisible}
-                                close={this.closeSaveModal}
-                />
-
-                <InstructorDetails visible={this.state.detailsModalVisible}
-                                   close={this.closeDetailsModal}
-                />
-
-                <InstructorDelete visible={this.state.confirmationVisible}
-                                  close={this.closeConfirmationModal}
-                />
-            </div>
-        );
-    }
+        <InstructorDelete visible={this.state.confirmationVisible} close={this.closeConfirmationModal} />
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        instructors: state.instructor.list,
-        enrollments: state.enrollment.list
-    };
+  return {
+    instructors: state.instructor.list,
+    enrollments: state.enrollment.list
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(_.assign({}, instructorActions, enrollmentActions), dispatch)
-    };
+  return {
+    actions: bindActionCreators(_.assign({}, instructorActions, enrollmentActions), dispatch)
+  };
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(InstructorsPage));

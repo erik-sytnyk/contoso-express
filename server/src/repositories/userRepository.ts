@@ -7,222 +7,213 @@ const bcrypt = require('bcrypt-nodejs');
 import AppError from '../appError';
 
 export default {
-    init,
-    getUsers,
-    getById,
-    getLocalUserByEmail,
-    findUserWithEmail,
-    saveLocalAccount,
-    getUserByActivationToken,
-    refreshActivationToken,
-    activateUser,
-    comparePasswords,
-    findUserByAuthProviderId,
-    saveAuthProviderProfile,
-    resetPassword,
-    getUserByResetToken,
-    refreshResetToken,
-    updateUserPassword
+  init,
+  getUsers,
+  getById,
+  getLocalUserByEmail,
+  findUserWithEmail,
+  saveLocalAccount,
+  getUserByActivationToken,
+  refreshActivationToken,
+  activateUser,
+  comparePasswords,
+  findUserByAuthProviderId,
+  saveAuthProviderProfile,
+  resetPassword,
+  getUserByResetToken,
+  refreshResetToken,
+  updateUserPassword
 };
 
 const db = dbInit.init();
 let userModel = db.models.User;
 
 function init(db) {
-    userModel = db.models.User;
+  userModel = db.models.User;
 }
 
 function getUsers(): Promise<User[]> {
-    return userModel.findAll();
+  return userModel.findAll();
 }
 
 function getById(id: number): Promise<User> {
-    return userModel.findById(id);
+  return userModel.findById(id);
 }
 
 function getLocalUserByEmail(email: string): Promise<User> {
-    return findUserWithEmail(email)
-        .then((user: User) => {
-            let noLocalProfile = !user || !user.profile.local;
+  return findUserWithEmail(email).then((user: User) => {
+    let noLocalProfile = !user || !user.profile.local;
 
-            if (noLocalProfile) return null;
+    if (noLocalProfile) return null;
 
-            return user;
-        });
+    return user;
+  });
 }
 
 function findUserWithEmail(email: string): Promise<User> {
-    return userModel.findOne({where: {email: email}});
+  return userModel.findOne({where: {email: email}});
 }
 
 function saveLocalAccount(user: User, email: string, password: string): Promise<User> {
-    let localProfile: any = {};
+  let localProfile: any = {};
 
-    localProfile.email = email;
-    localProfile.password = userModel.generateHash(password);
+  localProfile.email = email;
+  localProfile.password = userModel.generateHash(password);
 
-    let activationToken = generateActivationToken();
-    localProfile.activation = {
-        token: activationToken,
-        created: new Date()
-    };
+  let activationToken = generateActivationToken();
+  localProfile.activation = {
+    token: activationToken,
+    created: new Date()
+  };
 
-    localProfile.isActivated = false;
+  localProfile.isActivated = false;
 
-    if (user) {
-        user.email = email;
-        user.profile.local = localProfile;
+  if (user) {
+    user.email = email;
+    user.profile.local = localProfile;
 
-        return updateUser(user);
-    } else {
-        return userModel.create({
-            email: email,
-            profile: {
-                local: localProfile
-            }
-        });
-    }
+    return updateUser(user);
+  } else {
+    return userModel.create({
+      email: email,
+      profile: {
+        local: localProfile
+      }
+    });
+  }
 }
 
 function getUserByActivationToken(token: string): Promise<User> {
-    return getUsers()
-        .then((users) => {
-            let findUser = _.find(users, (user) => {
-                return user.profile.local &&
-                    user.profile.local.activation.token === token;
-            });
+  return getUsers().then(users => {
+    let findUser = _.find(users, user => {
+      return user.profile.local && user.profile.local.activation.token === token;
+    });
 
-            return findUser;
-        });
+    return findUser;
+  });
 }
 
 function refreshActivationToken(userId: number): Promise<User> {
-    return getById(userId)
-        .then((user) => {
-            if (!user) throw new AppError('auth', 'user_not_found');
+  return getById(userId).then(user => {
+    if (!user) throw new AppError('auth', 'user_not_found');
 
-            user.profile.local.activation = {
-                token: generateActivationToken(),
-                created: new Date().toString()
-            };
+    user.profile.local.activation = {
+      token: generateActivationToken(),
+      created: new Date().toString()
+    };
 
-            return updateUser(user);
-        });
+    return updateUser(user);
+  });
 }
 
 function activateUser(userId: number): Promise<User> {
-    return getById(userId)
-        .then((user) => {
-            if (!user) throw new AppError('auth', 'user_not_found');
+  return getById(userId).then(user => {
+    if (!user) throw new AppError('auth', 'user_not_found');
 
-            let localProfile = user.profile.local;
+    let localProfile = user.profile.local;
 
-            localProfile.activation = undefined;
-            localProfile.isActivated = true;
+    localProfile.activation = undefined;
+    localProfile.isActivated = true;
 
-            return updateUser(user);
-        });
+    return updateUser(user);
+  });
 }
 
 function comparePasswords(userId: number, password: string): Promise<boolean> {
-    return getById(userId)
-        .then((user) => {
-            let actualPassword = user.profile.local.password;
+  return getById(userId).then(user => {
+    let actualPassword = user.profile.local.password;
 
-            return bcrypt.compareSync(password, actualPassword);
-        });
+    return bcrypt.compareSync(password, actualPassword);
+  });
 }
 
 function findUserByAuthProviderId(id: number, provider: string): Promise<User> {
-    return getUsers()
-        .then((users) => {
-            let findUser = _.find(users, (user) => {
-                return user.profile[provider] &&
-                    user.profile[provider].id === id;
-            });
+  return getUsers().then(users => {
+    let findUser = _.find(users, user => {
+      return user.profile[provider] && user.profile[provider].id === id;
+    });
 
-            return findUser;
-        });
+    return findUser;
+  });
 }
 
-function saveAuthProviderProfile(user, profileData: {id: string, token: string, name: string, email: string}, provider: string): Promise<User> {
-    if (user) {
-        user.email = profileData.email;
-        user.profile[provider] = profileData;
+function saveAuthProviderProfile(
+  user,
+  profileData: {id: string; token: string; name: string; email: string},
+  provider: string
+): Promise<User> {
+  if (user) {
+    user.email = profileData.email;
+    user.profile[provider] = profileData;
 
-        return updateUser(user);
-    } else {
-        return userModel.create({
-            email: profileData.email,
-            profile: {
-                [provider]: profileData
-            }
-        });
-    }
+    return updateUser(user);
+  } else {
+    return userModel.create({
+      email: profileData.email,
+      profile: {
+        [provider]: profileData
+      }
+    });
+  }
 }
 
 function resetPassword(userId: number): Promise<User> {
-    return getById(userId)
-        .then((user) => {
-            if (!user) throw new AppError('Cannot find user by Id');
+  return getById(userId).then(user => {
+    if (!user) throw new AppError('Cannot find user by Id');
 
-            user.profile.local.reset = {
-                token: generateActivationToken(),
-                created: new Date().toString()
-            };
+    user.profile.local.reset = {
+      token: generateActivationToken(),
+      created: new Date().toString()
+    };
 
-            return updateUser(user);
-        });
+    return updateUser(user);
+  });
 }
 
 function getUserByResetToken(token: string): Promise<User> {
-    return getUsers()
-        .then((users) => {
-            let findUser = _.find(users, (user) => {
-                return user.profile.local &&
-                    user.profile.local.reset.token === token;
-            });
+  return getUsers().then(users => {
+    let findUser = _.find(users, user => {
+      return user.profile.local && user.profile.local.reset.token === token;
+    });
 
-            return findUser;
-        });
+    return findUser;
+  });
 }
 
 function refreshResetToken(userId: number): Promise<User> {
-    return getById(userId)
-        .then((user) => {
-            if (!user) throw new AppError('Cannot find user');
+  return getById(userId).then(user => {
+    if (!user) throw new AppError('Cannot find user');
 
-            user.profile.local.reset = {
-                token: generateActivationToken(),
-                created: new Date().toString()
-            };
+    user.profile.local.reset = {
+      token: generateActivationToken(),
+      created: new Date().toString()
+    };
 
-            return updateUser(user);
-        });
+    return updateUser(user);
+  });
 }
 
 function updateUserPassword(userId: number, password: string): Promise<User> {
-    return getById(userId)
-        .then((user) => {
-            if (!user) throw new AppError('Cannot find user');
+  return getById(userId).then(user => {
+    if (!user) throw new AppError('Cannot find user');
 
-            let localProfile = user.profile.local;
+    let localProfile = user.profile.local;
 
-            localProfile.reset = undefined;
-            localProfile.password = userModel.generateHash(password);
+    localProfile.reset = undefined;
+    localProfile.password = userModel.generateHash(password);
 
-            return updateUser(user);
-        });
+    return updateUser(user);
+  });
 }
 
 function generateActivationToken(): string {
-    let token = crypto.randomBytes(32).toString('hex');
-    return token;
+  let token = crypto.randomBytes(32).toString('hex');
+  return token;
 }
 
 function updateUser(user) {
-    //to notify sequelize that JSON field should be updated
-    user.profile = _.clone(user.profile);
+  //to notify sequelize that JSON field should be updated
+  user.profile = _.clone(user.profile);
 
-    return user.save();
+  return user.save();
 }

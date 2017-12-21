@@ -14,107 +14,112 @@ import auth from './auth/authInit';
 const app = express();
 
 export default {
-    start
+  start
 };
 
 function start(port) {
-    initExpress();
+  initExpress();
 
-    initViewEngine();
+  initViewEngine();
 
-    const passport = require('passport');
+  const passport = require('passport');
 
-    routes.init(app, passport);
+  routes.init(app, passport);
 
-    //should be after routes.init
-    initErrorHandling(app);
+  //should be after routes.init
+  initErrorHandling(app);
 
-    return new Promise((resolve, reject) => {
-        app.listen(port, () => {
-            return resolve(port);
-        });
+  return new Promise((resolve, reject) => {
+    app.listen(port, () => {
+      return resolve(port);
     });
+  });
 }
 
 function initExpress() {
-    if (config.app.isDevLocal) app.use(morgan('dev')); //log requests
+  if (config.app.isDevLocal) app.use(morgan('dev')); //log requests
 
-    app.use(bodyParser.json()); // get information from html forms
-    app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.json()); // get information from html forms
+  app.use(bodyParser.urlencoded({extended: true}));
 
-    app.use(compression());
+  app.use(compression());
 
-    if (config.app.isDevLocal) app.use(cors());
+  if (config.app.isDevLocal) app.use(cors());
 
-    //NOTE following required for auth only
+  //NOTE following required for auth only
 
-    initSession();
+  initSession();
 
-    initAuth();
+  initAuth();
 }
 
 function initViewEngine() {
-    const hbs = require('express-hbs');
-    const viewsDir = pathHelper.getDataRelative('views');
-    const entities = require('entities');
+  const hbs = require('express-hbs');
+  const viewsDir = pathHelper.getDataRelative('views');
+  const entities = require('entities');
 
-    // Hook in express-hbs and tell it where known directories reside
-    app.engine('hbs', hbs.express4({
-        partialsDir: pathHelper.path.join(viewsDir + '/partials'),
-        layoutsDir: pathHelper.path.join(viewsDir + '/layouts'),
-        defaultLayout: pathHelper.path.join(viewsDir + '/layouts/auth.hbs')
-    }));
+  // Hook in express-hbs and tell it where known directories reside
+  app.engine(
+    'hbs',
+    hbs.express4({
+      partialsDir: pathHelper.path.join(viewsDir + '/partials'),
+      layoutsDir: pathHelper.path.join(viewsDir + '/layouts'),
+      defaultLayout: pathHelper.path.join(viewsDir + '/layouts/auth.hbs')
+    })
+  );
 
-    hbs.registerHelper('json', function(obj) {
-        let jsonValue = JSON.stringify(obj);
+  hbs.registerHelper('json', function(obj) {
+    let jsonValue = JSON.stringify(obj);
 
-        let val = entities.encodeHTML(jsonValue);
+    let val = entities.encodeHTML(jsonValue);
 
-        return new hbs.SafeString(val);
-    });
+    return new hbs.SafeString(val);
+  });
 
-    app.set('view engine', 'hbs');
-    app.set('views', viewsDir);
+  app.set('view engine', 'hbs');
+  app.set('views', viewsDir);
 }
 
 function initAuth() {
-    const flash = require('connect-flash');
-    app.use(flash());
+  const flash = require('connect-flash');
+  app.use(flash());
 
-    const passport = require('passport');
+  const passport = require('passport');
 
-    auth(passport);
+  auth(passport);
 
-    app.use(passport.initialize());
-    app.use(passport.session()); // persistent login sessions
+  app.use(passport.initialize());
+  app.use(passport.session()); // persistent login sessions
 
-    return passport;
+  return passport;
 }
 
 function initSession() {
-    const cookieParser = require('cookie-parser');
-    app.use(cookieParser());
+  const cookieParser = require('cookie-parser');
+  app.use(cookieParser());
 
-    const session = require('cookie-session');
-    app.use(session({
-        secret: config.web.sessionSecret
-    }));
+  const session = require('cookie-session');
+  app.use(
+    session({
+      secret: config.web.sessionSecret
+    })
+  );
 }
 
 function initErrorHandling(app: express.Application) {
-    //log unhandled errors
-    (app as any).use(function (err, req, res, next) {
-        logger.error(err);
+  //log unhandled errors
+  (app as any).use(function(err, req, res, next) {
+    logger.error(err);
 
-        console.log(err);
+    console.log(err);
 
-        let message = _.isError(err) ? err.message : err;
-        message = config.app.isDevLocal ? message : 'Server Error';
+    let message = _.isError(err) ? err.message : err;
+    message = config.app.isDevLocal ? message : 'Server Error';
 
-        res.status(500).send({error: message});
-    });
+    res.status(500).send({error: message});
+  });
 
-    process.on('uncaughtException', function (err) {
-        logger.error(err);
-    });
+  process.on('uncaughtException', function(err) {
+    logger.error(err);
+  });
 }

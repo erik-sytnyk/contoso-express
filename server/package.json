@@ -2,7 +2,17 @@
   "name": "server",
   "version": "0.1.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "start": "npm run serve",
+    "serve": "nodemon --exec ts-node -- ./src/index.ts",
+    "format": "prettier \"src/**/*.{ts,js,json,css}\" --write"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "bracketSpacing": false
+  },
   "globalDependencies": {
     "typescript": "2.2.1"
   },
