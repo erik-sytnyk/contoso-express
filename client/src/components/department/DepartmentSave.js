@@ -5,6 +5,7 @@ import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import moment from 'moment';
 
 import helper from '../../helpers/uiHelper';
 import * as departmentActions from '../../actions/departmentActions';
@@ -41,7 +42,7 @@ class DepartmentSave extends React.Component {
     let department = this.state.department;
 
     //for date picker change
-    if (_.isString(event)) {
+    if (moment.isMoment(event)) {
       department.startDate = event;
     } else {
       const field = event.target.name;

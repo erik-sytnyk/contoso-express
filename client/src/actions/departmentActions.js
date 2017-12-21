@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import _ from 'lodash';
-import Promise from 'bluebird';
+
 import {beginAjaxCall} from './ajaxStatusActions';
 import departmentService from '../services/departmentService';
 import dateFormatter from '../formatters/dateFormatter';

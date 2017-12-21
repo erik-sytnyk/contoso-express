@@ -5,6 +5,7 @@ import {Modal, Button} from 'react-bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import moment from 'moment';
 
 import helper from '../../helpers/uiHelper';
 import * as studentActions from '../../actions/studentActions';
@@ -40,7 +41,7 @@ class StudentSave extends React.Component {
     let student = this.state.student;
 
     //for date picker change
-    if (_.isString(event)) {
+    if (moment.isMoment(event)) {
       student.enrollmentDate = event;
     } else {
       const field = event.target.name;

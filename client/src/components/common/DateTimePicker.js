@@ -1,5 +1,5 @@
 import React from 'react';
-import DateTimeField from 'react-bootstrap-datetimepicker';
+import Datetime from 'react-datetime';
 import PropTypes from 'prop-types';
 
 import config from '../../helpers/clientConfig';
@@ -20,14 +20,10 @@ const DateTimePicker = ({name, label, onChange, value, error}) => {
   return (
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
+
       <div className="field">
-        <DateTimeField
-          dateTime={dateValue}
-          format={config.format.date}
-          inputFormat={config.format.date}
-          onChange={onChange}
-          viewMode="date"
-        />
+        <Datetime value={dateValue} dateFormat={config.format.date} onChange={onChange} />
+
         {error && <div className="alert alert-danger">{error}</div>}
       </div>
     </div>
