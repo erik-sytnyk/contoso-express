@@ -16,20 +16,15 @@ export function init(sequelize, DataTypes) {
     }
   };
 
-  let options = {
-    classMethods: {
-      generateHash(password) {
-        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-      }
-    },
-    instanceMethods: {
-      getFullName() {
-        return `${this.lastName}, ${this.firstName}`;
-      }
-    }
+  let model = helper.defineModel('user', fields, sequelize);
+
+  model.generateHash = password => {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
   };
 
-  let model = helper.defineModel('user', fields, options, sequelize);
+  model.getFullName = () => {
+    return `${this.lastName}, ${this.firstName}`;
+  };
 
   return model;
 }

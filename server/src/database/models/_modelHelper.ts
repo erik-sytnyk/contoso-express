@@ -1,9 +1,5 @@
 import * as _ from 'lodash';
 
-const settings = {
-  pluralTableNames: true
-};
-
 export default {
   getName: getDbName,
   defineForeignKey,
@@ -11,7 +7,7 @@ export default {
 };
 
 function getDbName(name) {
-  return _.snakeCase(name);
+  return _.upperFirst(name);
 }
 
 function defineForeignKey(name) {
@@ -21,21 +17,13 @@ function defineForeignKey(name) {
   };
 }
 
-function defineModel(name: string, fields, options, sequelize) {
-  if (!options) options = {};
+function defineModel(name: string, fields, sequelize) {
+  let options = {
+    freezeTableName: true,
+    tableName: null
+  };
 
-  if (!options.tableName) {
-    let tableName = name;
-
-    if (settings.pluralTableNames) {
-      //the same way it is done in sequelize
-      tableName = sequelize.Utils.inflection.pluralize(name);
-    }
-
-    tableName = getDbName(tableName);
-
-    options.tableName = tableName;
-  }
+  options.tableName = getDbName(name);
 
   _.forEach(_.keys(fields), fieldKey => {
     fields[fieldKey].field = getDbName(fieldKey);

@@ -12,20 +12,17 @@ export function init(sequelize, DataTypes) {
     }
   };
 
-  let options = {
-    classMethods: {
-      associate(models) {
-        model.belongsTo(models.Student, {
-          foreignKey: helper.defineForeignKey('studentId')
-        });
-        model.belongsTo(models.Course, {
-          foreignKey: helper.defineForeignKey('courseId')
-        });
-      }
-    }
-  };
+  let model = helper.defineModel('enrollment', fields, sequelize);
 
-  let model = helper.defineModel('enrollment', fields, options, sequelize);
+  model.associate = models => {
+    model.belongsTo(models.Student, {
+      foreignKey: helper.defineForeignKey('studentId')
+    });
+
+    model.belongsTo(models.Course, {
+      foreignKey: helper.defineForeignKey('courseId')
+    });
+  };
 
   return model;
 }

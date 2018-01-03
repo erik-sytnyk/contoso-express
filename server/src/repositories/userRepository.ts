@@ -85,7 +85,7 @@ function saveLocalAccount(user: User, email: string, password: string): Promise<
 
 function getUserByActivationToken(token: string): Promise<User> {
   return getUsers().then(users => {
-    let findUser = _.find(users, user => {
+    let findUser = _.find(users, (user: any) => {
       return user.profile.local && user.profile.local.activation.token === token;
     });
 
@@ -129,7 +129,7 @@ function comparePasswords(userId: number, password: string): Promise<boolean> {
 
 function findUserByAuthProviderId(id: number, provider: string): Promise<User> {
   return getUsers().then(users => {
-    let findUser = _.find(users, user => {
+    let findUser = _.find(users, (user: any) => {
       return user.profile[provider] && user.profile[provider].id === id;
     });
 
@@ -172,7 +172,7 @@ function resetPassword(userId: number): Promise<User> {
 
 function getUserByResetToken(token: string): Promise<User> {
   return getUsers().then(users => {
-    let findUser = _.find(users, user => {
+    let findUser = _.find(users, (user: any) => {
       return user.profile.local && user.profile.local.reset.token === token;
     });
 

@@ -18,20 +18,17 @@ export function init(sequelize, DataTypes) {
     }
   };
 
-  let options = {
-    classMethods: {
-      associate(models) {
-        model.hasMany(models.Course, {
-          foreignKey: helper.defineForeignKey('departmentId')
-        });
-        model.belongsTo(models.Instructor, {
-          foreignKey: helper.defineForeignKey('instructorId')
-        });
-      }
-    }
-  };
+  let model = helper.defineModel('department', fields, sequelize);
 
-  let model = helper.defineModel('department', fields, options, sequelize);
+  model.associate = models => {
+    model.hasMany(models.Course, {
+      foreignKey: helper.defineForeignKey('departmentId')
+    });
+
+    model.belongsTo(models.Instructor, {
+      foreignKey: helper.defineForeignKey('instructorId')
+    });
+  };
 
   return model;
 }

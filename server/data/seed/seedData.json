@@ -1,6 +1,5 @@
 {
-  "users": [
-  ],
+  "users": [],
   "courses": [
     {
       "id": 1,
@@ -63,28 +62,28 @@
     {
       "id": 1,
       "name": "English",
-      "budget": 350000.00,
+      "budget": 350000.0,
       "startDate": "09/01/2007",
       "instructorId": 1
     },
     {
       "id": 2,
       "name": "Mathematics",
-      "budget": 100000.00,
+      "budget": 100000.0,
       "startDate": "09/01/2007",
       "instructorId": 2
     },
     {
       "id": 3,
       "name": "Engineering",
-      "budget": 350000.00,
+      "budget": 350000.0,
       "startDate": "09/01/2007",
       "instructorId": 3
     },
     {
       "id": 4,
       "name": "Economics",
-      "budget": 100000.00,
+      "budget": 100000.0,
       "startDate": "09/01/2007",
       "instructorId": 4
     }

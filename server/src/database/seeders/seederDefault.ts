@@ -96,7 +96,8 @@ async function postImportRoutine(db) {
 
 function updatePostgresSequence(model, db) {
   let tableName = model.tableName;
-  let idField = model.autoIncrementField;
-  let sql = `SELECT setval('${tableName}_id_seq', (SELECT MAX(${idField}) FROM ${tableName}));`;
+  let idField = _.capitalize(model.autoIncrementAttribute);
+  let sql = `SELECT setval('"${tableName}_Id_seq"', (SELECT MAX("${idField}") FROM "${tableName}"));`;
+
   return db.sequelize.query(sql);
 }

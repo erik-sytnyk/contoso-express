@@ -18,26 +18,22 @@ export function init(sequelize, DataTypes) {
     }
   };
 
-  let options = {
-    classMethods: {
-      associate: function(models) {
-        model.belongsToMany(models.Course, {
-          through: helper.getName('courseInstructor'),
-          foreignKey: helper.defineForeignKey('instructorId')
-        });
-        model.hasOne(models.OfficeAssignment, {
-          foreignKey: helper.defineForeignKey('instructorId')
-        });
-      }
-    },
-    instanceMethods: {
-      getFullName() {
-        return `${this.lastName}, ${this.firstName}`;
-      }
-    }
+  let model = helper.defineModel('instructor', fields, sequelize);
+
+  model.associate = models => {
+    model.belongsToMany(models.Course, {
+      through: helper.getName('courseInstructor'),
+      foreignKey: helper.defineForeignKey('instructorId')
+    });
+
+    model.hasOne(models.OfficeAssignment, {
+      foreignKey: helper.defineForeignKey('instructorId')
+    });
   };
 
-  let model = helper.defineModel('instructor', fields, options, sequelize);
+  model.getFullName = () => {
+    return `${this.lastName}, ${this.firstName}`;
+  };
 
   return model;
 }
