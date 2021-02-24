@@ -17,10 +17,8 @@
     "typescript": "2.2.1"
   },
   "dependencies": {
-    "@types/chai": "4.0.10",
-    "@types/fs-extra": "5.0.0",
-    "@types/mocha": "2.2.45",
-    "@types/node": "8.5.2",
+    "@types/mocha": "8.2.1",
+    "@types/node": "14.14.31",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "3.5.1",
     "body-parser": "1.18.2",
