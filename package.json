@@ -15,7 +15,8 @@
     "postinstall": "cd server && npm install && typings install && cd ../client && npm install",
     "start": "cd server && npm run start",
     "watch": "cd client && npm run start",
-    "build": "cd server && npm run build && cd ../client && npm run copy-assets && npm run build"
+    "build": "cd server && npm run build && cd ../client && npm run copy-assets && npm run build",
+    "format": "prettier \"(server|client)/src/**/*.{js,json,css}\" --write --config .prettierrc"
   },
   "repository": {
     "type": "git",

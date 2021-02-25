@@ -47,7 +47,7 @@
     "passport-local": "1.0.0",
     "pg": "7.4.0",
     "rimraf": "2.6.2",
-    "sequelize": "4.28.6",
+    "sequelize": "6.5.0",
     "winston": "2.4.0"
   },
   "devDependencies": {

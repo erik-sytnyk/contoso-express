@@ -1,11 +1,23 @@
-import {DbModels} from '../../typings/app/models';
 import config from '../config';
-const Sequelize = require('sequelize');
+import pathHelper from '../helpers/pathHelper';
+import {Sequelize} from 'sequelize';
 const models = require('./models/index');
+
+import {UserModel} from '../typings/models/UserModel';
+import {EventModel} from '../typings/models/EventModel';
+import {UserEventModel} from '../typings/models/UserEventModel';
+import {EventFeedbackModel} from '../typings/models/EventFeedbackModel';
+import {EventHistoryModel} from '../typings/models/EventHistoryModel';
 
 interface Db {
   sequelize: any;
-  models: DbModels;
+  models: {
+    User: UserModel;
+    Event: EventModel;
+    UserEvent: UserEventModel;
+    EventFeedback: EventFeedbackModel;
+    EventHistory: EventHistoryModel;
+  };
 }
 
 interface DbConnectionOptions {
@@ -14,7 +26,7 @@ interface DbConnectionOptions {
 }
 
 export default {
-  init: init
+  init
 };
 
 function init(connectionOptions?: DbConnectionOptions): Db {
@@ -28,9 +40,8 @@ function init(connectionOptions?: DbConnectionOptions): Db {
 }
 
 function getConnection(connectionOptions: DbConnectionOptions) {
-  let options = {
-    dialect: 'postgres',
-    host: config.db.host,
+  let options: any = {
+    dialect: config.db.dialect,
     pool: {
       max: 5,
       min: 0,
@@ -43,5 +54,16 @@ function getConnection(connectionOptions: DbConnectionOptions) {
     logging: false
   };
 
-  return new Sequelize(config.db.dbName, config.db.username, config.db.password, options);
+  if (config.db.connectionString) {
+    return new Sequelize(config.db.connectionString, options);
+  }
+
+  if (config.db.dialect === 'sqlite') {
+    options.storage = pathHelper.getLocalRelative(`./${config.db.name}.db`);
+  } else {
+    options.host = config.db.host;
+    if (config.db.port) options.port = config.db.port;
+  }
+
+  return new Sequelize(config.db.name, config.db.username, config.db.password, options);
 }
