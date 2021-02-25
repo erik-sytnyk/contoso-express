@@ -83,7 +83,7 @@ function sendAuthMessage(message, type, done, req) {
 function sendResetPasswordEmail(email, token) {
   let data = {
     token,
-    siteRootUrl: config.app.rootUrl
+    siteRootUrl: config.rootUrl
   };
 
   return emailHelper.sendEmailTemplate('password_reset', data, {
@@ -95,7 +95,7 @@ function sendResetPasswordEmail(email, token) {
 function sendActivationEmail(email, token) {
   let data = {
     token,
-    siteRootUrl: config.app.rootUrl
+    siteRootUrl: config.rootUrl
   };
 
   return emailHelper.sendEmailTemplate('activation', data, {

@@ -2,9 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome",
+      "url": "http://localhost:4000",
+      "webRoot": "${workspaceRoot}"
+    },
+    {
       "type": "node",
       "request": "launch",
-      "name": "Run Tests",
+      "name": "Run tests",
       "program": "${workspaceRoot}/server/node_modules/mocha/bin/_mocha",
       "args": [
         "--compilers",
@@ -27,31 +34,33 @@
       "name": "Run Server",
       "program": "${workspaceRoot}/server/src/index.ts",
       "sourceMaps": true,
-      "outFiles": [
-        "${workspaceRoot}/server/build/src/**/*"
-      ],
+      "outFiles": ["${workspaceRoot}/server/build/src/**/*"],
+      "preLaunchTask": "compile_ts"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run Quick Test",
+      "program": "${workspaceRoot}/server/src/test.ts",
+      "sourceMaps": true,
+      "outFiles": ["${workspaceRoot}/server/build/src/**/*"],
       "preLaunchTask": "compile_ts"
     },
     {
       "type": "node",
       "request": "launch",
       "name": "Run Seed",
-      "program": "${workspaceRoot}/server/src/tasks/syncDb.ts",
-      "args": [
-        "run",
-        "seed"
-      ],
+      "program": "${workspaceRoot}/server/src/index.ts",
+      "args": ["run", "seed"],
       "sourceMaps": true,
-      "outFiles": [
-        "${workspaceRoot}/server/build/src/**/*"
-      ],
+      "outFiles": ["${workspaceRoot}/server/build/src/**/*"],
       "preLaunchTask": "compile_ts"
     },
     {
       "type": "node",
       "request": "attach",
       "name": "Debug Server (attach)",
-      "address": "localhost",
+      "address": "http://localhost:4000",
       "port": 9999,
       "protocol": "inspector"
     }

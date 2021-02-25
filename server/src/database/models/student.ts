@@ -1,4 +1,4 @@
-import helper from './_modelHelper';
+import helper from '../modelHelper';
 
 export function init(sequelize, DataTypes) {
   let fields = {

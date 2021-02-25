@@ -1,14 +1,12 @@
 {
-  "app": {
-    "appName": "Contoso Express",
-    "isDevLocal": true,
-    "logErrors": true,
-    "rootUrl": "http://localhost:3500",
-    "port": 3500
-  },
+  "appName": "Contoso Express",
+  "isDevLocal": true,
+  "logErrors": true,
+  "rootUrl": "http://localhost:3500",
+  "port": 3500,
   "db": {
     "host": "localhost",
-    "dbName": "contoso",
+    "name": "contoso",
     "username": "admin",
     "password": "password123"
   },

@@ -1,4 +1,4 @@
-import helper from './_modelHelper';
+import helper from '../modelHelper';
 const bcrypt = require('bcrypt-nodejs');
 
 export function init(sequelize, DataTypes) {

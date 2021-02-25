@@ -28,13 +28,13 @@ function getDepartments(): Promise<Department[]> {
 }
 
 function getDepartmentById(id): Promise<Department> {
-  return departmentModel.findById(id, {
+  return departmentModel.findByPk(id, {
     include: instructorModel
   });
 }
 
 function updateDepartment(departmentData): Promise<Department> {
-  return departmentModel.findById(departmentData.id).then(department => {
+  return departmentModel.findByPk(departmentData.id).then(department => {
     if (!department) throw new AppError('app', 'department_not_found');
 
     department.name = departmentData.name;
@@ -51,7 +51,7 @@ function addDepartment(department): Promise<Department> {
 }
 
 function deleteDepartment(id): Promise<Department> {
-  return departmentModel.findById(id).then(department => {
+  return departmentModel.findByPk(id).then(department => {
     if (!department) throw new AppError('app', 'department_not_found');
 
     return department.destroy();

@@ -11,7 +11,7 @@ let providerName = 'google';
 let strategySettings = {
   clientID: config.auth.google.clientID,
   clientSecret: config.auth.google.clientSecret,
-  callbackURL: `${config.app.rootUrl}/auth/${providerName}/callback`
+  callbackURL: `${config.rootUrl}/auth/${providerName}/callback`
 };
 
 function init(passport) {

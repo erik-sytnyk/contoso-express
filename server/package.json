@@ -19,6 +19,7 @@
   "dependencies": {
     "@types/mocha": "8.2.1",
     "@types/node": "14.14.31",
+    "app-module-path": "2.2.0",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "3.5.1",
     "body-parser": "1.18.2",
@@ -48,6 +49,7 @@
     "pg": "7.4.0",
     "rimraf": "2.6.2",
     "sequelize": "6.5.0",
+    "sqlite3": "5.0.2",
     "winston": "2.4.0"
   },
   "devDependencies": {

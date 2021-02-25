@@ -1,4 +1,4 @@
-import seeder from '../database/seeders/seederDefault';
+import seeder from '../database/seeders/seederDev';
 import * as Promise from 'bluebird';
 import pathHelper from '../helpers/pathHelper';
 

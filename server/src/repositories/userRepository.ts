@@ -37,7 +37,7 @@ function getUsers(): Promise<User[]> {
 }
 
 function getById(id: number): Promise<User> {
-  return userModel.findById(id);
+  return userModel.findByPk(id);
 }
 
 function getLocalUserByEmail(email: string): Promise<User> {

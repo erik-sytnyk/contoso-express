@@ -3,20 +3,16 @@ import pathHelper from '../helpers/pathHelper';
 import {Sequelize} from 'sequelize';
 const models = require('./models/index');
 
-import {UserModel} from '../typings/models/UserModel';
-import {EventModel} from '../typings/models/EventModel';
-import {UserEventModel} from '../typings/models/UserEventModel';
-import {EventFeedbackModel} from '../typings/models/EventFeedbackModel';
-import {EventHistoryModel} from '../typings/models/EventHistoryModel';
-
 interface Db {
   sequelize: any;
   models: {
-    User: UserModel;
-    Event: EventModel;
-    UserEvent: UserEventModel;
-    EventFeedback: EventFeedbackModel;
-    EventHistory: EventHistoryModel;
+    User: any;
+    Course: any;
+    Department: any;
+    Enrollment: any;
+    Instructor: any;
+    OfficeAssignment: any;
+    Student: any;
   };
 }
 

@@ -49,13 +49,13 @@ function getStudents(search, sortOrder, pageNumber, pageSize) {
 }
 
 function getStudentById(id): Promise<Student> {
-  return studentModel.findById(id, {
+  return studentModel.findByPk(id, {
     include: [{model: enrollmentModel, include: [courseModel]}]
   });
 }
 
 function updateStudent(stud): Promise<Student> {
-  return studentModel.findById(stud.id).then(student => {
+  return studentModel.findByPk(stud.id).then(student => {
     if (!student) throw new AppError('app', 'student_not_found');
 
     student.firstName = stud.firstName;
@@ -71,7 +71,7 @@ function addStudent(student): Promise<Student> {
 }
 
 function deleteStudent(id): Promise<Student> {
-  return studentModel.findById(id).then(student => {
+  return studentModel.findByPk(id).then(student => {
     if (!student) throw new AppError('app', 'student_not_found');
 
     return student.destroy();

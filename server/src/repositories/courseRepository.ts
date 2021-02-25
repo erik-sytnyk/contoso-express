@@ -35,13 +35,13 @@ function getCourses(departmentId): Promise<Course[]> {
 }
 
 function getCourseById(id): Promise<Course> {
-  return courseModel.findById(id, {
+  return courseModel.findByPk(id, {
     include: departmentModel
   });
 }
 
 function updateCourse(courseData): Promise<Course> {
-  return courseModel.findById(courseData.id).then(course => {
+  return courseModel.findByPk(courseData.id).then(course => {
     if (!course) throw new AppError('app', 'course_not_found');
 
     course.number = courseData.number;
@@ -58,7 +58,7 @@ function addCourse(course): Promise<Course> {
 }
 
 function deleteCourse(id): Promise<Course> {
-  return courseModel.findById(id).then(course => {
+  return courseModel.findByPk(id).then(course => {
     if (!course) throw new AppError('app', 'course_not_found');
 
     return course.destroy();

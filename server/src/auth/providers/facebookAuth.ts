@@ -11,7 +11,7 @@ let providerName = 'facebook';
 let strategySettings = {
   clientID: config.auth.facebook.clientID,
   clientSecret: config.auth.facebook.clientSecret,
-  callbackURL: `${config.app.rootUrl}/auth/${providerName}/callback`,
+  callbackURL: `${config.rootUrl}/auth/${providerName}/callback`,
   profileFields: ['id', 'emails', 'name']
 };
 

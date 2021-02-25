@@ -22,7 +22,7 @@ function getErrorMessage(error): string {
     if (error.uiShow) return error.message;
   }
 
-  if (config.app.isDevLocal) {
+  if (config.isDevLocal) {
     return error.message || error;
   }
 
@@ -30,7 +30,7 @@ function getErrorMessage(error): string {
 }
 
 function logError(error) {
-  if (!config.app.logErrors) return;
+  if (!config.logErrors) return;
 
   if (error.isAppError && !error.log) return;
 

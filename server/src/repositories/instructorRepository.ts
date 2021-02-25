@@ -52,11 +52,11 @@ function getInstructorById(id): Promise<Instructor> {
     ]
   };
 
-  return instructorModel.findById(id, options);
+  return instructorModel.findByPk(id, options);
 }
 
 function updateInstructor(instructorData): Promise<Instructor> {
-  return instructorModel.findById(instructorData.id).then(instructor => {
+  return instructorModel.findByPk(instructorData.id).then(instructor => {
     if (!instructor) throw new AppError('app', 'instructor_not_found');
 
     instructor.firstName = instructorData.firstName;
@@ -85,7 +85,7 @@ function addInstructor(instructorData): Promise<Instructor> {
 }
 
 function deleteInstructor(id): Promise<Instructor> {
-  return instructorModel.findById(id).then(instructor => {
+  return instructorModel.findByPk(id).then(instructor => {
     if (!instructor) throw new AppError('app', 'instructor_not_found');
 
     return instructor.destroy();

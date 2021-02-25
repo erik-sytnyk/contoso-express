@@ -6,18 +6,20 @@ import pathHelper from './helpers/pathHelper';
 let logConfig = true;
 
 let config = {
-  app: {
-    appName: '',
-    isDevLocal: process.env.NODE_ENV !== 'production',
-    logErrors: true,
-    rootUrl: 'http://localhost:3500',
-    port: 3500
-  },
+  appName: '',
+  isDevLocal: process.env.NODE_ENV !== 'production',
+  logErrors: true,
+  rootUrl: 'http://localhost:3500',
+  port: 3500,
   db: {
+    connectionString: '',
+    dialect: 'sqlite',
     host: 'localhost',
-    dbName: 'contoso',
+    port: 0,
+    name: 'contoso',
     username: '',
-    password: ''
+    password: '',
+    seedOnStart: false
   },
   web: {
     sessionSecret: ''
