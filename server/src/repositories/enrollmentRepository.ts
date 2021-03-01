@@ -1,6 +1,8 @@
-import dbInit from '../database/database';
 import * as Promise from 'bluebird';
-import {Enrollment} from '../../typings/app/models';
+
+import dbInit from '../database/database';
+
+import {Enrollment} from '../../typings/models/EnrollmentModel';
 
 export default {
   init,

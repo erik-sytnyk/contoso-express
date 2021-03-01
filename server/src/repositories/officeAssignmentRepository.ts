@@ -1,6 +1,8 @@
-import dbInit from '../database/database';
 import * as Promise from 'bluebird';
-import {OfficeAssignment} from '../../typings/app/models';
+
+import dbInit from '../database/database';
+
+import {OfficeAssignment} from '../../typings/models/OfficeAssignmentModel';
 
 export default {
   init,
@@ -32,12 +34,12 @@ function saveOfficeAssignment(officeAssignment, instructorId): Promise<OfficeAss
     }
 
     if (!office && officeAssignment.location) {
-      office = {
+      let officeData = {
         location: officeAssignment.location,
         instructorId: instructorId
       };
 
-      return officeAssignmentModel.create(office);
+      return officeAssignmentModel.create(officeData);
     }
 
     return Promise.resolve(null);

@@ -1,10 +1,12 @@
-import dbInit from '../database/database';
 import * as _ from 'lodash';
 import * as Promise from 'bluebird';
-import {User} from '../../typings/app/models';
 const crypto = require('crypto');
 const bcrypt = require('bcrypt-nodejs');
+
+import dbInit from '../database/database';
 import AppError from '../appError';
+
+import {User} from '../../typings/models/UserModel';
 
 export default {
   init,

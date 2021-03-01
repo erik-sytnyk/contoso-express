@@ -1,7 +1,10 @@
-import dbInit from '../database/database';
 import * as Promise from 'bluebird';
-import {Student} from '../../typings/app/models';
+import {Op} from 'sequelize';
+
+import dbInit from '../database/database';
 import AppError from '../appError';
+
+import {Student} from '../../typings/models/StudentModel';
 
 export default {
   init,
@@ -26,7 +29,7 @@ function init(db) {
 
 function getStudentStatistics() {
   let queryString = `SELECT enrollment_date as "enrollmentDate", COUNT(*) AS "studentCount" 
-                            FROM students GROUP BY enrollment_date`;
+                            FROM student GROUP BY enrollment_date`;
 
   return db.sequelize.query(queryString).then(data => {
     return data[0];
@@ -36,14 +39,17 @@ function getStudentStatistics() {
 function getStudents(search, sortOrder, pageNumber, pageSize) {
   let orderParams = getSortOrder(sortOrder);
 
-  let options = {
-    where: {
-      $or: [{firstName: {$like: `%${search}%`}}, {lastName: {$like: `%${search}%`}}]
-    },
+  let options: any = {
     offset: (pageNumber - 1) * pageSize,
     limit: pageSize,
     order: [[orderParams.order, orderParams.direction]]
   };
+
+  if (search) {
+    options.where = {
+      [Op.or]: [{firstName: {[Op.like]: `%${search}%`}}, {lastName: {[Op.like]: `%${search}%`}}]
+    };
+  }
 
   return studentModel.findAndCountAll(options);
 }

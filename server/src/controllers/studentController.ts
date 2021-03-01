@@ -1,7 +1,7 @@
+import * as Joi from 'joi';
+
 import helper from './_controllerHelper';
 import studentRepository from '../repositories/studentRepository';
-import * as Joi from 'joi';
-import config from '../config';
 
 export default {
   getStudentsStatistics,

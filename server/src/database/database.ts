@@ -3,16 +3,24 @@ import pathHelper from '../helpers/pathHelper';
 import {Sequelize} from 'sequelize';
 const models = require('./models/index');
 
+import {UserModel} from '../../typings/models/UserModel';
+import {CourseModel} from '../../typings/models/CourseModel';
+import {DepartmentModel} from '../../typings/models/DepartmentModel';
+import {EnrollmentModel} from '../../typings/models/EnrollmentModel';
+import {InstructorModel} from '../../typings/models/InstructorModel';
+import {OfficeAssignmentModel} from '../../typings/models/OfficeAssignmentModel';
+import {StudentModel} from '../../typings/models/StudentModel';
+
 interface Db {
   sequelize: any;
   models: {
-    User: any;
-    Course: any;
-    Department: any;
-    Enrollment: any;
-    Instructor: any;
-    OfficeAssignment: any;
-    Student: any;
+    User: UserModel;
+    Course: CourseModel;
+    Department: DepartmentModel;
+    Enrollment: EnrollmentModel;
+    Instructor: InstructorModel;
+    OfficeAssignment: OfficeAssignmentModel;
+    Student: StudentModel;
   };
 }
 

@@ -8,3 +8,5 @@ data/logs
 data/config/local.json
 .vscode/
 shrinkwrap.yaml
+package-lock.json
+/local

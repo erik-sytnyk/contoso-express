@@ -1,7 +1,9 @@
-import dbInit from '../database/database';
 import * as Promise from 'bluebird';
-import {Course} from '../../typings/app/models';
+
+import dbInit from '../database/database';
 import AppError from '../appError';
+
+import {Course} from '../../typings/models/CourseModel';
 
 export default {
   init,

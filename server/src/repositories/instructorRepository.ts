@@ -1,8 +1,10 @@
-import dbInit from '../database/database';
 import * as _ from 'lodash';
 import * as Promise from 'bluebird';
-import {Instructor} from '../../typings/app/models';
+
+import dbInit from '../database/database';
 import AppError from '../appError';
+
+import {Instructor} from '../../typings/models/InstructorModel';
 
 export default {
   init,
