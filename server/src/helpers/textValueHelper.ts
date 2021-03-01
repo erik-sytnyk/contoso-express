@@ -1,9 +1,10 @@
 const _ = require('lodash');
 import pathHelper from './/pathHelper';
+import * as fs from 'fs-extra';
 
 const template = require('es6-template-strings');
 const textValuesPath = pathHelper.getDataRelative('text', 'textValues.json');
-const textValuesInfo = require(textValuesPath);
+const textValuesInfo = fs.readJsonSync(textValuesPath);
 
 export default {
   byKey,

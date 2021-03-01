@@ -55,6 +55,7 @@
   "devDependencies": {
     "chai": "4.1.2",
     "mocha": "4.1.0",
+    "ts-node": "9.1.1",
     "tslint": "5.8.0"
   }
 }
