@@ -1,9 +1,5 @@
-import * as fs from 'fs-extra';
-import * as _ from 'lodash';
-
 import pathHelper from './helpers/pathHelper';
-
-let logConfig = true;
+import configBuilder from './helpers/configHelper';
 
 let config = {
   appName: '',
@@ -19,7 +15,7 @@ let config = {
     name: 'contoso',
     username: '',
     password: '',
-    seedOnStart: false
+    seedOnStart: true
   },
   web: {
     sessionSecret: ''
@@ -45,23 +41,21 @@ let config = {
   }
 };
 
-function tryReadConfigFile(path) {
-  try {
-    return fs.readJsonSync(path);
-  } catch (err) {
-    return {};
+//define ENV VARs which override all other values if defined
+let envVars = {
+  db: {
+    connectionString: 'DB_CONNECTION_STRING'
   }
-}
+};
 
-let defaultFile = tryReadConfigFile(pathHelper.getDataRelative('config.json'));
-_.merge(config, defaultFile);
+configBuilder.addJsonFile(config, pathHelper.getDataRelative('config.json'), true);
 
-let localFile = tryReadConfigFile(pathHelper.getLocalRelative('config.local.json'));
-_.merge(config, localFile);
+configBuilder.addJsonFile(config, pathHelper.getLocalRelative('config.local.json'));
 
-if (logConfig) {
-  console.log('App configuration:');
-  console.log(JSON.stringify(config, null, 2));
+configBuilder.loadEnvVars(config, envVars);
+
+if (config.isDevLocal) {
+  configBuilder.printConfig(config);
 }
 
 export default config;
