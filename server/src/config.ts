@@ -23,17 +23,6 @@ let config = {
   email: {
     fromNoReply: ''
   },
-  auth: {
-    useAuth: true,
-    google: {
-      clientID: '',
-      clientSecret: ''
-    },
-    facebook: {
-      clientID: '',
-      clientSecret: ''
-    }
-  },
   format: {
     date: '',
     year: '',

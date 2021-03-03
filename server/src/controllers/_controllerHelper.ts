@@ -1,6 +1,5 @@
 import errorHelper from '../helpers/errorHelper';
 import AppError from '../appError';
-import {Response} from 'express';
 import * as Joi from 'joi';
 
 export default {
@@ -38,8 +37,8 @@ function loadSchema(data, schema): Promise<any> {
     stripUnknown: true
   };
 
-  return new Promise(function(resolve, reject) {
-    Joi.validate(data, schema, validationOptions, function(err, val) {
+  return new Promise(function (resolve, reject) {
+    Joi.validate(data, schema, validationOptions, function (err, val) {
       if (!err) return resolve(val);
 
       let error = null;

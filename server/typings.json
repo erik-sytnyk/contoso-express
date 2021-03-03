@@ -19,10 +19,6 @@
     "moment-node": "registry:dt/moment-node#2.11.1+20160511043338",
     "morgan": "registry:dt/morgan#1.7.0+20160524142355",
     "node": "registry:dt/node#6.0.0+20160602155235",
-    "passport": "registry:dt/passport#0.2.0+20160317120654",
-    "passport-facebook": "registry:dt/passport-facebook#1.0.3+20160316155526",
-    "passport-google-oauth": "registry:dt/passport-google-oauth#1.0.3+20160316155526",
-    "passport-local": "registry:dt/passport-local#0.0.0+20160316155526",
     "serve-static": "registry:dt/serve-static#0.0.0+20160501131543",
     "shortid": "registry:dt/shortid#0.0.0+20160316155526",
     "winston": "registry:dt/winston#0.0.0+20160417152829"

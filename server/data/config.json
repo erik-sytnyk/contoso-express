@@ -16,17 +16,6 @@
   "email": {
     "fromNoReply": "noreply@contoso.com"
   },
-  "auth": {
-    "useAuth": true,
-    "google": {
-      "clientID": "???",
-      "clientSecret": "???"
-    },
-    "facebook": {
-      "clientID": "???",
-      "clientSecret": "???"
-    }
-  },
   "format": {
     "date": "MM/DD/YYYY",
     "year": "YYYY",

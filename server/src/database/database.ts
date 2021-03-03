@@ -3,7 +3,6 @@ import pathHelper from '../helpers/pathHelper';
 import {Sequelize} from 'sequelize';
 const models = require('./models/index');
 
-import {UserModel} from '../../typings/models/UserModel';
 import {CourseModel} from '../../typings/models/CourseModel';
 import {DepartmentModel} from '../../typings/models/DepartmentModel';
 import {EnrollmentModel} from '../../typings/models/EnrollmentModel';
@@ -14,7 +13,6 @@ import {StudentModel} from '../../typings/models/StudentModel';
 interface Db {
   sequelize: any;
   models: {
-    User: UserModel;
     Course: CourseModel;
     Department: DepartmentModel;
     Enrollment: EnrollmentModel;

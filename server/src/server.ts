@@ -3,9 +3,8 @@ import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as _ from 'lodash';
-import db from './database/database';
-import * as passport from 'passport';
 
+import db from './database/database';
 import config from './config';
 import routes from './routes/routes';
 import logger from './logger';
@@ -20,7 +19,7 @@ export default {
 function start(port) {
   initExpress();
 
-  routes.init(app, passport);
+  routes.init(app);
 
   initErrorHandling(app);
 

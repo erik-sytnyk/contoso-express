@@ -39,11 +39,6 @@ class Navigation extends React.Component {
               <NavItem eventKey={6}>Departments</NavItem>
             </LinkContainer>
           </Nav>
-          <Nav pullRight>
-            <NavItem eventKey={1} href="/logout">
-              LogOut <i className="fa fa-sign-out fa-lg" />
-            </NavItem>
-          </Nav>
         </Navbar.Collapse>
       </Navbar>
     );

@@ -9,8 +9,7 @@ const models = [
   require('./enrollment'),
   require('./instructor'),
   require('./officeAssignment'),
-  require('./student'),
-  require('./user')
+  require('./student')
 ];
 
 module.exports = {

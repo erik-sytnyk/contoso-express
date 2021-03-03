@@ -11,8 +11,6 @@ async function seedData(db) {
   let seedPath = path.getDataRelative('seed/seedData.json');
   let seedData = require(seedPath);
 
-  await seedUsers(db, seedData.users);
-
   await seedInstructors(db, seedData.instructors);
 
   await seedOfficeAssignments(db, seedData.officeAssignments);
@@ -28,12 +26,6 @@ async function seedData(db) {
   await postImportRoutine(db);
 
   console.log('DB was seeded!');
-}
-
-async function seedUsers(db, usersData) {
-  for (let user of usersData) {
-    await db.models.User.create(user);
-  }
 }
 
 async function seedDepartments(db, departmentsData) {
