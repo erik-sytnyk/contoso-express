@@ -1,5 +1,3 @@
-import * as Promise from 'bluebird';
-
 import dbInit from '../database/database';
 
 import {Enrollment} from '../../typings/models/EnrollmentModel';
@@ -18,11 +16,11 @@ function init(db) {
   studentModel = db.models.Student;
 }
 
-function getEnrollmentsByCourseId(courseId): Promise<Enrollment[]> {
+async function getEnrollmentsByCourseId(courseId): Promise<Enrollment[]> {
   let options = {
     where: {courseId: courseId},
     include: studentModel
   };
 
-  return enrollmentModel.findAll(options);
+  return await enrollmentModel.findAll(options);
 }

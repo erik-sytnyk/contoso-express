@@ -1,5 +1,3 @@
-import * as Promise from 'bluebird';
-
 import dbInit from '../database/database';
 import AppError from '../appError';
 
@@ -23,39 +21,39 @@ function init(db) {
   instructorModel = db.models.Instructor;
 }
 
-function getDepartments(): Promise<Department[]> {
-  return departmentModel.findAll({
+async function getDepartments(): Promise<Department[]> {
+  return await departmentModel.findAll({
     include: instructorModel
   });
 }
 
-function getDepartmentById(id): Promise<Department> {
-  return departmentModel.findByPk(id, {
+async function getDepartmentById(id): Promise<Department> {
+  return await departmentModel.findByPk(id, {
     include: instructorModel
   });
 }
 
-function updateDepartment(departmentData): Promise<Department> {
-  return departmentModel.findByPk(departmentData.id).then(department => {
-    if (!department) throw new AppError('app', 'department_not_found');
+async function updateDepartment(departmentData): Promise<Department> {
+  let department = await departmentModel.findByPk(departmentData.id);
 
-    department.name = departmentData.name;
-    department.budget = departmentData.budget;
-    department.startDate = departmentData.startDate;
-    department.instructorId = departmentData.instructorId;
+  if (!department) throw new AppError('app', 'department_not_found');
 
-    return department.save();
-  });
+  department.name = departmentData.name;
+  department.budget = departmentData.budget;
+  department.startDate = departmentData.startDate;
+  department.instructorId = departmentData.instructorId;
+
+  return await department.save();
 }
 
-function addDepartment(department): Promise<Department> {
-  return departmentModel.create(department);
+async function addDepartment(department): Promise<Department> {
+  return await departmentModel.create(department);
 }
 
-function deleteDepartment(id): Promise<Department> {
-  return departmentModel.findByPk(id).then(department => {
-    if (!department) throw new AppError('app', 'department_not_found');
+async function deleteDepartment(id): Promise<void> {
+  let department = await departmentModel.findByPk(id);
 
-    return department.destroy();
-  });
+  if (!department) throw new AppError('app', 'department_not_found');
+
+  await department.destroy();
 }

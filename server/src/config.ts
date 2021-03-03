@@ -9,13 +9,12 @@ let config = {
   port: 3500,
   db: {
     connectionString: '',
-    dialect: 'sqlite',
+    dialect: 'postgres',
     host: 'localhost',
     port: 0,
     name: 'contoso',
     username: '',
-    password: '',
-    seedOnStart: true
+    password: ''
   },
   web: {
     sessionSecret: ''

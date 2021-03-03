@@ -1,5 +1,4 @@
 import seeder from '../database/seeders/seederDev';
-import * as Promise from 'bluebird';
 import pathHelper from '../helpers/pathHelper';
 
 const dbPath = pathHelper.getDataRelative('db', 'test.db');

@@ -18,11 +18,10 @@ describe('Department Repository', () => {
           expect(departments).not.to.be.null;
           expect(departments).to.have.length(4);
           expect(departments[0].name).to.be.equal('English');
-          expect(departments[0].instructor).not.to.be.null;
-          expect(departments[0].instructor.firstName).to.be.equal('Kim');
+          expect(departments[0].instructorId).to.be.equal(1);
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -45,7 +44,7 @@ describe('Department Repository', () => {
           expect(data.budget).to.be.equal(department.budget.toString());
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -67,7 +66,7 @@ describe('Department Repository', () => {
           expect(data.budget).to.be.equal(department.budget);
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -78,12 +77,11 @@ describe('Department Repository', () => {
         .then(department => {
           expect(department).not.to.be.null;
           expect(department.name).to.be.equal('Test Department updated');
-          expect(department.instructor).not.to.be.null;
-          expect(department.instructor.firstName).to.be.equal('Roger');
-          expect(department.instructor.lastName).to.be.equal('Harui');
+          expect(department.instructorId).not.to.be.null;
+          expect(department.instructorId).to.be.equal(3);
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -95,7 +93,7 @@ describe('Department Repository', () => {
           expect(data).not.to.be.null;
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });

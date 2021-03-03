@@ -19,10 +19,10 @@ describe('Instructor Repository', () => {
           expect(instructors).to.have.length(5);
           expect(instructors[0]).to.have.property('firstName');
           expect(instructors[0].courses.length).to.be.greaterThan(0);
-          expect(instructors[0].courses[0].department).not.to.be.null;
+          expect(instructors[0].courses[0].departmentId).not.to.be.null;
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -45,7 +45,7 @@ describe('Instructor Repository', () => {
           expect(data.lastName).to.be.equal(instructor.lastName);
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -67,7 +67,7 @@ describe('Instructor Repository', () => {
           expect(data.lastName).to.be.equal(instructor.lastName);
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -79,10 +79,10 @@ describe('Instructor Repository', () => {
           expect(instructor).not.to.be.null;
           expect(instructor.firstName).to.be.equal('Name updated');
           expect(instructor.courses).to.have.length(2);
-          expect(instructor.courses[0].department).not.to.be.null;
+          expect(instructor.courses[0].departmentId).not.to.be.null;
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -94,7 +94,7 @@ describe('Instructor Repository', () => {
           expect(data).not.to.be.null;
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });

@@ -1,5 +1,3 @@
-import * as Promise from 'bluebird';
-
 import dbInit from '../database/database';
 
 import {OfficeAssignment} from '../../typings/models/OfficeAssignmentModel';
@@ -17,41 +15,41 @@ function init(db) {
   officeAssignmentModel = db.models.OfficeAssignment;
 }
 
-function getOfficeAssignmentByInstructorId(instructorId) {
+async function getOfficeAssignmentByInstructorId(instructorId) {
   let options = {
     where: {instructorId: instructorId}
   };
 
-  return officeAssignmentModel.findOne(options);
+  return await officeAssignmentModel.findOne(options);
 }
 
-function saveOfficeAssignment(officeAssignment, instructorId): Promise<OfficeAssignment> {
-  return getOfficeAssignmentByInstructorId(instructorId).then(office => {
-    if (office) {
-      office.location = officeAssignment.location;
+async function saveOfficeAssignment(officeAssignment, instructorId): Promise<OfficeAssignment> {
+  let office = await getOfficeAssignmentByInstructorId(instructorId);
 
-      return office.save();
-    }
+  if (office) {
+    office.location = officeAssignment.location;
 
-    if (!office && officeAssignment.location) {
-      let officeData = {
-        location: officeAssignment.location,
-        instructorId: instructorId
-      };
+    return await office.save();
+  }
 
-      return officeAssignmentModel.create(officeData);
-    }
+  if (!office && officeAssignment.location) {
+    let officeData = {
+      location: officeAssignment.location,
+      instructorId: instructorId
+    };
 
-    return Promise.resolve(null);
-  });
+    return await officeAssignmentModel.create(officeData);
+  }
+
+  return await Promise.resolve(null);
 }
 
-function deleteOfficeAssignmentByInstructorId(instructorId): Promise<OfficeAssignment> {
-  return getOfficeAssignmentByInstructorId(instructorId).then(office => {
-    if (office) {
-      return office.destroy();
-    }
+async function deleteOfficeAssignmentByInstructorId(instructorId): Promise<void> {
+  let office = await getOfficeAssignmentByInstructorId(instructorId);
 
-    return Promise.resolve(null);
-  });
+  if (office) {
+    return await office.destroy();
+  }
+
+  return await Promise.resolve(null);
 }

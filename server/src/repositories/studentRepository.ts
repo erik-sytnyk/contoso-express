@@ -1,4 +1,3 @@
-import * as Promise from 'bluebird';
 import {Op} from 'sequelize';
 
 import dbInit from '../database/database';
@@ -27,16 +26,16 @@ function init(db) {
   courseModel = db.models.Course;
 }
 
-function getStudentStatistics() {
+async function getStudentStatistics() {
   let queryString = `SELECT enrollment_date as "enrollmentDate", COUNT(*) AS "studentCount" 
                             FROM student GROUP BY enrollment_date`;
 
-  return db.sequelize.query(queryString).then(data => {
-    return data[0];
-  });
+  let data = await db.sequelize.query(queryString);
+
+  return data ? data[0] : [];
 }
 
-function getStudents(search, sortOrder, pageNumber, pageSize) {
+async function getStudents(search, sortOrder, pageNumber, pageSize) {
   let orderParams = getSortOrder(sortOrder);
 
   let options: any = {
@@ -51,38 +50,42 @@ function getStudents(search, sortOrder, pageNumber, pageSize) {
     };
   }
 
-  return studentModel.findAndCountAll(options);
+  return await studentModel.findAndCountAll(options);
 }
 
-function getStudentById(id): Promise<Student> {
-  return studentModel.findByPk(id, {
+async function getStudentById(id): Promise<Student> {
+  let options = {
     include: [{model: enrollmentModel, include: [courseModel]}]
-  });
+  };
+
+  return await studentModel.findByPk(id, options);
 }
 
-function updateStudent(stud): Promise<Student> {
-  return studentModel.findByPk(stud.id).then(student => {
-    if (!student) throw new AppError('app', 'student_not_found');
+async function updateStudent(stud): Promise<Student> {
+  let student = await studentModel.findByPk(stud.id);
 
-    student.firstName = stud.firstName;
-    student.lastName = stud.lastName;
-    student.enrollmentDate = stud.enrollmentDate;
+  if (!student) throw new AppError('app', 'student_not_found');
 
-    return student.save();
-  });
+  student.firstName = stud.firstName;
+  student.lastName = stud.lastName;
+  student.enrollmentDate = stud.enrollmentDate;
+
+  return await student.save();
 }
 
-function addStudent(student): Promise<Student> {
-  return studentModel.create(student);
+async function addStudent(student): Promise<Student> {
+  return await studentModel.create(student);
 }
 
-function deleteStudent(id): Promise<Student> {
-  return studentModel.findByPk(id).then(student => {
-    if (!student) throw new AppError('app', 'student_not_found');
+async function deleteStudent(id): Promise<void> {
+  let student = await studentModel.findByPk(id);
 
-    return student.destroy();
-  });
+  if (!student) throw new AppError('app', 'student_not_found');
+
+  await student.destroy();
 }
+
+//helper methods
 
 function getSortOrder(sortOrder) {
   let result: any = {};

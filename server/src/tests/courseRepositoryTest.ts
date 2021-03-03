@@ -20,7 +20,7 @@ describe('Course Repository', () => {
           expect(courses[0]).to.have.property('number');
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -36,7 +36,7 @@ describe('Course Repository', () => {
           expect(courses[1].title).to.be.equal('Macroeconomics');
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -59,7 +59,7 @@ describe('Course Repository', () => {
           expect(data.title).to.be.equal(course.title);
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -81,7 +81,7 @@ describe('Course Repository', () => {
           expect(data.title).to.be.equal(course.title);
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -93,12 +93,10 @@ describe('Course Repository', () => {
           expect(course).not.to.be.null;
           expect(course.number).to.be.equal(1001);
           expect(course.title).to.be.equal('Test course updated');
-          expect(course.department).not.to.be.null;
-          expect(course.department.name).to.be.equal('Engineering');
-          expect(course.department.id).to.be.equal(3);
+          expect(course.departmentId).to.be.equal(3);
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });
@@ -110,7 +108,7 @@ describe('Course Repository', () => {
           expect(data).not.to.be.null;
           done();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           done(err);
         });
     });

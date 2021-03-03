@@ -12,7 +12,7 @@ export default {
 async function createDb() {
   try {
     if (config.isDevLocal) {
-      //await createIfNotExists();
+      await createIfNotExists();
     }
 
     const db = dbInit.init();

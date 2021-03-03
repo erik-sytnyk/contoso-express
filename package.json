@@ -7,7 +7,6 @@
     "Contoso",
     "Express",
     "Postgres",
-    "Passport",
     "React"
   ],
   "main": "index.js",

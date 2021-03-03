@@ -23,8 +23,6 @@ async function seedData(db) {
 
   await seedEnrollments(db, seedData.enrollments);
 
-  await postImportRoutine(db);
-
   console.log('DB was seeded!');
 }
 
@@ -74,22 +72,4 @@ async function seedOfficeAssignments(db, officeAssignmentsData) {
 
 function parseDate(dateStr) {
   return moment(dateStr, config.format.date).toDate();
-}
-
-async function postImportRoutine(db) {
-  if (db.sequelize.dialect.name === 'postgres') {
-    return await _.toArray(db.models).map(model => {
-      return updatePostgresSequence(model, db);
-    });
-  }
-
-  return Promise.resolve(null);
-}
-
-function updatePostgresSequence(model, db) {
-  let tableName = model.tableName;
-  let idField = _.capitalize(model.autoIncrementAttribute);
-  let sql = `SELECT setval('"${tableName}_Id_seq"', (SELECT MAX("${idField}") FROM "${tableName}"));`;
-
-  return db.sequelize.query(sql);
 }

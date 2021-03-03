@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import * as Promise from 'bluebird';
 
 import dbInit from '../database/database';
 import AppError from '../appError';
@@ -28,10 +27,8 @@ function init(db) {
   officeAssignmentModel = db.models.OfficeAssignment;
 }
 
-function getInstructors(): Promise<Instructor[]> {
-  let instructors: any = [];
-
-  return instructorModel.findAll({
+async function getInstructors(): Promise<Instructor[]> {
+  let options = {
     include: [
       //include Course with Department
       {
@@ -40,10 +37,12 @@ function getInstructors(): Promise<Instructor[]> {
       },
       officeAssignmentModel
     ]
-  });
+  };
+
+  return await instructorModel.findAll(options);
 }
 
-function getInstructorById(id): Promise<Instructor> {
+async function getInstructorById(id): Promise<Instructor> {
   let options = {
     include: [
       {
@@ -54,42 +53,42 @@ function getInstructorById(id): Promise<Instructor> {
     ]
   };
 
-  return instructorModel.findByPk(id, options);
+  return await instructorModel.findByPk(id, options);
 }
 
-function updateInstructor(instructorData): Promise<Instructor> {
-  return instructorModel.findByPk(instructorData.id).then(instructor => {
-    if (!instructor) throw new AppError('app', 'instructor_not_found');
+async function updateInstructor(instructorData): Promise<Instructor> {
+  let instructor = await instructorModel.findByPk(instructorData.id);
 
-    instructor.firstName = instructorData.firstName;
-    instructor.lastName = instructorData.lastName;
-    instructor.hireDate = instructorData.hireDate;
+  if (!instructor) throw new AppError('app', 'instructor_not_found');
 
-    db.sequelize.transaction(tr => {
-      let options = {transaction: tr};
-      let coursesIds = _.map(instructorData.courses, c => (c as any).id);
+  instructor.firstName = instructorData.firstName;
+  instructor.lastName = instructorData.lastName;
+  instructor.hireDate = instructorData.hireDate;
 
-      return Promise.all([instructor.save(options), instructor.setCourses(coursesIds, options)]);
-    });
-
-    return instructor.save();
-  });
-}
-
-function addInstructor(instructorData): Promise<Instructor> {
-  return instructorModel.create(instructorData).then(instructor => {
+  await db.sequelize.transaction(tr => {
+    let options = {transaction: tr};
     let coursesIds = _.map(instructorData.courses, c => (c as any).id);
 
-    instructor.setCourses(coursesIds);
-
-    return instructor.save();
+    return Promise.all([instructor.save(options), instructor.setCourses(coursesIds, options)]);
   });
+
+  return await instructor.save();
 }
 
-function deleteInstructor(id): Promise<Instructor> {
-  return instructorModel.findByPk(id).then(instructor => {
-    if (!instructor) throw new AppError('app', 'instructor_not_found');
+async function addInstructor(instructorData): Promise<Instructor> {
+  let instructor = await instructorModel.create(instructorData);
 
-    return instructor.destroy();
-  });
+  let coursesIds = _.map(instructorData.courses, c => (c as any).id);
+
+  instructor.setCourses(coursesIds);
+
+  return await instructor.save();
+}
+
+async function deleteInstructor(id): Promise<void> {
+  let instructor = await instructorModel.findByPk(id);
+
+  if (!instructor) throw new AppError('app', 'instructor_not_found');
+
+  return await instructor.destroy();
 }

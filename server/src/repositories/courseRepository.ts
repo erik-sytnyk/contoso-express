@@ -1,5 +1,3 @@
-import * as Promise from 'bluebird';
-
 import dbInit from '../database/database';
 import AppError from '../appError';
 
@@ -23,7 +21,7 @@ function init(db) {
   departmentModel = db.models.Department;
 }
 
-function getCourses(departmentId): Promise<Course[]> {
+async function getCourses(departmentId): Promise<Course[]> {
   let options = {
     include: departmentModel,
     where: {}
@@ -33,36 +31,36 @@ function getCourses(departmentId): Promise<Course[]> {
     options.where = {departmentId: departmentId};
   }
 
-  return courseModel.findAll(options);
+  return await courseModel.findAll(options);
 }
 
-function getCourseById(id): Promise<Course> {
-  return courseModel.findByPk(id, {
+async function getCourseById(id): Promise<Course> {
+  return await courseModel.findByPk(id, {
     include: departmentModel
   });
 }
 
-function updateCourse(courseData): Promise<Course> {
-  return courseModel.findByPk(courseData.id).then(course => {
-    if (!course) throw new AppError('app', 'course_not_found');
+async function updateCourse(courseData): Promise<Course> {
+  let course = await courseModel.findByPk(courseData.id);
 
-    course.number = courseData.number;
-    course.title = courseData.title;
-    course.credits = courseData.credits;
-    course.departmentId = courseData.departmentId;
+  if (!course) throw new AppError('app', 'course_not_found');
 
-    return course.save();
-  });
+  course.number = courseData.number;
+  course.title = courseData.title;
+  course.credits = courseData.credits;
+  course.departmentId = courseData.departmentId;
+
+  return await course.save();
 }
 
-function addCourse(course): Promise<Course> {
-  return courseModel.create(course);
+async function addCourse(course): Promise<Course> {
+  return await courseModel.create(course);
 }
 
-function deleteCourse(id): Promise<Course> {
-  return courseModel.findByPk(id).then(course => {
-    if (!course) throw new AppError('app', 'course_not_found');
+async function deleteCourse(id): Promise<void> {
+  let course = await courseModel.findByPk(id);
 
-    return course.destroy();
-  });
+  if (!course) throw new AppError('app', 'course_not_found');
+
+  await course.destroy();
 }
