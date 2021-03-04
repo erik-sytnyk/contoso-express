@@ -17,6 +17,10 @@ import logger from './logger';
 import tasks from './tasks';
 
 async function start() {
+  if (config.db.seedOnStart) {
+    await tasks.seed();
+  }
+
   let port = await server.start(process.env.PORT || config.port);
 
   console.log(`Server is listening on port ${port}!`);

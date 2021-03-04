@@ -14,7 +14,8 @@ let config = {
     port: 0,
     name: 'contoso',
     username: '',
-    password: ''
+    password: '',
+    seedOnStart: false
   },
   web: {
     sessionSecret: ''
@@ -32,7 +33,8 @@ let config = {
 //define ENV VARs which override all other values if defined
 let envVars = {
   db: {
-    connectionString: 'DB_CONNECTION_STRING'
+    connectionString: 'DB_CONNECTION_STRING',
+    seedOnStart: 'DB_SEED_ON_START'
   }
 };
 
