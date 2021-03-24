@@ -36,26 +36,26 @@ function initStudentRoutes() {
   helper.get('/api/student/list', studentController.getStudents);
   helper.get('/api/student/getStudent', studentController.getStudent);
   helper.post('/api/student/save', studentController.saveStudent);
-  helper.delete('/api/student/delete', studentController.deleteStudent);
+  helper.delete('/api/student/delete/:id', studentController.deleteStudent);
 }
 
 function initDepartmentRoutes() {
   helper.get('/api/department/list', departmentController.getDepartments);
   helper.get('/api/department/getDepartment', departmentController.getDepartment);
   helper.post('/api/department/save', departmentController.saveDepartment);
-  helper.delete('/api/department/delete', departmentController.deleteDepartment);
+  helper.delete('/api/department/delete/:id', departmentController.deleteDepartment);
 }
 
 function initInstructorRoutes() {
   helper.get('/api/instructor/list', instructorController.getInstructors);
   helper.get('/api/instructor/getInstructor', instructorController.getInstructor);
   helper.post('/api/instructor/save', instructorController.saveInstructor);
-  helper.delete('/api/instructor/delete', instructorController.deleteInstructor);
+  helper.delete('/api/instructor/delete/:id', instructorController.deleteInstructor);
 }
 
 function initCourseRoutes() {
   helper.get('/api/course/list', courseController.getCourses);
   helper.get('/api/course/getCourse', courseController.getCourse);
   helper.post('/api/course/save', courseController.saveCourse);
-  helper.delete('/api/course/delete', courseController.deleteCourse);
+  helper.delete('/api/course/delete/:id', courseController.deleteCourse);
 }

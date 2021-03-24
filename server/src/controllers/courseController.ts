@@ -1,4 +1,5 @@
 import * as Joi from 'joi';
+
 import helper from './_controllerHelper';
 import courseRepository from '../repositories/courseRepository';
 
@@ -65,9 +66,11 @@ async function saveCourse(req, res) {
 
 async function deleteCourse(req, res) {
   try {
-    let id = req.body.id;
+    let data = await helper.loadSchema(req.params, {
+      id: Joi.number().required()
+    });
 
-    await courseRepository.deleteCourse(id);
+    await courseRepository.deleteCourse(data.id);
 
     return helper.sendData({}, res);
   } catch (err) {

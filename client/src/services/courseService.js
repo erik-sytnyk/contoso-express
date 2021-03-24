@@ -20,5 +20,5 @@ function saveCourse(course) {
 }
 
 function deleteCourse(id) {
-  return httpHelper.delete('/api/course/delete', {id});
+  return httpHelper.delete(`/api/course/delete/${id}`, {});
 }

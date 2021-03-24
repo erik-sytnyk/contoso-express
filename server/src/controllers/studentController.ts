@@ -77,9 +77,11 @@ async function saveStudent(req, res) {
 
 async function deleteStudent(req, res) {
   try {
-    let id = req.body.id;
+    let data = await helper.loadSchema(req.params, {
+      id: Joi.number().required()
+    });
 
-    await studentRepository.deleteStudent(id);
+    await studentRepository.deleteStudent(data.id);
 
     return helper.sendData({}, res);
   } catch (err) {

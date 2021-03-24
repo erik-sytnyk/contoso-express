@@ -1,7 +1,8 @@
-import helper from './_controllerHelper';
-import departmentRepository from '../repositories/departmentRepository';
 import * as Joi from 'joi';
-import config from '../config';
+
+import helper from './_controllerHelper';
+
+import departmentRepository from '../repositories/departmentRepository';
 
 export default {
   getDepartments,
@@ -67,9 +68,11 @@ async function saveDepartment(req, res) {
 
 async function deleteDepartment(req, res) {
   try {
-    let id = req.body.id;
+    let data = await helper.loadSchema(req.params, {
+      id: Joi.number().required()
+    });
 
-    await departmentRepository.deleteDepartment(id);
+    await departmentRepository.deleteDepartment(data.id);
 
     return helper.sendData({}, res);
   } catch (err) {

@@ -20,5 +20,5 @@ function saveDepartment(department) {
 }
 
 function deleteDepartment(id) {
-  return httpHelper.delete('/api/department/delete', {id});
+  return httpHelper.delete(`/api/department/delete/${id}`, {});
 }

@@ -1,6 +1,7 @@
 import * as Joi from 'joi';
-import config from '../config';
+
 import helper from './_controllerHelper';
+
 import instructorRepository from '../repositories/instructorRepository';
 import officeAssignmentRepository from '../repositories/officeAssignmentRepository';
 
@@ -75,11 +76,13 @@ async function saveInstructor(req, res) {
 
 async function deleteInstructor(req, res) {
   try {
-    let id = req.body.id;
+    let data = await helper.loadSchema(req.params, {
+      id: Joi.number().required()
+    });
 
-    await officeAssignmentRepository.deleteOfficeAssignmentByInstructorId(id);
+    await officeAssignmentRepository.deleteOfficeAssignmentByInstructorId(data.id);
 
-    await instructorRepository.deleteInstructor(id);
+    await instructorRepository.deleteInstructor(data.id);
 
     return helper.sendData({}, res);
   } catch (err) {
